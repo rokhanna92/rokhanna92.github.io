@@ -421,7 +421,7 @@ const description =
         </div>
       </section>
 
-      <section id="kontakt" style="position:relative; z-index:2; background:#070707; border-top:3px solid #FECB0F; padding:96px 32px 100px; box-shadow:0 -40px 80px rgba(0,0,0,.55)">
+      <section id="kontakt" data-parallax="pre" style="position:relative; z-index:2; will-change:transform; background:#070707; border-top:3px solid #FECB0F; padding:96px 32px 100px; box-shadow:0 -40px 80px rgba(0,0,0,.55)">
         <div style="max-width:1360px; margin:0 auto; display:flex; flex-wrap:wrap; gap:60px">
           <div style="flex:0 1 400px" data-rv>
             <p style="margin:0 0 12px; font:500 11px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:rgba(254,203,15,.7)">08 / KONTAKT</p>
@@ -583,36 +583,7 @@ const description =
         revealed.forEach((el) => el.classList.add('rv-on'));
       }
 
-      // Paralaksa hero sekcije i FAQ-a.
-      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        const hero = document.querySelector<HTMLElement>('[data-parallax="hero"]');
-        const faqSection = document.querySelector<HTMLElement>('[data-parallax="faq"]');
-        let raf = 0;
-        const onScroll = () => {
-          if (raf) return;
-          raf = requestAnimationFrame(() => {
-            raf = 0;
-            const y = window.scrollY || 0;
-            if (hero) {
-              const h = hero.offsetHeight || 1;
-              hero.style.transform = 'translateY(' + Math.min(y * 0.45, h * 0.6).toFixed(1) + 'px)';
-            }
-            if (faqSection) {
-              let el: HTMLElement | null = faqSection;
-              let top = 0;
-              while (el) {
-                top += el.offsetTop;
-                el = el.offsetParent as HTMLElement | null;
-              }
-              const fh = faqSection.offsetHeight || 1;
-              const t = Math.min(Math.max((y - top) * 0.45, 0), fh * 0.6);
-              faqSection.style.transform = 'translateY(' + t.toFixed(1) + 'px)';
-            }
-          });
-        };
-        window.addEventListener('scroll', onScroll, { passive: true });
-        onScroll();
-      }
+      // Paralaksa hero i FAQ sekcije vodi Footer.astro, jer je zajednicka.
     </script>
   </body>
 </html>

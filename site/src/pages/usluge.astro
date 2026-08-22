@@ -62,7 +62,7 @@ const description =
     <div id="pg-usluge">
       <Header variant="inner" active="/usluge" />
 
-      <section style="position:relative; background:#040404; overflow:hidden; padding:88px 32px 64px">
+      <section data-parallax="hero" style="position:relative; z-index:0; will-change:transform; background:#040404; overflow:hidden; padding:88px 32px 64px">
         <svg class="hero-pid" viewBox="0 0 640 420" preserveAspectRatio="xMaxYMid slice" style="position:absolute; right:0; top:0; height:100%; width:min(58vw,760px); opacity:.85" aria-hidden="true">
           <path d="M-20 90 H320 V230 H660" fill="none" stroke="#222222" stroke-width="10"></path>
           <path d="M140 440 V150 H660" fill="none" stroke="#1c1c1c" stroke-width="10"></path>
@@ -94,7 +94,7 @@ const description =
         </div>
       </section>
 
-      <section id="bzr" style="background:#070707; border-top:1px solid rgba(255,255,255,.09); padding:88px 32px 92px">
+      <section id="bzr" style="position:relative; z-index:2; box-shadow:0 -30px 60px rgba(0,0,0,.55); background:#070707; border-top:1px solid rgba(255,255,255,.09); padding:88px 32px 92px">
         <div style="max-width:1360px; margin:0 auto; position:relative; padding-left:44px">
           <div style="position:absolute; left:0; top:6px; bottom:6px; width:3px; background:repeating-linear-gradient(180deg,#FECB0F 0 10px,transparent 10px 26px); animation:flowY 1.2s linear infinite" aria-hidden="true"></div>
           <div style="display:flex; flex-wrap:wrap; gap:56px">
@@ -231,7 +231,7 @@ const description =
         </div>
       </section>
 
-      <section style="background:#FECB0F; color:#070707; padding:72px 32px">
+      <section data-parallax="pre" style="position:relative; z-index:1; will-change:transform; background:#FECB0F; color:#070707; padding:72px 32px">
         <div style="max-width:1360px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:28px">
           <div>
             <p data-wp style="margin:0; font:700 clamp(26px,3vw,40px)/1.1 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.03em; max-width:26ch">Ne znate šta vam od ovoga treba?</p>

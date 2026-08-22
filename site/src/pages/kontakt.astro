@@ -78,7 +78,7 @@ const description =
     <div id="pg-kontakt">
       <Header variant="inner" active="/kontakt" cta="#upit" />
 
-      <section style="background:#040404; padding:88px 32px 80px">
+      <section data-parallax="hero" style="position:relative; z-index:0; will-change:transform; background:#040404; padding:88px 32px 80px">
         <div style="max-width:1360px; margin:0 auto; display:flex; flex-wrap:wrap; gap:56px; align-items:center">
           <div style="flex:1 1 520px; min-width:0">
             <p style="margin:0 0 20px; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45); letter-spacing:.2em"><a href="/" style="color:rgba(255,255,255,.45)">POČETNA</a> / <span style="color:#FECB0F">KONTAKT</span></p>
@@ -111,7 +111,7 @@ const description =
         </div>
       </section>
 
-      <section style="background:#070707; border-top:1px solid rgba(255,255,255,.09); padding:72px 32px">
+      <section style="position:relative; z-index:2; box-shadow:0 -30px 60px rgba(0,0,0,.55); background:#070707; border-top:1px solid rgba(255,255,255,.09); padding:72px 32px">
         <div style="max-width:1360px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr)); gap:20px">
           {kanali.map((k, i) => (
             <div data-fd style={`border:1px solid rgba(255,255,255,.14); padding:24px${i === 0 ? '' : `; transition-delay:${(i * 6) / 100}s`}`}>
@@ -132,7 +132,7 @@ const description =
         </div>
       </section>
 
-      <section id="upit" style="background:#EFEDE6; color:#070707; padding:88px 32px 96px">
+      <section id="upit" data-parallax="pre" style="position:relative; z-index:1; will-change:transform; background:#EFEDE6; color:#070707; padding:88px 32px 96px">
         <div style="max-width:1360px; margin:0 auto; display:flex; flex-wrap:wrap; gap:56px">
           <div style="flex:0 1 380px">
             <p style="margin:0 0 12px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:rgba(7,7,7,.45)">UPIT / FORMULAR</p>

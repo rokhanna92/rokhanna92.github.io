@@ -16,7 +16,7 @@ const {
 const updated = '21.08.2026.';
 ---
 
-<footer style="position:relative; z-index:2; background:#040404; color:#F2F1EC; border-top:1px solid rgba(255,255,255,.1); padding:64px 32px 0">
+<footer style="position:relative; z-index:2; background:#040404; color:#F2F1EC; border-top:1px solid rgba(255,255,255,.1); padding:64px 32px 0; box-shadow:0 -30px 60px rgba(0,0,0,.55)">
   <div style="max-width:1360px; margin:0 auto">
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr)); gap:40px; padding-bottom:48px">
       <div>
@@ -130,6 +130,70 @@ const updated = '21.08.2026.';
 </style>
 
 <script>
+  // ---- Paralaksa: obelezena sekcija zaostaje za skrolom, pa sledeca
+  // sekcija (veci z-index) klizi preko nje. data-parallax="hero" racuna od
+  // vrha strane, svaka druga vrednost od sopstvenog polozaja. ----
+  const pxEls = [...document.querySelectorAll<HTMLElement>('[data-parallax]')];
+  if (pxEls.length && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let pxRaf = 0;
+    // Koliko sme da se pomeri sekcija pred podnozjem: najvise njen donji
+    // unutrasnji razmak, da podnozje pokrije prazninu a ne tekst. Razmak se
+    // menja po sirini ekrana, pa se mera osvezava uz promenu velicine.
+    let pxCaps = new WeakMap<HTMLElement, number>();
+    const measure = () => {
+      pxCaps = new WeakMap();
+      for (const el of pxEls) {
+        if (el.dataset.parallax !== 'pre') continue;
+        const pad = parseFloat(getComputedStyle(el).paddingBottom) || 0;
+        pxCaps.set(el, Math.max(0, pad - 8));
+      }
+    };
+    const paint = () => {
+      pxRaf = 0;
+      const y = window.scrollY || 0;
+      for (const el of pxEls) {
+        const h = el.offsetHeight || 1;
+        const mode = el.dataset.parallax;
+        let shift: number;
+        if (mode === 'hero') {
+          shift = Math.min(y * 0.45, h * 0.6);
+        } else {
+          // offsetTop lanac, ne getBoundingClientRect: rect vec sadrzi nas
+          // transform, pa bi racun sam sebe hranio.
+          let node: HTMLElement | null = el;
+          let top = 0;
+          while (node) {
+            top += node.offsetTop;
+            node = node.offsetParent as HTMLElement | null;
+          }
+          if (mode === 'pre') {
+            // Sekcija pred podnozjem nikad ne prodje vrh ekrana, jer ispod nje
+            // stoji samo podnozje. Zato se racuna od ulaska u vidno polje.
+            const seen = window.innerHeight + y - top;
+            shift = Math.min(Math.max(seen * 0.22, 0), pxCaps.get(el) ?? 0);
+          } else {
+            shift = Math.min(Math.max((y - top) * 0.45, 0), h * 0.6);
+          }
+        }
+        el.style.transform = 'translateY(' + shift.toFixed(1) + 'px)';
+      }
+    };
+    const onPxScroll = () => {
+      if (pxRaf) return;
+      pxRaf = requestAnimationFrame(paint);
+    };
+    const onPxResize = () => {
+      measure();
+      onPxScroll();
+    };
+    window.addEventListener('scroll', onPxScroll, { passive: true });
+    window.addEventListener('resize', onPxResize, { passive: true });
+    measure();
+    paint();
+    // Razmak zavisi od preloma teksta, pa se mera ponavlja kad font stigne.
+    document.fonts?.ready.then(onPxResize);
+  }
+
   const toTop = document.getElementById('to-top');
   if (toTop) {
     let raf = 0;

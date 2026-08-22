@@ -128,7 +128,7 @@ const description =
     <div id="pg-cenovnik">
       <Header variant="inner" active="/cenovnik" />
 
-      <section style="background:#070707; color:#F2F1EC; padding:80px 32px 72px; position:relative">
+      <section data-parallax="hero" style="background:#070707; color:#F2F1EC; padding:80px 32px 72px; position:relative; z-index:0; will-change:transform">
         <div style="max-width:1360px; margin:0 auto">
           <p style="margin:0 0 20px; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45); letter-spacing:.2em"><a href="/" class="crumb-a" style="color:rgba(255,255,255,.45)">POČETNA</a> / <span style="color:#FECB0F">CENOVNIK 2026/27</span></p>
           <h1 style="margin:0; font:700 clamp(38px,4.6vw,68px)/1 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.035em; color:#fff">Cene bez iznenađenja.</h1>
@@ -144,7 +144,7 @@ const description =
         </div>
       </section>
 
-      <section style="background:#EFEDE6; padding:0 32px; position:relative; z-index:1">
+      <section style="background:#EFEDE6; padding:0 32px; position:relative; z-index:2; box-shadow:0 -30px 60px rgba(0,0,0,.55)">
         <div style="max-width:1360px; margin:-1px auto 0; box-sizing:border-box; background:#070707; color:#F2F1EC; transform:translateY(0); padding:38px 38px 34px; display:flex; flex-wrap:wrap; gap:44px; box-shadow:0 30px 60px rgba(7,7,7,.18)">
           <div style="flex:1 1 440px; min-width:0">
             <p style="margin:0 0 4px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:#FECB0F">PROCENA / INTERAKTIVNO</p>
@@ -220,7 +220,7 @@ const description =
         </div>
       </section>
 
-      <section style="padding:40px 32px 96px; position:relative">
+      <section data-parallax="pre" style="padding:40px 32px 96px; position:relative; z-index:1; will-change:transform; background:#EFEDE6">
         <div style="max-width:1080px; margin:0 auto; box-sizing:border-box; background:#FECB0F; padding:34px 34px 30px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px">
           <div>
             <p style="margin:0; font:700 clamp(22px,2.4vw,30px)/1.15 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.02em">Pošaljite matični broj firme i broj zaposlenih.</p>
