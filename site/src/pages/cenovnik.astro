@@ -120,8 +120,6 @@ const description =
       .sheet-head b{color:rgba(255,255,255,.45);font-weight:600}
       .pr-idx{width:1%;white-space:nowrap;text-align:right;font:600 11px 'IBM Plex Mono',monospace;color:rgba(7,7,7,.32);padding:13px 0 13px 16px;border-bottom:1px solid rgba(7,7,7,.09);vertical-align:top}
       tr.pr:last-child th,tr.pr:last-child td{border-bottom:none}
-      /* Plava mreza iza tabela: isti motiv kao sekcija Rokovi na pocetnoj. */
-      .grid-bg{background-image:linear-gradient(rgba(7,7,7,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(7,7,7,.055) 1px,transparent 1px);background-size:56px 56px}
 
       /* ---- Naslovni blok, kao zaglavlje tehnickog crteza ---- */
       .titleblock{display:flex;flex-wrap:wrap;border:1px solid rgba(255,255,255,.18);margin-top:34px}
@@ -206,8 +204,20 @@ const description =
         </div>
       </section>
 
-      <section class="grid-bg" style="padding:88px 32px 40px; position:relative">
-        <div style="max-width:1080px; margin:0 auto">
+      <section style="padding:88px 32px 40px; position:relative">
+        <dot-grid
+          aria-hidden="true"
+          style="background-image:radial-gradient(#DDDBD4 2px,transparent 2px); background-size:25px 25px"
+          dot-size="4"
+          gap="21"
+          base-color="#DDDBD4"
+          active-color="#FECB0F"
+          proximity="120"
+          shock-radius="250"
+          shock-strength="5"
+          resistance="750"
+          return-duration="1.5"></dot-grid>
+        <div style="max-width:1080px; margin:0 auto; position:relative; z-index:1">
           {groups.map((g) => (
             <div data-sheet class="sheet" style={`margin-bottom:36px; --dur:${(g.stavke.length * 55 + 420) / 1000}s`}>
               <div class="sheet-head"><span>{g.naziv}</span><b>{g.oznaka}</b></div>
@@ -240,6 +250,8 @@ const description =
 
       <Footer serviceHref="/usluge" lastLink={null} />
     </div>
+
+    <script type="module" src="/dot-grid.js" is:inline></script>
 
     <script type="application/json" id="pp-estimator" set:html={JSON.stringify(estimator)} is:inline></script>
 
@@ -397,24 +409,6 @@ const description =
         sheets.forEach((el) => io.observe(el));
       } else {
         sheets.forEach((el) => el.classList.add('sh-on'));
-      }
-
-      // Mreza iza tabela klizi sporije od strane, za osecaj dubine. Menja se
-      // samo background-position, pa nema pomeranja rasporeda ni procepa.
-      const grid = document.querySelector<HTMLElement>('.grid-bg');
-      if (grid && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        let gRaf = 0;
-        const paintGrid = () => {
-          gRaf = 0;
-          grid.style.backgroundPosition = '0 ' + (-grid.getBoundingClientRect().top * 0.12).toFixed(1) + 'px';
-        };
-        const onGrid = () => {
-          if (gRaf) return;
-          gRaf = requestAnimationFrame(paintGrid);
-        };
-        window.addEventListener('scroll', onGrid, { passive: true });
-        window.addEventListener('resize', onGrid, { passive: true });
-        paintGrid();
       }
     </script>
   </body>
