@@ -4,3 +4,6 @@
 # OS junk
 .DS_Store
 Thumbs.db
+
+# client pitch: PDFs, pricing, build scripts - must not reach the public repo
+presentation/
