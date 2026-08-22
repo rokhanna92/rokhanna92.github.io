@@ -74,12 +74,20 @@ const description =
       a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
       ::selection{background:#070707;color:#FECB0F}
       @keyframes blink{0%,45%{opacity:1}50%,95%{opacity:.12}100%{opacity:1}}
-      [data-fd]{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
-      .fd-on{opacity:1 !important;transform:none !important}
+      /* ---- Ispis lista: zaglavlje prevuce s leva, redovi izlaze jedan po
+         jedan, a zuta glava stampaca silazi niz list. Pomeranje ide preko
+         clip-path, jer transform na celijama tabele nije pouzdan. ---- */
+      [data-sheet] .sheet-head{clip-path:inset(0 100% 0 0);transition:clip-path .5s cubic-bezier(.2,.7,.2,1)}
+      [data-sheet] tr.pr>*{opacity:0;clip-path:inset(0 100% 0 0);transition:opacity .4s ease var(--d,0s),clip-path .5s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
+      [data-sheet].sh-on .sheet-head{clip-path:inset(0 0 0 0)}
+      [data-sheet].sh-on tr.pr>*{opacity:1;clip-path:inset(0 0 0 0)}
+      [data-sheet]::after{content:'';position:absolute;left:0;right:0;top:0;height:2px;background:#FECB0F;opacity:0;pointer-events:none}
+      [data-sheet].sh-on::after{animation:printhead var(--dur,1.2s) cubic-bezier(.3,.55,.35,1) forwards}
+      @keyframes printhead{0%{opacity:1;top:0}90%{opacity:1}100%{opacity:0;top:100%}}
       tr.pr:hover td, tr.pr:hover th{background:#FECB0F !important}
       input[type=range]{accent-color:#FECB0F}
       input[type=checkbox]{accent-color:#FECB0F}
-      @media (prefers-reduced-motion:reduce){[data-fd]{opacity:1;transform:none;transition:none}}
+      @media (prefers-reduced-motion:reduce){[data-sheet] .sheet-head,[data-sheet] tr.pr>*{clip-path:none;opacity:1;transition:none}[data-sheet].sh-on::after{animation:none}}
 
       /* !important je obavezan: osnovne boje su u inline style atributima,
          koji inače pobeđuju svako pravilo iz stilova. */
@@ -107,7 +115,7 @@ const description =
       @media (prefers-reduced-motion:reduce){.odo-strip{transition:none}}
 
       /* ---- Tabele kao list specifikacije ---- */
-      .sheet{border:1px solid rgba(7,7,7,.16);background:#fff;box-shadow:0 1px 0 rgba(7,7,7,.04)}
+      .sheet{position:relative;border:1px solid rgba(7,7,7,.16);background:#fff;box-shadow:0 1px 0 rgba(7,7,7,.04)}
       .sheet-head{display:flex;justify-content:space-between;align-items:center;background:#070707;color:#FECB0F;padding:11px 16px;font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.18em}
       .sheet-head b{color:rgba(255,255,255,.45);font-weight:600}
       .pr-idx{width:1%;white-space:nowrap;text-align:right;font:600 11px 'IBM Plex Mono',monospace;color:rgba(7,7,7,.32);padding:13px 0 13px 16px;border-bottom:1px solid rgba(7,7,7,.09);vertical-align:top}
@@ -128,7 +136,7 @@ const description =
     <div id="pg-cenovnik">
       <Header variant="inner" active="/cenovnik" />
 
-      <section data-parallax="hero" style="background:#070707; color:#F2F1EC; padding:80px 32px 72px; position:relative; z-index:0; will-change:transform">
+      <section style="background:#070707; color:#F2F1EC; padding:80px 32px 72px; position:relative">
         <div style="max-width:1360px; margin:0 auto">
           <p style="margin:0 0 20px; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45); letter-spacing:.2em"><a href="/" class="crumb-a" style="color:rgba(255,255,255,.45)">POČETNA</a> / <span style="color:#FECB0F">CENOVNIK 2026/27</span></p>
           <h1 style="margin:0; font:700 clamp(38px,4.6vw,68px)/1 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.035em; color:#fff">Cene bez iznenađenja.</h1>
@@ -144,7 +152,7 @@ const description =
         </div>
       </section>
 
-      <section style="background:#EFEDE6; padding:0 32px; position:relative; z-index:2; box-shadow:0 -30px 60px rgba(0,0,0,.55)">
+      <section style="background:#EFEDE6; padding:0 32px; position:relative; z-index:1">
         <div style="max-width:1360px; margin:-1px auto 0; box-sizing:border-box; background:#070707; color:#F2F1EC; transform:translateY(0); padding:38px 38px 34px; display:flex; flex-wrap:wrap; gap:44px; box-shadow:0 30px 60px rgba(7,7,7,.18)">
           <div style="flex:1 1 440px; min-width:0">
             <p style="margin:0 0 4px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:#FECB0F">PROCENA / INTERAKTIVNO</p>
@@ -201,12 +209,12 @@ const description =
       <section class="grid-bg" style="padding:88px 32px 40px; position:relative">
         <div style="max-width:1080px; margin:0 auto">
           {groups.map((g) => (
-            <div data-fd class="sheet" style="margin-bottom:36px">
+            <div data-sheet class="sheet" style={`margin-bottom:36px; --dur:${(g.stavke.length * 55 + 420) / 1000}s`}>
               <div class="sheet-head"><span>{g.naziv}</span><b>{g.oznaka}</b></div>
               <table style="width:100%; border-collapse:collapse">
                 <tbody>
                   {g.stavke.map((r, i) => (
-                    <tr class="pr">
+                    <tr class="pr" style={`--d:${(i * 55 + 140) / 1000}s`}>
                       <td class="pr-idx">{String(i + 1).padStart(2, '0')}</td>
                       <th scope="row" style="text-align:left; font:400 15px 'IBM Plex Sans',system-ui,sans-serif; padding:13px 16px; border-bottom:1px solid rgba(7,7,7,.09)">{r.n}<span style="display:block; font:400 12.5px 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.5); margin-top:2px">{r.d}</span></th>
                       <td style="text-align:right; font:700 15px 'IBM Plex Mono',monospace; padding:13px 16px; border-bottom:1px solid rgba(7,7,7,.09); white-space:nowrap; font-variant-numeric:tabular-nums">{r.c}</td>
@@ -220,7 +228,7 @@ const description =
         </div>
       </section>
 
-      <section data-parallax="pre" style="padding:40px 32px 96px; position:relative; z-index:1; will-change:transform; background:#EFEDE6">
+      <section style="padding:40px 32px 96px; position:relative">
         <div style="max-width:1080px; margin:0 auto; box-sizing:border-box; background:#FECB0F; padding:34px 34px 30px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px">
           <div>
             <p style="margin:0; font:700 clamp(22px,2.4vw,30px)/1.15 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.02em">Pošaljite matični broj firme i broj zaposlenih.</p>
@@ -372,22 +380,41 @@ const description =
         if (el.textContent !== days) el.textContent = days;
       });
 
-      // Fade-up za grupe cenovnika.
-      const fade = document.querySelectorAll<HTMLElement>('[data-fd]');
+      // Ispis liste kad list ude u vidno polje. Prati se sam list, koji nije
+      // isecen, pa prag iznad nule ovde radi ispravno.
+      const sheets = document.querySelectorAll<HTMLElement>('[data-sheet]');
       if ('IntersectionObserver' in window) {
         const io = new IntersectionObserver(
           (entries, obs) =>
             entries.forEach((e) => {
               if (e.isIntersecting) {
-                e.target.classList.add('fd-on');
+                e.target.classList.add('sh-on');
                 obs.unobserve(e.target);
               }
             }),
           { threshold: 0.08 }
         );
-        fade.forEach((el) => io.observe(el));
+        sheets.forEach((el) => io.observe(el));
       } else {
-        fade.forEach((el) => el.classList.add('fd-on'));
+        sheets.forEach((el) => el.classList.add('sh-on'));
+      }
+
+      // Mreza iza tabela klizi sporije od strane, za osecaj dubine. Menja se
+      // samo background-position, pa nema pomeranja rasporeda ni procepa.
+      const grid = document.querySelector<HTMLElement>('.grid-bg');
+      if (grid && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        let gRaf = 0;
+        const paintGrid = () => {
+          gRaf = 0;
+          grid.style.backgroundPosition = '0 ' + (-grid.getBoundingClientRect().top * 0.12).toFixed(1) + 'px';
+        };
+        const onGrid = () => {
+          if (gRaf) return;
+          gRaf = requestAnimationFrame(paintGrid);
+        };
+        window.addEventListener('scroll', onGrid, { passive: true });
+        window.addEventListener('resize', onGrid, { passive: true });
+        paintGrid();
       }
     </script>
   </body>
