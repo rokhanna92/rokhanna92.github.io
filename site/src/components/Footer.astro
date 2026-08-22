@@ -147,7 +147,13 @@ const updated = '21.08.2026.';
         const pad = parseFloat(getComputedStyle(el).paddingBottom) || 0;
         // Pola razmaka, najvise 56px, ostaje kao vazduh izmedju poslednjeg
         // dugmeta i ivice podnozja. Ostatak sme da se pojede pomeranjem.
-        pxCaps.set(el, Math.max(0, pad - Math.min(56, pad * 0.5)));
+        const cap = Math.max(0, pad - Math.min(56, pad * 0.5));
+        pxCaps.set(el, cap);
+        // data-pull: sekcija se podigne tacno za svoj hod, pa spustanje ne
+        // otvara procep iznad nje. U mirovanju naleze tacno na donji rub
+        // prethodne sekcije. Stoji samo tamo gde se boja sekcije razlikuje od
+        // pozadine strane, jer se procep inace i ne vidi.
+        if (el.hasAttribute('data-pull')) el.style.marginTop = cap ? -cap + 'px' : '';
       }
     };
     const paint = () => {
