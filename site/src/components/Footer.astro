@@ -1,5 +1,6 @@
 ---
 import services from '../data/services.json';
+import { cena } from '../lib/cene';
 import { firma } from '../lib/firma';
 
 interface Props {
@@ -11,7 +12,7 @@ interface Props {
 
 const {
   serviceHref = '/usluge',
-  lastLink = { href: '#paketi', label: 'Pro paket · ključ u ruke' },
+  lastLink = { href: '#paketi', label: cena('pausal-pro').naziv },
 } = Astro.props;
 
 const updated = '21.08.2026.';

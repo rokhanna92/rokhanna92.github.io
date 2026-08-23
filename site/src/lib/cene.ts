@@ -64,6 +64,13 @@ export function cena(id: string): Cena {
   return nadjena;
 }
 
+// Red koji nosi svoj "label" ga zadrzava, jer se ponegde namerno razlikuje od
+// cenovnika ("Akt o proceni rizika, po radnom mestu" prema "Akt o proceni
+// rizika"). Gde razlike nema, label se brise iz podataka i uzima se naziv iz
+// cenovnika, da isti tekst ne stoji na dva mesta.
+export const labelReda = (row: { ref?: string; label?: string }) =>
+  row.label ?? (row.ref ? cena(row.ref).naziv : '');
+
 // Cenovnik za prikaz: polje "c" se izvodi, ne cuva se u JSON-u.
 export const grupe = cenovnik.groups.map((g) => ({
   ...g,

@@ -38,10 +38,20 @@
       }
     ],
     "prices": [
-      { "label": "Pravila zaštite od požara sa planom evakuacije", "ref": "pravila-zop" },
-      { "label": "Elaborat zaštite od požara", "ref": "elaborat-zop" },
-      { "label": "Plan evakuacije i uputstva u boji, po spratu", "value": "na upit" },
-      { "label": "Obuka zaposlenih iz oblasti ZOP, po radniku", "ref": "obuka-bzr-zop-visina" }
+      {
+        "ref": "pravila-zop"
+      },
+      {
+        "ref": "elaborat-zop"
+      },
+      {
+        "label": "Plan evakuacije i uputstva u boji, po spratu",
+        "value": "na upit"
+      },
+      {
+        "label": "Obuka zaposlenih iz oblasti ZOP, po radniku",
+        "ref": "obuka-bzr-zop-visina"
+      }
     ]
   },
   "koordinator": {

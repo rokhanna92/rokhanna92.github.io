@@ -3,7 +3,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import usluge from '../data/usluge.json';
 import chips from '../data/price-chips.json';
-import { cena } from '../lib/cene';
+import { cena, labelReda } from '../lib/cene';
 import { firma } from '../lib/firma';
 import '../styles/responsive.css';
 
@@ -165,7 +165,7 @@ const description =
                   <div
                     data-fd
                     style={`border-top:1px solid rgba(7,7,7,.2);${i === zop.prices.length - 1 ? ' border-bottom:1px solid rgba(7,7,7,.2);' : ''} padding:13px 0; display:flex; justify-content:space-between; gap:20px${delay(i, 6)}`}
-                  ><span>{row.label}</span><strong style="white-space:nowrap">{iznosReda(row)}</strong></div>
+                  ><span>{labelReda(row)}</span><strong style="white-space:nowrap">{iznosReda(row)}</strong></div>
                 ))}
               </div>
             </div>

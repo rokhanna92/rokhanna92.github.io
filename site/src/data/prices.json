@@ -2,7 +2,6 @@
   "packages": [
     {
       "id": "osnovni",
-      "name": "Osnovni paket",
       "ref": "pausal-osnovni",
       "suffix": "RSD",
       "unit": "/ MESEČNO",
@@ -19,7 +18,6 @@
     },
     {
       "id": "pro",
-      "name": "Pro paket · ključ u ruke",
       "ref": "pausal-pro",
       "suffix": "RSD",
       "unit": "/ MESEČNO",
@@ -38,12 +36,35 @@
   ],
   "packagesNote": "Cena zavisi od broja zaposlenih i delatnosti. Ulazni BZR audit i izrada dokumentacije naplaćuju se posebno, po cenovniku.",
   "items": [
-    { "label": "Akt o proceni rizika, po radnom mestu", "ref": "akt-o-proceni-rizika", "tabular": true },
-    { "label": "Pravilnik o bezbednosti i zdravlju na radu", "ref": "pravilnik-bzr", "tabular": false },
-    { "label": "Obuka radnika za BZR, ZOP ili rad na visini, po radniku", "ref": "obuka-bzr-zop-visina", "tabular": false },
-    { "label": "Pravila zaštite od požara", "ref": "pravila-zop", "tabular": false },
-    { "label": "Kontrola gradilišta sa fotoreportingom, po satu", "ref": "fotoreporting", "tabular": false },
-    { "label": "Revizija PP aparata, po aparatu", "ref": "revizija-pp-aparata", "tabular": false }
+    {
+      "label": "Akt o proceni rizika, po radnom mestu",
+      "ref": "akt-o-proceni-rizika",
+      "tabular": true
+    },
+    {
+      "ref": "pravilnik-bzr",
+      "tabular": false
+    },
+    {
+      "label": "Obuka radnika za BZR, ZOP ili rad na visini, po radniku",
+      "ref": "obuka-bzr-zop-visina",
+      "tabular": false
+    },
+    {
+      "label": "Pravila zaštite od požara",
+      "ref": "pravila-zop",
+      "tabular": false
+    },
+    {
+      "label": "Kontrola gradilišta sa fotoreportingom, po satu",
+      "ref": "fotoreporting",
+      "tabular": false
+    },
+    {
+      "label": "Revizija PP aparata, po aparatu",
+      "ref": "revizija-pp-aparata",
+      "tabular": false
+    }
   ],
   "itemsNote": "Cene su u dinarima, bez PDV-a."
 }
