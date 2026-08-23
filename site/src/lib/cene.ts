@@ -6,14 +6,20 @@ import prices from '../data/prices.json';
 import priceChips from '../data/price-chips.json';
 import usluge from '../data/usluge.json';
 
-export type Cena = { iznos: string; jedinica: string; c: string };
+export type Cena = { iznos: string; jedinica: string; naziv: string; opis: string; c: string };
+
+// Pages CMS ne upisuje prazna neobavezna polja, nego ih izostavi iz fajla.
+// Zato se svako takvo polje ovde svede na prazan string pre upotrebe, inace
+// bi sablon ispisao rec "undefined" na sajtu.
+type Stavka = { id: string; n: string; d?: string; iznos: string; jedinica?: string };
+const tekst = (v: string | undefined) => v ?? '';
 
 // "3.200" + "/ sat" -> "3.200 / sat". Prazna jedinica ne ostavlja razmak.
 const spoji = (iznos: string, jedinica: string) => `${iznos} ${jedinica}`.trim();
 
 const mapa = new Map<string, Cena>();
 for (const g of cenovnik.groups) {
-  for (const s of g.stavke) {
+  for (const s of g.stavke as Stavka[]) {
     // Urednik koji doda stavku kroz CMS dobija prazan id, jer je polje zakljucano.
     // Bolje da build stane nego da stavka tiho ostane bez veze sa ostatkom sajta.
     if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(s.id)) {
@@ -24,7 +30,27 @@ for (const g of cenovnik.groups) {
     if (mapa.has(s.id)) {
       throw new Error(`Cenovnik: id "${s.id}" postoji dva puta u cenovnik.json. Svaka stavka mora imati jedinstven id.`);
     }
-    mapa.set(s.id, { iznos: s.iznos, jedinica: s.jedinica, c: spoji(s.iznos, s.jedinica) });
+    const jedinica = tekst(s.jedinica);
+    mapa.set(s.id, {
+      iznos: s.iznos,
+      jedinica,
+      naziv: s.n,
+      opis: tekst(s.d),
+      c: spoji(s.iznos, jedinica),
+    });
+  }
+}
+
+// Tripwire za celu klasu greske od koje je nastao ovaj tekst: neobavezno polje
+// koje CMS izostavi, pa ga sablon slepi u string. Jednom je vec objavljeno
+// "4.000–7.000 undefined" na cenovniku.
+for (const [id, c] of mapa) {
+  for (const [polje, vrednost] of Object.entries(c)) {
+    if (vrednost.includes('undefined')) {
+      throw new Error(
+        `Cenovnik: stavka "${id}" ima "undefined" u polju ${polje} ("${vrednost}"). Neko neobavezno polje nedostaje u cenovnik.json, a kod ga slepljuje u tekst.`
+      );
+    }
   }
 }
 
