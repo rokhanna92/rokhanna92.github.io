@@ -1,0 +1,223 @@
+{
+  "meta": {
+    "naslov": "Preving Pro · Bezbednost i zdravlje na radu i zaštita od požara",
+    "opis": "Savetnik za BZR, referent zaštite od požara i koordinator gradilišta. Novi Sad, Klisa. Dokumentacija, obuke i rokovi pod kontrolom."
+  },
+  "hero": {
+    "koordinate": "45.29°N / 19.85°E · NOVI SAD · KLISA",
+    "linija": "LINIJA 24/7 AKTIVNA",
+    "oznaka": "BZR_01 / ZOP_02 / KOORDINATOR_03 / OBUKE_04",
+    "naslovPre": "Bezbednost i zdravlje na radu po standardu",
+    "naslovAkcenat": "rafinerije",
+    "naslovPosle": ".",
+    "uvod": "Savetnik za BZR, referent zaštite od požara i koordinator gradilišta. Deset godina na projektima u Slovačkoj, Mađarskoj, Češkoj, Austriji i Hrvatskoj. Vi radite svoj posao, a dokumentaciju, obuke i rokove držimo mi.",
+    "dugmePonuda": "Zatražite ponudu",
+    "telefon": "063 81 855 87",
+    "telefonHref": "tel:+381638185587",
+    "linkCenovnik": "Pogledajte cenovnik →",
+    "panel": {
+      "naslov": "STATUS / PROPISI",
+      "zivo": "ŽIVO",
+      "redovi": [
+        { "label": "Zakon 35/2023", "value": "NA SNAZI" },
+        { "label": "4 nova pravilnika", "value": "01.01.2027." },
+        { "label": "Lične licence", "value": "4 / 4" }
+      ]
+    },
+    "traka": [
+      "AKT O PROCENI RIZIKA",
+      "OBUKA ZAPOSLENIH",
+      "PLAN EVAKUACIJE",
+      "ELABORAT O UREĐENJU GRADILIŠTA",
+      "REVIZIJA PP APARATA",
+      "ZASTUPANJE PRED INSPEKCIJOM",
+      "GEOTAGOVANI FOTOREPORTING"
+    ]
+  },
+  "brojke": [
+    { "broj": "04", "tekst": "lične licence Inspektorata za rad i MUP-a Republike Srbije" },
+    { "broj": "10", "tekst": "godina na investicionim projektima i remontima u EU" },
+    { "broj": "05", "tekst": "rafinerija: Slovnaft, MOL, Unipetrol, OMV i INA" },
+    { "broj": "24/7", "tekst": "telefonska linija i hitan izlazak na teren" }
+  ],
+  "provera": {
+    "oznaka": "SISTEM / PROVERA OBAVEZA",
+    "naslov": "Da li vam je potreban savetnik za BZR?",
+    "uvod": "Odgovorite na dva pitanja i odmah znate na čemu ste.",
+    "pitanje1": "01 / KOLIKO IMATE ZAPOSLENIH?",
+    "odgovori1": ["Nemam zaposlene", "1–20", "Više od 20"],
+    "pitanje2": "02 / ČIME SE BAVITE?",
+    "odgovori2": [
+      "Građevina, proizvodnja, skladištenje, transport",
+      "Kancelarija, IT, trgovina, usluge",
+      "Nešto drugo"
+    ],
+    "napomena": "Informativna procena na osnovu Zakona o BZR („Sl. glasnik RS\" br. 35/2023). Ne zamenjuje stručnu ocenu. Pozovite nas i proverićemo vaš konkretan slučaj.",
+    "rezultatOznaka": "REZULTAT",
+    "rezultati": {
+      "noEmp": {
+        "title": "Ne, još ne.",
+        "body": "Obaveze iz Zakona o BZR nastaju sa prvim zaposlenim. Ako planirate zapošljavanje, pametno je pripremiti akt o proceni rizika i pravilnike pre prvog ugovora. Jeftinije je nego naknadno usklađivanje.",
+        "fine": false
+      },
+      "many": {
+        "title": "Da, bez izuzetka.",
+        "body": "Sa više od 20 zaposlenih poslodavac ne može sam da obavlja poslove BZR ni u jednoj delatnosti. Potrebno vam je stručno lice, kompletna dokumentacija i evidencije usklađene sa novim pravilnicima.",
+        "fine": true
+      },
+      "risk": {
+        "title": "Da, potreban vam je.",
+        "body": "Sa najmanje jednim zaposlenim u delatnosti povećanog rizika dužni ste da organizujete poslove bezbednosti i zdravlja na radu i angažujete stručno lice. Sami taj posao ne možete voditi.",
+        "fine": true
+      },
+      "office": {
+        "title": "Možda, uz stručni ispit.",
+        "body": "U pojedinim manje rizičnim delatnostima poslodavac sa do 20 zaposlenih može sam da obavlja poslove BZR, pod uslovom da položi stručni ispit. U praksi većina vlasnika taj posao poverava stručnom licu. Vreme, evidencije i izmene propisa ostaju naša briga.",
+        "fine": false
+      },
+      "other": {
+        "title": "Verovatno da, zavisi od šifre delatnosti.",
+        "body": "Lista manje rizičnih delatnosti je zatvorena. Ako vaša šifra delatnosti nije na njoj, poslove BZR mora voditi stručno lice. Pozovite nas sa matičnim brojem firme i odgovaramo odmah.",
+        "fine": false
+      }
+    },
+    "rokOznaka": "ROK",
+    "rok": "1. januar 2027.",
+    "kaznaOznaka": "KAZNA ZA PREDUZETNIKA",
+    "kazna": "400.000–500.000 RSD",
+    "dugme": "Zatražite ponudu →"
+  },
+  "usluge": {
+    "naslov": "Šta radimo",
+    "oznaka": "01 / USLUGE",
+    "vise": "Više →"
+  },
+  "kako": {
+    "oznaka": "02 / PROCEDURA",
+    "naslov": "Kako radimo",
+    "uvod": "Sve počinje ulaznim auditom, bez obaveze. Posle njega tačno znate šta vam nedostaje, koliko košta i kojim redom se rešava.",
+    "koraci": [
+      {
+        "n": "01",
+        "naslov": "Ulazni BZR audit",
+        "tekst": "Pregledamo dokumentaciju, radna mesta i evidencije. Dobijate spisak nedostataka i redosled rešavanja, bez obaveze da nastavite sa nama.",
+        "highlight": false
+      },
+      {
+        "n": "02",
+        "naslov": "Dokumentacija po meri",
+        "tekst": "Akt o proceni rizika za svako radno mesto, pravilnik o BZR, pravilnik o LZO, pravila i planovi zaštite od požara, uputstva u boji. Na USB ključu i u štampanom obliku.",
+        "highlight": false
+      },
+      {
+        "n": "03",
+        "naslov": "Obuka i testiranje",
+        "tekst": "Teorijski i praktični deo obuke, testiranje zaposlenih i vođenje propisane evidencije. Uživo ili onlajn, po dogovoru.",
+        "highlight": false
+      },
+      {
+        "n": "04",
+        "naslov": "Mesečna kontrola",
+        "tekst": "Izlazak na teren, geotagovane fotografije nedostataka i protokol sa predlogom mera u vašem imejlu. Uz izveštaj ide i faktura.",
+        "highlight": true
+      }
+    ]
+  },
+  "rokovi": {
+    "oznaka": "03 / ROKOVI KOJI VAS SE TIČU",
+    "datumRed1": "1. januar",
+    "datumRed2": "2027.",
+    "tekst": "Od tog dana primenjuju se četiri nova pravilnika: o proceni rizika, o radu na visini, o pregledu opreme za rad i električnih i gromobranskih instalacija, i o vođenju evidencija. Primena je pomerena sa 1. jula 2026. godine. Dobili ste vreme, ne oproštaj.",
+    "kazne": [
+      { "oznaka": "KAZNA / PREDUZETNIK", "iznos": "400.000–500.000", "valuta": "RSD" },
+      { "oznaka": "KAZNA / PRAVNO LICE", "iznos": "1,5–2 miliona", "valuta": "RSD" },
+      { "oznaka": "KAZNA / ODGOVORNO LICE", "iznos": "50.000–150.000", "valuta": "RSD" }
+    ],
+    "gradilistaJako": "Gradilišta.",
+    "gradilistaTekst": " Prijavu o početku rada dostavljate inspekciji rada najmanje osam dana pre početka radova, a elaborat o uređenju gradilišta izrađujete ako radovi traju duže od tri dana neprekidno.",
+    "izvor": "Izvor: Zakon o BZR („Sl. glasnik RS\" br. 35/2023) i prateći pravilnici („Sl. glasnik RS\" br. 57/2026)."
+  },
+  "paketi": {
+    "oznaka": "04 / MESEČNI PAUŠAL",
+    "naslov": "BZR i ZOP po sistemu ključ u ruke",
+    "uvod": "Mesečni paušal po meri vaše firme. Vi dobijate stručno lice, dokumentaciju i rokove pod kontrolom, bez zaposlenog inženjera na platnom spisku."
+  },
+  "cenovnik": {
+    "oznaka": "05 / CENOVNIK",
+    "naslov": "Cene bez iznenađenja",
+    "uvod": "Objavljujemo cene. Niko drugi u ovom poslu to ne radi. Mi mislimo da je to prvi test poverenja.",
+    "link": "CEO CENOVNIK →"
+  },
+  "zasto": {
+    "naslov": "Zašto Preving Pro",
+    "oznaka": "06 / DOKAZI, NE PRIDEVI",
+    "licence": [
+      { "oznaka": "LICENCA 01", "tekst": "Savetnik za bezbednost i zdravlje na radu" },
+      { "oznaka": "LICENCA 02", "tekst": "Koordinator gradilišta u fazi izrade projekta" },
+      { "oznaka": "LICENCA 03", "tekst": "Koordinator gradilišta u fazi izvođenja radova" },
+      { "oznaka": "LICENCA 04", "tekst": "Referent zaštite od požara" }
+    ],
+    "licenceNapomena": "Izdate od Inspektorata za rad i MUP-a Republike Srbije.",
+    "iskustvoOznaka": "DESET GODINA NA NAJZAHTEVNIJIM PROJEKTIMA U EU",
+    "rafinerije": [
+      { "ime": "Slovnaft", "mesto": "BRATISLAVA · SLOVAČKA" },
+      { "ime": "MOL", "mesto": "MAĐARSKA" },
+      { "ime": "Unipetrol", "mesto": "ČEŠKA" },
+      { "ime": "OMV", "mesto": "AUSTRIJA" },
+      { "ime": "INA", "mesto": "HRVATSKA" }
+    ],
+    "iskustvoTekst": "Sedam godina na investicionim projektima i generalnim remontima rafinerija, tri godine kao koordinator na gradilištima u Slovačkoj. Ako standard izdrži remont rafinerije, izdržaće i vaše gradilište.",
+    "kartice": [
+      {
+        "oznaka": "OPREMA NA TERENU",
+        "tekst": "Alcovisor Mark X Plus za kontrolu alkohola sa protokolom o testiranju, fotoaparat za geotagovani fotoreporting, projektor za obuke na terenu."
+      },
+      {
+        "oznaka": "DOSTUPNOST",
+        "tekst": "Telefonska linija 24 časa, 7 dana u nedelji. Povreda na radu i inspekcija ne čekaju radno vreme."
+      }
+    ],
+    "gde": {
+      "oznaka": "GDE RADIMO",
+      "delovi": [
+        { "jako": "Novi Sad i okolina", "tekst": ": kancelarija na Temerinskom putu 51, Klisa. " },
+        { "jako": "Opština Kovačica", "tekst": ": Kovačica, Padina, Debeljača. " },
+        { "jako": "Cela Vojvodina", "tekst": ": po dogovoru." }
+      ]
+    },
+    "napomena": "Poslove obavljamo na osnovu ličnih licenci izdatih od Inspektorata za rad i MUP-a Republike Srbije, uz akt poslodavca o imenovanju savetnika za BZR i ugovor koji ostaje u vašoj dokumentaciji."
+  },
+  "faq": {
+    "oznaka": "07 / PITANJA",
+    "naslov": "Ono što nas svi pitaju",
+    "uvod": "Ako vaše pitanje nije ovde, pozovite. Odgovaramo istog radnog dana."
+  },
+  "kontakt": {
+    "oznaka": "08 / KONTAKT",
+    "naslov": "Zatražite ponudu",
+    "uvod": "Pošaljite osnovne podatke i dobijate konkretnu ponudu, bez obaveze. Odgovaramo istog radnog dana.",
+    "telefon": "063 81 855 87",
+    "telefonHref": "tel:+381638185587",
+    "imejl": "boris.sabo@previngpro.rs",
+    "adresa1": "Temerinski put 51, Klisa",
+    "adresa2": "21000 Novi Sad",
+    "radnoVreme": "pon–pet 08–16 · linija 24/7",
+    "polja": {
+      "ime": "IME I PREZIME",
+      "firma": "NAZIV FIRME",
+      "kontakt": "TELEFON ILI IMEJL",
+      "zaposleni": "BROJ ZAPOSLENIH",
+      "delatnost": "DELATNOST",
+      "poruka": "PORUKA (OPCIONO)"
+    },
+    "saglasnost": "Slažem se da Preving Pro obradi moje podatke radi odgovora na ovaj upit, u skladu sa Politikom privatnosti.",
+    "saglasnostGreska": "Označite saglasnost da bismo mogli da odgovorimo na upit.",
+    "dugme": "Pošaljite upit →",
+    "poslato": {
+      "oznaka": "UPIT PRIMLJEN",
+      "naslov": "Primili smo vaš upit.",
+      "tekstPre": "Javljamo se istog radnog dana. Ako je hitno: ",
+      "tekstPosle": "."
+    }
+  }
+}

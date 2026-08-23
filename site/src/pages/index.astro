@@ -5,6 +5,7 @@ import services from '../data/services.json';
 import prices from '../data/prices.json';
 import faq from '../data/faq.json';
 import formOptions from '../data/form-options.json';
+import tekst from '../data/index.json';
 import { cena } from '../lib/cene';
 import '../styles/responsive.css';
 
@@ -19,49 +20,24 @@ const cd = {
   ss: pad(Math.floor(left / 1e3) % 60),
 };
 
-const empOpts = ['Nemam zaposlene', '1–20', 'Više od 20'];
-const actOpts = [
-  'Građevina, proizvodnja, skladištenje, transport',
-  'Kancelarija, IT, trgovina, usluge',
-  'Nešto drugo',
-];
+// Sav tekst naslovne strane stoji u src/data/index.json, da urednik moze da ga
+// menja kroz CMS. U kodu ostaju samo strukturne labele i prelom.
+const { hero, brojke, provera, kako, rokovi, paketi, zasto, kontakt } = tekst;
+const uslugeTekst = tekst.usluge;
+const cenovnikTekst = tekst.cenovnik;
+const faqTekst = tekst.faq;
 
-const results = {
-  noEmp: {
-    title: 'Ne, još ne.',
-    body: 'Obaveze iz Zakona o BZR nastaju sa prvim zaposlenim. Ako planirate zapošljavanje, pametno je pripremiti akt o proceni rizika i pravilnike pre prvog ugovora. Jeftinije je nego naknadno usklađivanje.',
-    fine: false,
-  },
-  many: {
-    title: 'Da, bez izuzetka.',
-    body: 'Sa više od 20 zaposlenih poslodavac ne može sam da obavlja poslove BZR ni u jednoj delatnosti. Potrebno vam je stručno lice, kompletna dokumentacija i evidencije usklađene sa novim pravilnicima.',
-    fine: true,
-  },
-  risk: {
-    title: 'Da, potreban vam je.',
-    body: 'Sa najmanje jednim zaposlenim u delatnosti povećanog rizika dužni ste da organizujete poslove bezbednosti i zdravlja na radu i angažujete stručno lice. Sami taj posao ne možete voditi.',
-    fine: true,
-  },
-  office: {
-    title: 'Možda, uz stručni ispit.',
-    body: 'U pojedinim manje rizičnim delatnostima poslodavac sa do 20 zaposlenih može sam da obavlja poslove BZR, pod uslovom da položi stručni ispit. U praksi većina vlasnika taj posao poverava stručnom licu. Vreme, evidencije i izmene propisa ostaju naša briga.',
-    fine: false,
-  },
-  other: {
-    title: 'Verovatno da, zavisi od šifre delatnosti.',
-    body: 'Lista manje rizičnih delatnosti je zatvorena. Ako vaša šifra delatnosti nije na njoj, poslove BZR mora voditi stručno lice. Pozovite nas sa matičnim brojem firme i odgovaramo odmah.',
-    fine: false,
-  },
-};
+const empOpts = provera.odgovori1;
+const actOpts = provera.odgovori2;
+const results = provera.rezultati;
 
 // Polazno stanje ankete: 1–20 zaposlenih, delatnost povećanog rizika.
 const empDefault = 1;
 const actDefault = 0;
 const initial = results.risk;
 
-const title = 'Preving Pro · Bezbednost i zdravlje na radu i zaštita od požara';
-const description =
-  'Savetnik za BZR, referent zaštite od požara i koordinator gradilišta. Novi Sad, Klisa. Dokumentacija, obuke i rokovi pod kontrolom.';
+const title = tekst.meta.naslov;
+const description = tekst.meta.opis;
 ---
 
 <!doctype html>
@@ -129,27 +105,27 @@ const description =
         </div>
 
         <div style="position:relative; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; padding:24px 32px 0">
-          <span style="font:500 11px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.42); letter-spacing:.16em; font-variant-numeric:tabular-nums">45.29°N / 19.85°E · NOVI SAD · KLISA</span>
-          <span style="font:500 11px 'IBM Plex Mono',monospace; color:#FECB0F; letter-spacing:.16em; display:flex; align-items:center; gap:7px"><span style="width:6px; height:6px; border-radius:50%; background:#FECB0F; animation:blink 1.8s steps(1,end) infinite"></span>LINIJA 24/7 AKTIVNA</span>
+          <span style="font:500 11px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.42); letter-spacing:.16em; font-variant-numeric:tabular-nums">{hero.koordinate}</span>
+          <span style="font:500 11px 'IBM Plex Mono',monospace; color:#FECB0F; letter-spacing:.16em; display:flex; align-items:center; gap:7px"><span style="width:6px; height:6px; border-radius:50%; background:#FECB0F; animation:blink 1.8s steps(1,end) infinite"></span>{hero.linija}</span>
         </div>
 
         <div style="position:relative; flex:1; display:flex; align-items:center; padding:40px 32px 56px">
           <div style="max-width:1360px; margin:0 auto; width:100%; display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:36px">
             <div style="max-width:680px; min-width:min(100%,420px)">
-              <p style="margin:0 0 22px; font:500 11.5px 'IBM Plex Mono',monospace; color:#FECB0F; letter-spacing:.22em">BZR_01 / ZOP_02 / KOORDINATOR_03 / OBUKE_04</p>
-              <h1 style="margin:0; font:700 clamp(42px,4.8vw,72px)/0.98 'IBM Plex Sans',system-ui,sans-serif; color:#fff; letter-spacing:-.035em">Bezbednost i zdravlje na radu po standardu <span style="color:#FECB0F">rafinerije</span>.</h1>
-              <p style="margin:22px 0 0; font:400 17px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.7); max-width:52ch">Savetnik za BZR, referent zaštite od požara i koordinator gradilišta. Deset godina na projektima u Slovačkoj, Mađarskoj, Češkoj, Austriji i Hrvatskoj. Vi radite svoj posao, a dokumentaciju, obuke i rokove držimo mi.</p>
+              <p style="margin:0 0 22px; font:500 11.5px 'IBM Plex Mono',monospace; color:#FECB0F; letter-spacing:.22em">{hero.oznaka}</p>
+              <h1 style="margin:0; font:700 clamp(42px,4.8vw,72px)/0.98 'IBM Plex Sans',system-ui,sans-serif; color:#fff; letter-spacing:-.035em">{hero.naslovPre} <span style="color:#FECB0F">{hero.naslovAkcenat}</span>{hero.naslovPosle}</h1>
+              <p style="margin:22px 0 0; font:400 17px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.7); max-width:52ch">{hero.uvod}</p>
               <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:30px; align-items:center">
-                <a href="#kontakt" class="btn-y" style="background:#FECB0F; color:#070707; font:700 14.5px 'IBM Plex Sans',system-ui,sans-serif; padding:15px 26px">Zatražite ponudu</a>
-                <a href="tel:+381638185587" class="btn-ghost" style="border:1px solid rgba(255,255,255,.32); color:#fff; font:600 14px 'IBM Plex Mono',monospace; padding:14px 22px; backdrop-filter:blur(3px)">063 81 855 87</a>
-                <a href="/cenovnik" style="font:600 14px 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.85); text-decoration:underline; text-decoration-thickness:1.5px; text-underline-offset:4px; margin-left:8px">Pogledajte cenovnik →</a>
+                <a href="#kontakt" class="btn-y" style="background:#FECB0F; color:#070707; font:700 14.5px 'IBM Plex Sans',system-ui,sans-serif; padding:15px 26px">{hero.dugmePonuda}</a>
+                <a href={hero.telefonHref} class="btn-ghost" style="border:1px solid rgba(255,255,255,.32); color:#fff; font:600 14px 'IBM Plex Mono',monospace; padding:14px 22px; backdrop-filter:blur(3px)">{hero.telefon}</a>
+                <a href="/cenovnik" style="font:600 14px 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.85); text-decoration:underline; text-decoration-thickness:1.5px; text-underline-offset:4px; margin-left:8px">{hero.linkCenovnik}</a>
               </div>
             </div>
             <div class="hero-panel" style="width:268px; border:1px solid rgba(254,203,15,.28); background:rgba(4,4,4,.66); backdrop-filter:blur(4px); padding:18px 18px 16px; flex:none">
-              <div style="display:flex; justify-content:space-between; align-items:center; font:500 10px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45); letter-spacing:.18em; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.14)"><span>STATUS / PROPISI</span><span style="color:#FECB0F">ŽIVO</span></div>
-              <div style="display:flex; justify-content:space-between; font:500 12px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.75); padding:11px 0 0"><span>Zakon 35/2023</span><span style="color:#FECB0F">NA SNAZI</span></div>
-              <div style="display:flex; justify-content:space-between; font:500 12px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.75); padding:7px 0 0"><span>4 nova pravilnika</span><span style="color:#FECB0F">01.01.2027.</span></div>
-              <div style="display:flex; justify-content:space-between; font:500 12px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.75); padding:7px 0 14px"><span>Lične licence</span><span style="color:#FECB0F">4 / 4</span></div>
+              <div style="display:flex; justify-content:space-between; align-items:center; font:500 10px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45); letter-spacing:.18em; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.14)"><span>{hero.panel.naslov}</span><span style="color:#FECB0F">{hero.panel.zivo}</span></div>
+              {hero.panel.redovi.map((r, i) => (
+                <div style={`display:flex; justify-content:space-between; font:500 12px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.75); padding:${i === 0 ? '11px 0 0' : i === hero.panel.redovi.length - 1 ? '7px 0 14px' : '7px 0 0'}`}><span>{r.label}</span><span style="color:#FECB0F">{r.value}</span></div>
+              ))}
               <div style="border-top:1px solid rgba(255,255,255,.14); padding-top:12px">
                 <div style="font:700 30px 'IBM Plex Mono',monospace; color:#fff; letter-spacing:.02em; font-variant-numeric:tabular-nums"><span data-cd="days">{cd.days}</span><span style="color:rgba(255,255,255,.35)">:</span><span data-cd="hh">{cd.hh}</span><span style="color:rgba(255,255,255,.35)">:</span><span data-cd="mm">{cd.mm}</span><span style="color:rgba(255,255,255,.35)">:</span><span data-cd="ss">{cd.ss}</span></div>
                 <div style="display:flex; gap:0; font:500 9px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.42); letter-spacing:.14em; margin-top:4px"><span style="width:64px">DANA</span><span style="width:48px">SATI</span><span style="width:48px">MIN</span><span>SEK</span></div>
@@ -160,50 +136,51 @@ const description =
 
         <div style="position:relative; height:44px; background:#FECB0F; display:flex; align-items:center; overflow:hidden; flex:none">
           <div style="display:flex; white-space:nowrap; font:600 12px 'IBM Plex Mono',monospace; color:#070707; letter-spacing:.16em; animation:marquee 28s linear infinite">
-            <span style="padding-right:44px">AKT O PROCENI RIZIKA</span><span style="padding-right:44px">/ OBUKA ZAPOSLENIH</span><span style="padding-right:44px">/ PLAN EVAKUACIJE</span><span style="padding-right:44px">/ ELABORAT O UREĐENJU GRADILIŠTA</span><span style="padding-right:44px">/ REVIZIJA PP APARATA</span><span style="padding-right:44px">/ ZASTUPANJE PRED INSPEKCIJOM</span><span style="padding-right:44px">/ GEOTAGOVANI FOTOREPORTING</span>
-            <span style="padding-right:44px">AKT O PROCENI RIZIKA</span><span style="padding-right:44px">/ OBUKA ZAPOSLENIH</span><span style="padding-right:44px">/ PLAN EVAKUACIJE</span><span style="padding-right:44px">/ ELABORAT O UREĐENJU GRADILIŠTA</span><span style="padding-right:44px">/ REVIZIJA PP APARATA</span><span style="padding-right:44px">/ ZASTUPANJE PRED INSPEKCIJOM</span><span style="padding-right:44px">/ GEOTAGOVANI FOTOREPORTING</span>
+            {/* Traka se ispisuje dva puta, jer animacija pomera pola sirine. */}
+            {[0, 1].map(() => hero.traka.map((t, i) => (
+              <span style="padding-right:44px">{i === 0 ? t : `/ ${t}`}</span>
+            )))}
           </div>
         </div>
       </section>
 
       <section style="position:relative; z-index:2; background:#0b0b0b; border-top:1px solid rgba(255,255,255,.08); box-shadow:0 -30px 60px rgba(0,0,0,.55)">
         <div style="max-width:1360px; margin:0 auto; padding:36px 32px; display:grid; grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr)); gap:0">
-          <div style="padding:0 28px 0 0"><div style="font:700 42px 'IBM Plex Sans',system-ui,sans-serif; color:#FECB0F; letter-spacing:-.03em">04</div><div style="font:400 13.5px/1.5 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.6); margin-top:8px">lične licence Inspektorata za rad i MUP-a Republike Srbije</div></div>
-          <div style="padding:0 28px; border-left:1px solid rgba(255,255,255,.1)"><div style="font:700 42px 'IBM Plex Sans',system-ui,sans-serif; color:#FECB0F; letter-spacing:-.03em">10</div><div style="font:400 13.5px/1.5 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.6); margin-top:8px">godina na investicionim projektima i remontima u EU</div></div>
-          <div style="padding:0 28px; border-left:1px solid rgba(255,255,255,.1)"><div style="font:700 42px 'IBM Plex Sans',system-ui,sans-serif; color:#FECB0F; letter-spacing:-.03em">05</div><div style="font:400 13.5px/1.5 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.6); margin-top:8px">rafinerija: Slovnaft, MOL, Unipetrol, OMV i INA</div></div>
-          <div style="padding:0 0 0 28px; border-left:1px solid rgba(255,255,255,.1)"><div style="font:700 42px 'IBM Plex Sans',system-ui,sans-serif; color:#FECB0F; letter-spacing:-.03em">24/7</div><div style="font:400 13.5px/1.5 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.6); margin-top:8px">telefonska linija i hitan izlazak na teren</div></div>
+          {brojke.map((b, i) => (
+            <div style={i === 0 ? 'padding:0 28px 0 0' : `padding:${i === brojke.length - 1 ? '0 0 0 28px' : '0 28px'}; border-left:1px solid rgba(255,255,255,.1)`}><div style="font:700 42px 'IBM Plex Sans',system-ui,sans-serif; color:#FECB0F; letter-spacing:-.03em">{b.broj}</div><div style="font:400 13.5px/1.5 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.6); margin-top:8px">{b.tekst}</div></div>
+          ))}
         </div>
       </section>
 
       <section id="provera" style="position:relative; z-index:2; background:#070707; border-top:1px solid rgba(255,255,255,.08); padding:96px 32px 100px">
         <div style="max-width:1360px; margin:0 auto; display:flex; flex-wrap:wrap; gap:60px">
           <div style="flex:1 1 480px; min-width:0" data-rv>
-            <p style="margin:0 0 14px; font:500 11px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:rgba(254,203,15,.7)">SISTEM / PROVERA OBAVEZA</p>
-            <h2 style="margin:0 0 12px; font:700 clamp(30px,3.2vw,44px)/1.04 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.03em; color:#fff">Da li vam je potreban savetnik za BZR?</h2>
-            <p style="margin:0 0 36px; font:400 16.5px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.62)">Odgovorite na dva pitanja i odmah znate na čemu ste.</p>
-            <p style="margin:0 0 12px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.16em; color:rgba(255,255,255,.45)">01 / KOLIKO IMATE ZAPOSLENIH?</p>
+            <p style="margin:0 0 14px; font:500 11px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:rgba(254,203,15,.7)">{provera.oznaka}</p>
+            <h2 style="margin:0 0 12px; font:700 clamp(30px,3.2vw,44px)/1.04 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.03em; color:#fff">{provera.naslov}</h2>
+            <p style="margin:0 0 36px; font:400 16.5px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.62)">{provera.uvod}</p>
+            <p style="margin:0 0 12px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.16em; color:rgba(255,255,255,.45)">{provera.pitanje1}</p>
             <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:26px">
               {empOpts.map((t, i) => (
                 <button type="button" class="opt" data-q="emp" data-i={i} aria-pressed={i === empDefault ? 'true' : 'false'}>{t}</button>
               ))}
             </div>
-            <p style="margin:0 0 12px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.16em; color:rgba(255,255,255,.45)">02 / ČIME SE BAVITE?</p>
+            <p style="margin:0 0 12px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.16em; color:rgba(255,255,255,.45)">{provera.pitanje2}</p>
             <div style="display:flex; flex-wrap:wrap; gap:10px">
               {actOpts.map((t, i) => (
                 <button type="button" class="opt" data-q="act" data-i={i} aria-pressed={i === actDefault ? 'true' : 'false'} style="text-align:left">{t}</button>
               ))}
             </div>
-            <p style="margin:32px 0 0; font:400 13px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.4); max-width:58ch">Informativna procena na osnovu Zakona o BZR („Sl. glasnik RS" br. 35/2023). Ne zamenjuje stručnu ocenu. Pozovite nas i proverićemo vaš konkretan slučaj.</p>
+            <p style="margin:32px 0 0; font:400 13px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.4); max-width:58ch">{provera.napomena}</p>
           </div>
           <div aria-live="polite" style="flex:1 1 420px; min-width:0; background:#FECB0F; color:#070707; padding:34px 34px 30px; min-height:360px; align-self:stretch; display:flex; flex-direction:column; gap:16px" data-rv>
-            <p style="margin:0; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:rgba(7,7,7,.55)">REZULTAT</p>
+            <p style="margin:0; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:rgba(7,7,7,.55)">{provera.rezultatOznaka}</p>
             <p id="res-title" style="margin:0; font:700 clamp(28px,2.8vw,40px)/1.04 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.025em">{initial.title}</p>
             <p id="res-body" style="margin:0; font:400 15.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.85)">{initial.body}</p>
             <div id="res-fine" hidden={!initial.fine} style="display:flex; flex-wrap:wrap; gap:30px; border-top:1.5px solid rgba(7,7,7,.3); padding-top:16px">
-              <div><p style="margin:0; font:600 10px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(7,7,7,.5)">ROK</p><p style="margin:4px 0 0; font:700 19px 'IBM Plex Sans',system-ui,sans-serif">1. januar 2027.</p></div>
-              <div><p style="margin:0; font:600 10px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(7,7,7,.5)">KAZNA ZA PREDUZETNIKA</p><p style="margin:4px 0 0; font:700 19px 'IBM Plex Sans',system-ui,sans-serif">400.000–500.000 RSD</p></div>
+              <div><p style="margin:0; font:600 10px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(7,7,7,.5)">{provera.rokOznaka}</p><p style="margin:4px 0 0; font:700 19px 'IBM Plex Sans',system-ui,sans-serif">{provera.rok}</p></div>
+              <div><p style="margin:0; font:600 10px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(7,7,7,.5)">{provera.kaznaOznaka}</p><p style="margin:4px 0 0; font:700 19px 'IBM Plex Sans',system-ui,sans-serif">{provera.kazna}</p></div>
             </div>
-            <div style="margin-top:auto"><a href="#kontakt" class="btn-dark" style="display:inline-block; background:#070707; color:#FECB0F; font:700 14px 'IBM Plex Sans',system-ui,sans-serif; padding:14px 24px">Zatražite ponudu →</a></div>
+            <div style="margin-top:auto"><a href="#kontakt" class="btn-dark" style="display:inline-block; background:#070707; color:#FECB0F; font:700 14px 'IBM Plex Sans',system-ui,sans-serif; padding:14px 24px">{provera.dugme}</a></div>
           </div>
         </div>
       </section>
@@ -211,8 +188,8 @@ const description =
       <section id="usluge" style="position:relative; z-index:2; background:#EFEDE6; color:#070707; padding:96px 32px 100px">
         <div style="max-width:1360px; margin:0 auto">
           <div style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:44px" data-rv>
-            <h2 style="margin:0; font:700 clamp(32px,3.6vw,48px) 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.035em">Šta radimo</h2>
-            <span style="font:500 11px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.45); letter-spacing:.2em">01 / USLUGE</span>
+            <h2 style="margin:0; font:700 clamp(32px,3.6vw,48px) 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.035em">{uslugeTekst.naslov}</h2>
+            <span style="font:500 11px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.45); letter-spacing:.2em">{uslugeTekst.oznaka}</span>
           </div>
           <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr)); gap:24px">
             {services.map((s) => (
@@ -229,34 +206,24 @@ const description =
                 <div style="font:500 11px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.4); letter-spacing:.16em">{s.num}</div>
                 <h3 style="margin:12px 0 10px; font:700 20px/1.2 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.01em">{s.title}</h3>
                 <p style="margin:0; font:400 14.5px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.65)">{s.text}</p>
-                <div style="margin-top:16px; font:600 13px 'IBM Plex Mono',monospace">Više →</div>
+                <div style="margin-top:16px; font:600 13px 'IBM Plex Mono',monospace">{uslugeTekst.vise}</div>
               </a>
             ))}
           </div>
 
           <div style="border-top:1px solid rgba(7,7,7,.15); margin-top:72px; padding-top:56px; display:flex; flex-wrap:wrap; gap:56px" id="kako">
             <div style="flex:0 1 340px" data-rv>
-              <p style="margin:0 0 12px; font:500 11px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.45); letter-spacing:.2em">02 / PROCEDURA</p>
-              <h2 style="margin:0; font:700 clamp(28px,3vw,40px)/1.05 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.03em">Kako radimo</h2>
-              <p style="margin:16px 0 0; font:400 15.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.65)">Sve počinje ulaznim auditom, bez obaveze. Posle njega tačno znate šta vam nedostaje, koliko košta i kojim redom se rešava.</p>
+              <p style="margin:0 0 12px; font:500 11px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.45); letter-spacing:.2em">{kako.oznaka}</p>
+              <h2 style="margin:0; font:700 clamp(28px,3vw,40px)/1.05 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.03em">{kako.naslov}</h2>
+              <p style="margin:16px 0 0; font:400 15.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.65)">{kako.uvod}</p>
             </div>
             <div style="flex:1 1 560px; min-width:0">
-              <div style="display:flex; gap:24px; border-top:1px solid rgba(7,7,7,.18); padding:22px 0" data-rv>
-                <span style="font:700 34px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.2); flex:none; width:64px">01</span>
-                <div><h3 style="margin:0 0 6px; font:700 18px 'IBM Plex Sans',system-ui,sans-serif">Ulazni BZR audit</h3><p style="margin:0; font:400 14.5px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.65)">Pregledamo dokumentaciju, radna mesta i evidencije. Dobijate spisak nedostataka i redosled rešavanja, bez obaveze da nastavite sa nama.</p></div>
-              </div>
-              <div style="display:flex; gap:24px; border-top:1px solid rgba(7,7,7,.18); padding:22px 0" data-rv>
-                <span style="font:700 34px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.2); flex:none; width:64px">02</span>
-                <div><h3 style="margin:0 0 6px; font:700 18px 'IBM Plex Sans',system-ui,sans-serif">Dokumentacija po meri</h3><p style="margin:0; font:400 14.5px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.65)">Akt o proceni rizika za svako radno mesto, pravilnik o BZR, pravilnik o LZO, pravila i planovi zaštite od požara, uputstva u boji. Na USB ključu i u štampanom obliku.</p></div>
-              </div>
-              <div style="display:flex; gap:24px; border-top:1px solid rgba(7,7,7,.18); padding:22px 0" data-rv>
-                <span style="font:700 34px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.2); flex:none; width:64px">03</span>
-                <div><h3 style="margin:0 0 6px; font:700 18px 'IBM Plex Sans',system-ui,sans-serif">Obuka i testiranje</h3><p style="margin:0; font:400 14.5px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.65)">Teorijski i praktični deo obuke, testiranje zaposlenih i vođenje propisane evidencije. Uživo ili onlajn, po dogovoru.</p></div>
-              </div>
-              <div style="display:flex; gap:24px; border-top:1px solid rgba(7,7,7,.18); border-bottom:1px solid rgba(7,7,7,.18); padding:22px 0" data-rv>
-                <span style="font:700 34px 'IBM Plex Mono',monospace; color:#FECB0F; -webkit-text-stroke:1px #070707; flex:none; width:64px">04</span>
-                <div><h3 style="margin:0 0 6px; font:700 18px 'IBM Plex Sans',system-ui,sans-serif">Mesečna kontrola</h3><p style="margin:0; font:400 14.5px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.65)">Izlazak na teren, geotagovane fotografije nedostataka i protokol sa predlogom mera u vašem imejlu. Uz izveštaj ide i faktura.</p></div>
-              </div>
+              {kako.koraci.map((k) => (
+                <div style={k.highlight ? 'display:flex; gap:24px; border-top:1px solid rgba(7,7,7,.18); border-bottom:1px solid rgba(7,7,7,.18); padding:22px 0' : 'display:flex; gap:24px; border-top:1px solid rgba(7,7,7,.18); padding:22px 0'} data-rv>
+                  <span style={k.highlight ? "font:700 34px 'IBM Plex Mono',monospace; color:#FECB0F; -webkit-text-stroke:1px #070707; flex:none; width:64px" : "font:700 34px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.2); flex:none; width:64px"}>{k.n}</span>
+                  <div><h3 style="margin:0 0 6px; font:700 18px 'IBM Plex Sans',system-ui,sans-serif">{k.naslov}</h3><p style="margin:0; font:400 14.5px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.65)">{k.tekst}</p></div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -265,32 +232,26 @@ const description =
       <section id="rokovi" style="z-index:2; background:#070707; border-top:3px solid #FECB0F; padding:96px 32px 100px; position:relative; overflow:hidden">
         <div style="position:absolute; inset:0; background-image:linear-gradient(rgba(254,203,15,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(254,203,15,.04) 1px,transparent 1px); background-size:56px 56px; pointer-events:none"></div>
         <div style="max-width:1360px; margin:0 auto; position:relative">
-          <p style="margin:0 0 14px; font:500 11px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:rgba(254,203,15,.7)" data-rv>03 / ROKOVI KOJI VAS SE TIČU</p>
+          <p style="margin:0 0 14px; font:500 11px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:rgba(254,203,15,.7)" data-rv>{rokovi.oznaka}</p>
           <div style="display:flex; flex-wrap:wrap; align-items:flex-end; gap:40px 80px" data-rv>
-            <h2 style="margin:0; font:700 clamp(52px,7vw,110px)/0.95 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.04em; color:#FECB0F">1. januar<br />2027.</h2>
+            <h2 style="margin:0; font:700 clamp(52px,7vw,110px)/0.95 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.04em; color:#FECB0F">{rokovi.datumRed1}<br />{rokovi.datumRed2}</h2>
             <div style="padding-bottom:8px">
               <div style="font:700 clamp(34px,4vw,56px) 'IBM Plex Mono',monospace; color:#fff; letter-spacing:.02em; font-variant-numeric:tabular-nums"><span data-cd="days">{cd.days}</span><span style="color:rgba(255,255,255,.3)">:</span><span data-cd="hh">{cd.hh}</span><span style="color:rgba(255,255,255,.3)">:</span><span data-cd="mm">{cd.mm}</span><span style="color:rgba(255,255,255,.3)">:</span><span data-cd="ss">{cd.ss}</span></div>
               <div style="font:500 10.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45); letter-spacing:.3em; margin-top:6px">DANA · SATI · MINUTA · SEKUNDI</div>
             </div>
           </div>
-          <p style="margin:30px 0 0; font:400 17px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.72); max-width:66ch" data-rv>Od tog dana primenjuju se četiri nova pravilnika: o proceni rizika, o radu na visini, o pregledu opreme za rad i električnih i gromobranskih instalacija, i o vođenju evidencija. Primena je pomerena sa 1. jula 2026. godine. Dobili ste vreme, ne oproštaj.</p>
+          <p style="margin:30px 0 0; font:400 17px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.72); max-width:66ch" data-rv>{rokovi.tekst}</p>
           <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr)); gap:24px; margin-top:44px">
-            <div style="border:1px solid rgba(255,255,255,.14); padding:22px" data-rv>
-              <p style="margin:0; font:600 10px 'IBM Plex Mono',monospace; letter-spacing:.18em; color:rgba(255,255,255,.45)">KAZNA / PREDUZETNIK</p>
-              <p style="margin:10px 0 0; font:700 28px 'IBM Plex Sans',system-ui,sans-serif; color:#FECB0F; letter-spacing:-.02em">400.000–500.000 <span style="font:500 13px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.5)">RSD</span></p>
-            </div>
-            <div style="border:1px solid rgba(255,255,255,.14); padding:22px" data-rv>
-              <p style="margin:0; font:600 10px 'IBM Plex Mono',monospace; letter-spacing:.18em; color:rgba(255,255,255,.45)">KAZNA / PRAVNO LICE</p>
-              <p style="margin:10px 0 0; font:700 28px 'IBM Plex Sans',system-ui,sans-serif; color:#FECB0F; letter-spacing:-.02em">1,5–2 miliona <span style="font:500 13px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.5)">RSD</span></p>
-            </div>
-            <div style="border:1px solid rgba(255,255,255,.14); padding:22px" data-rv>
-              <p style="margin:0; font:600 10px 'IBM Plex Mono',monospace; letter-spacing:.18em; color:rgba(255,255,255,.45)">KAZNA / ODGOVORNO LICE</p>
-              <p style="margin:10px 0 0; font:700 28px 'IBM Plex Sans',system-ui,sans-serif; color:#FECB0F; letter-spacing:-.02em">50.000–150.000 <span style="font:500 13px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.5)">RSD</span></p>
-            </div>
+            {rokovi.kazne.map((k) => (
+              <div style="border:1px solid rgba(255,255,255,.14); padding:22px" data-rv>
+                <p style="margin:0; font:600 10px 'IBM Plex Mono',monospace; letter-spacing:.18em; color:rgba(255,255,255,.45)">{k.oznaka}</p>
+                <p style="margin:10px 0 0; font:700 28px 'IBM Plex Sans',system-ui,sans-serif; color:#FECB0F; letter-spacing:-.02em">{k.iznos} <span style="font:500 13px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.5)">{k.valuta}</span></p>
+              </div>
+            ))}
           </div>
           <div style="border-left:3px solid #FECB0F; padding:4px 0 4px 22px; margin-top:36px" data-rv>
-            <p style="margin:0; font:400 15.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.75); max-width:70ch"><strong style="color:#fff">Gradilišta.</strong> Prijavu o početku rada dostavljate inspekciji rada najmanje osam dana pre početka radova, a elaborat o uređenju gradilišta izrađujete ako radovi traju duže od tri dana neprekidno.</p>
-            <p style="margin:10px 0 0; font:400 13px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.38)">Izvor: Zakon o BZR („Sl. glasnik RS" br. 35/2023) i prateći pravilnici („Sl. glasnik RS" br. 57/2026).</p>
+            <p style="margin:0; font:400 15.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.75); max-width:70ch"><strong style="color:#fff">{rokovi.gradilistaJako}</strong>{rokovi.gradilistaTekst}</p>
+            <p style="margin:10px 0 0; font:400 13px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.38)">{rokovi.izvor}</p>
           </div>
         </div>
       </section>
@@ -298,9 +259,9 @@ const description =
       <section id="paketi" style="position:relative; z-index:2; background:#EFEDE6; color:#070707; padding:96px 32px 88px">
         <div style="max-width:1360px; margin:0 auto">
           <div style="max-width:640px; margin-bottom:44px" data-rv>
-            <p style="margin:0 0 12px; font:500 11px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.45); letter-spacing:.2em">04 / MESEČNI PAUŠAL</p>
-            <h2 style="margin:0 0 14px; font:700 clamp(32px,3.6vw,48px)/1.05 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.035em">BZR i ZOP po sistemu ključ u ruke</h2>
-            <p style="margin:0; font:400 16.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.65)">Mesečni paušal po meri vaše firme. Vi dobijate stručno lice, dokumentaciju i rokove pod kontrolom, bez zaposlenog inženjera na platnom spisku.</p>
+            <p style="margin:0 0 12px; font:500 11px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.45); letter-spacing:.2em">{paketi.oznaka}</p>
+            <h2 style="margin:0 0 14px; font:700 clamp(32px,3.6vw,48px)/1.05 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.035em">{paketi.naslov}</h2>
+            <p style="margin:0; font:400 16.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.65)">{paketi.uvod}</p>
           </div>
           <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr)); gap:28px; align-items:stretch">
             {prices.packages.map((p) => (
@@ -338,10 +299,10 @@ const description =
 
           <div id="cenovnik" style="border-top:1px solid rgba(7,7,7,.15); margin-top:64px; padding-top:56px; display:flex; flex-wrap:wrap; gap:56px">
             <div style="flex:0 1 340px" data-rv>
-              <p style="margin:0 0 12px; font:500 11px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.45); letter-spacing:.2em">05 / CENOVNIK</p>
-              <h2 style="margin:0 0 14px; font:700 clamp(28px,3vw,40px)/1.05 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.03em">Cene bez iznenađenja</h2>
-              <p style="margin:0; font:400 15.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.65)">Objavljujemo cene. Niko drugi u ovom poslu to ne radi. Mi mislimo da je to prvi test poverenja.</p>
-              <a href="/cenovnik" class="keep-ink" style="display:inline-block; margin-top:22px; font:700 13px 'IBM Plex Mono',monospace; color:#070707; border-bottom:2px solid #070707; padding-bottom:3px">CEO CENOVNIK →</a>
+              <p style="margin:0 0 12px; font:500 11px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.45); letter-spacing:.2em">{cenovnikTekst.oznaka}</p>
+              <h2 style="margin:0 0 14px; font:700 clamp(28px,3vw,40px)/1.05 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.03em">{cenovnikTekst.naslov}</h2>
+              <p style="margin:0; font:400 15.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.65)">{cenovnikTekst.uvod}</p>
+              <a href="/cenovnik" class="keep-ink" style="display:inline-block; margin-top:22px; font:700 13px 'IBM Plex Mono',monospace; color:#070707; border-bottom:2px solid #070707; padding-bottom:3px">{cenovnikTekst.link}</a>
             </div>
             <div style="flex:1 1 520px; min-width:0; font:400 15.5px 'IBM Plex Sans',system-ui,sans-serif" data-rv>
               {prices.items.map((it) => (
@@ -356,53 +317,48 @@ const description =
       <section id="zasto" style="position:relative; z-index:2; background:#070707; border-top:1px solid rgba(255,255,255,.08); padding:96px 32px 100px">
         <div style="max-width:1360px; margin:0 auto">
           <div style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:44px" data-rv>
-            <h2 style="margin:0; font:700 clamp(32px,3.6vw,48px) 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.035em; color:#fff">Zašto Preving Pro</h2>
-            <span style="font:500 11px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.4); letter-spacing:.2em">06 / DOKAZI, NE PRIDEVI</span>
+            <h2 style="margin:0; font:700 clamp(32px,3.6vw,48px) 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.035em; color:#fff">{zasto.naslov}</h2>
+            <span style="font:500 11px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.4); letter-spacing:.2em">{zasto.oznaka}</span>
           </div>
           <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr)); gap:16px" data-rv>
-            <div style="border:1px solid rgba(254,203,15,.3); padding:20px"><p style="margin:0; font:600 10px 'IBM Plex Mono',monospace; letter-spacing:.16em; color:rgba(254,203,15,.7)">LICENCA 01</p><p style="margin:10px 0 0; font:700 15.5px/1.35 'IBM Plex Sans',system-ui,sans-serif; color:#fff">Savetnik za bezbednost i zdravlje na radu</p></div>
-            <div style="border:1px solid rgba(254,203,15,.3); padding:20px"><p style="margin:0; font:600 10px 'IBM Plex Mono',monospace; letter-spacing:.16em; color:rgba(254,203,15,.7)">LICENCA 02</p><p style="margin:10px 0 0; font:700 15.5px/1.35 'IBM Plex Sans',system-ui,sans-serif; color:#fff">Koordinator gradilišta u fazi izrade projekta</p></div>
-            <div style="border:1px solid rgba(254,203,15,.3); padding:20px"><p style="margin:0; font:600 10px 'IBM Plex Mono',monospace; letter-spacing:.16em; color:rgba(254,203,15,.7)">LICENCA 03</p><p style="margin:10px 0 0; font:700 15.5px/1.35 'IBM Plex Sans',system-ui,sans-serif; color:#fff">Koordinator gradilišta u fazi izvođenja radova</p></div>
-            <div style="border:1px solid rgba(254,203,15,.3); padding:20px"><p style="margin:0; font:600 10px 'IBM Plex Mono',monospace; letter-spacing:.16em; color:rgba(254,203,15,.7)">LICENCA 04</p><p style="margin:10px 0 0; font:700 15.5px/1.35 'IBM Plex Sans',system-ui,sans-serif; color:#fff">Referent zaštite od požara</p></div>
+            {zasto.licence.map((l) => (
+              <div style="border:1px solid rgba(254,203,15,.3); padding:20px"><p style="margin:0; font:600 10px 'IBM Plex Mono',monospace; letter-spacing:.16em; color:rgba(254,203,15,.7)">{l.oznaka}</p><p style="margin:10px 0 0; font:700 15.5px/1.35 'IBM Plex Sans',system-ui,sans-serif; color:#fff">{l.tekst}</p></div>
+            ))}
           </div>
-          <p style="margin:14px 0 0; font:400 13px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.4)" data-rv>Izdate od Inspektorata za rad i MUP-a Republike Srbije.</p>
+          <p style="margin:14px 0 0; font:400 13px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.4)" data-rv>{zasto.licenceNapomena}</p>
 
           <div style="margin-top:56px" data-rv>
-            <p style="margin:0 0 18px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.2em; color:rgba(255,255,255,.45)">DESET GODINA NA NAJZAHTEVNIJIM PROJEKTIMA U EU</p>
+            <p style="margin:0 0 18px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.2em; color:rgba(255,255,255,.45)">{zasto.iskustvoOznaka}</p>
             <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr)); gap:0; border-top:1px solid rgba(255,255,255,.14)">
-              <div style="border-bottom:1px solid rgba(255,255,255,.14); padding:18px 20px 18px 0"><p style="margin:0; font:700 19px 'IBM Plex Sans',system-ui,sans-serif; color:#fff">Slovnaft</p><p style="margin:4px 0 0; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45)">BRATISLAVA · SLOVAČKA</p></div>
-              <div style="border-bottom:1px solid rgba(255,255,255,.14); padding:18px 20px"><p style="margin:0; font:700 19px 'IBM Plex Sans',system-ui,sans-serif; color:#fff">MOL</p><p style="margin:4px 0 0; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45)">MAĐARSKA</p></div>
-              <div style="border-bottom:1px solid rgba(255,255,255,.14); padding:18px 20px"><p style="margin:0; font:700 19px 'IBM Plex Sans',system-ui,sans-serif; color:#fff">Unipetrol</p><p style="margin:4px 0 0; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45)">ČEŠKA</p></div>
-              <div style="border-bottom:1px solid rgba(255,255,255,.14); padding:18px 20px"><p style="margin:0; font:700 19px 'IBM Plex Sans',system-ui,sans-serif; color:#fff">OMV</p><p style="margin:4px 0 0; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45)">AUSTRIJA</p></div>
-              <div style="border-bottom:1px solid rgba(255,255,255,.14); padding:18px 0 18px 20px"><p style="margin:0; font:700 19px 'IBM Plex Sans',system-ui,sans-serif; color:#fff">INA</p><p style="margin:4px 0 0; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45)">HRVATSKA</p></div>
+              {zasto.rafinerije.map((r, i) => (
+                <div style={`border-bottom:1px solid rgba(255,255,255,.14); padding:${i === 0 ? '18px 20px 18px 0' : i === zasto.rafinerije.length - 1 ? '18px 0 18px 20px' : '18px 20px'}`}><p style="margin:0; font:700 19px 'IBM Plex Sans',system-ui,sans-serif; color:#fff">{r.ime}</p><p style="margin:4px 0 0; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45)">{r.mesto}</p></div>
+              ))}
             </div>
-            <p style="margin:18px 0 0; font:400 15.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.65); max-width:64ch">Sedam godina na investicionim projektima i generalnim remontima rafinerija, tri godine kao koordinator na gradilištima u Slovačkoj. Ako standard izdrži remont rafinerije, izdržaće i vaše gradilište.</p>
+            <p style="margin:18px 0 0; font:400 15.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.65); max-width:64ch">{zasto.iskustvoTekst}</p>
           </div>
 
           <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr)); gap:24px; margin-top:48px">
+            {zasto.kartice.map((k) => (
+              <div style="background:#0d0d0d; border:1px solid rgba(255,255,255,.1); padding:24px" data-rv>
+                <p style="margin:0 0 10px; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.18em; color:#FECB0F">{k.oznaka}</p>
+                <p style="margin:0; font:400 15px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.72)">{k.tekst}</p>
+              </div>
+            ))}
             <div style="background:#0d0d0d; border:1px solid rgba(255,255,255,.1); padding:24px" data-rv>
-              <p style="margin:0 0 10px; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.18em; color:#FECB0F">OPREMA NA TERENU</p>
-              <p style="margin:0; font:400 15px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.72)">Alcovisor Mark X Plus za kontrolu alkohola sa protokolom o testiranju, fotoaparat za geotagovani fotoreporting, projektor za obuke na terenu.</p>
-            </div>
-            <div style="background:#0d0d0d; border:1px solid rgba(255,255,255,.1); padding:24px" data-rv>
-              <p style="margin:0 0 10px; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.18em; color:#FECB0F">DOSTUPNOST</p>
-              <p style="margin:0; font:400 15px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.72)">Telefonska linija 24 časa, 7 dana u nedelji. Povreda na radu i inspekcija ne čekaju radno vreme.</p>
-            </div>
-            <div style="background:#0d0d0d; border:1px solid rgba(255,255,255,.1); padding:24px" data-rv>
-              <p style="margin:0 0 10px; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.18em; color:#FECB0F">GDE RADIMO</p>
-              <p style="margin:0; font:400 15px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.72)"><strong style="color:#fff">Novi Sad i okolina</strong>: kancelarija na Temerinskom putu 51, Klisa. <strong style="color:#fff">Opština Kovačica</strong>: Kovačica, Padina, Debeljača. <strong style="color:#fff">Cela Vojvodina</strong>: po dogovoru.</p>
+              <p style="margin:0 0 10px; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.18em; color:#FECB0F">{zasto.gde.oznaka}</p>
+              <p style="margin:0; font:400 15px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.72)">{zasto.gde.delovi.map((d) => (<Fragment><strong style="color:#fff">{d.jako}</strong>{d.tekst}</Fragment>))}</p>
             </div>
           </div>
-          <p style="margin:28px 0 0; font:400 13.5px/1.65 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.4); max-width:78ch" data-rv>Poslove obavljamo na osnovu ličnih licenci izdatih od Inspektorata za rad i MUP-a Republike Srbije, uz akt poslodavca o imenovanju savetnika za BZR i ugovor koji ostaje u vašoj dokumentaciji.</p>
+          <p style="margin:28px 0 0; font:400 13.5px/1.65 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.4); max-width:78ch" data-rv>{zasto.napomena}</p>
         </div>
       </section>
 
       <section id="faq" data-parallax="faq" style="position:relative; z-index:1; will-change:transform; background:#EFEDE6; color:#070707; padding:96px 32px 100px">
         <div style="max-width:1360px; margin:0 auto; display:flex; flex-wrap:wrap; gap:56px">
           <div style="flex:0 1 340px" data-rv>
-            <p style="margin:0 0 12px; font:500 11px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.45); letter-spacing:.2em">07 / PITANJA</p>
-            <h2 style="margin:0; font:700 clamp(28px,3vw,40px)/1.05 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.03em">Ono što nas svi pitaju</h2>
-            <p style="margin:16px 0 0; font:400 15.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.65)">Ako vaše pitanje nije ovde, pozovite. Odgovaramo istog radnog dana.</p>
+            <p style="margin:0 0 12px; font:500 11px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.45); letter-spacing:.2em">{faqTekst.oznaka}</p>
+            <h2 style="margin:0; font:700 clamp(28px,3vw,40px)/1.05 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.03em">{faqTekst.naslov}</h2>
+            <p style="margin:16px 0 0; font:400 15.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.65)">{faqTekst.uvod}</p>
           </div>
           <div style="flex:1 1 620px; min-width:0" data-rv>
             {faq.map((item, i) => (
@@ -425,53 +381,53 @@ const description =
       <section id="kontakt" data-parallax="pre" data-pull style="position:relative; z-index:2; will-change:transform; background:#070707; border-top:3px solid #FECB0F; padding:96px 32px 136px; box-shadow:0 -40px 80px rgba(0,0,0,.55)">
         <div style="max-width:1360px; margin:0 auto; display:flex; flex-wrap:wrap; gap:60px">
           <div style="flex:0 1 400px" data-rv>
-            <p style="margin:0 0 12px; font:500 11px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:rgba(254,203,15,.7)">08 / KONTAKT</p>
-            <h2 style="margin:0 0 16px; font:700 clamp(32px,3.6vw,48px)/1.04 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.035em; color:#fff">Zatražite ponudu</h2>
-            <p style="margin:0 0 28px; font:400 16px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.65)">Pošaljite osnovne podatke i dobijate konkretnu ponudu, bez obaveze. Odgovaramo istog radnog dana.</p>
+            <p style="margin:0 0 12px; font:500 11px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:rgba(254,203,15,.7)">{kontakt.oznaka}</p>
+            <h2 style="margin:0 0 16px; font:700 clamp(32px,3.6vw,48px)/1.04 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.035em; color:#fff">{kontakt.naslov}</h2>
+            <p style="margin:0 0 28px; font:400 16px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.65)">{kontakt.uvod}</p>
             <div style="display:grid; gap:14px; font:500 14px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.8)">
-              <a href="tel:+381638185587" style="color:#FECB0F">063 81 855 87</a>
-              <a href="mailto:boris.sabo@previngpro.rs" style="color:rgba(255,255,255,.8)">boris.sabo@previngpro.rs</a>
-              <span style="color:rgba(255,255,255,.5)">Temerinski put 51, Klisa<br />21000 Novi Sad</span>
-              <span style="color:rgba(255,255,255,.5)">pon–pet 08–16 · linija 24/7</span>
+              <a href={kontakt.telefonHref} style="color:#FECB0F">{kontakt.telefon}</a>
+              <a href={`mailto:${kontakt.imejl}`} style="color:rgba(255,255,255,.8)">{kontakt.imejl}</a>
+              <span style="color:rgba(255,255,255,.5)">{kontakt.adresa1}<br />{kontakt.adresa2}</span>
+              <span style="color:rgba(255,255,255,.5)">{kontakt.radnoVreme}</span>
             </div>
           </div>
           <div style="flex:1 1 560px; min-width:0" data-rv>
             <div id="pp-form">
               <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr)); gap:18px">
-                <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.55)">IME I PREZIME
+                <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.55)">{kontakt.polja.ime}
                   <input type="text" autocomplete="name" class="field" style="background:#0e0e0e; border:1px solid rgba(255,255,255,.2); color:#fff; font-size:15px; padding:14px 14px; outline:none; min-height:20px" />
                 </label>
-                <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.55)">NAZIV FIRME
+                <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.55)">{kontakt.polja.firma}
                   <input type="text" autocomplete="organization" class="field" style="background:#0e0e0e; border:1px solid rgba(255,255,255,.2); color:#fff; font-size:15px; padding:14px 14px; outline:none" />
                 </label>
-                <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.55)">TELEFON ILI IMEJL
+                <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.55)">{kontakt.polja.kontakt}
                   <input type="text" inputmode="email" class="field" style="background:#0e0e0e; border:1px solid rgba(255,255,255,.2); color:#fff; font-size:15px; padding:14px 14px; outline:none" />
                 </label>
-                <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.55)">BROJ ZAPOSLENIH
+                <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.55)">{kontakt.polja.zaposleni}
                   <select class="field" style="background:#0e0e0e; border:1px solid rgba(255,255,255,.2); color:#fff; font-size:15px; padding:14px 10px; outline:none">
                     {formOptions.zaposleni.map((o) => (<option>{o}</option>))}
                   </select>
                 </label>
-                <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.55); grid-column:1/-1">DELATNOST
+                <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.55); grid-column:1/-1">{kontakt.polja.delatnost}
                   <select class="field" style="background:#0e0e0e; border:1px solid rgba(255,255,255,.2); color:#fff; font-size:15px; padding:14px 10px; outline:none">
                     {formOptions.delatnost.map((o) => (<option>{o}</option>))}
                   </select>
                 </label>
-                <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.55); grid-column:1/-1">PORUKA (OPCIONO)
+                <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.55); grid-column:1/-1">{kontakt.polja.poruka}
                   <textarea rows="3" class="field" style="background:#0e0e0e; border:1px solid rgba(255,255,255,.2); color:#fff; font-size:15px; padding:14px 14px; outline:none; resize:vertical"></textarea>
                 </label>
               </div>
               <label style="display:flex; gap:12px; align-items:flex-start; margin-top:20px; font:400 13.5px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.6); cursor:pointer">
                 <input type="checkbox" id="pp-consent" style="width:18px; height:18px; margin-top:2px; accent-color:#FECB0F; flex:none" />
-                <span>Slažem se da Preving Pro obradi moje podatke radi odgovora na ovaj upit, u skladu sa Politikom privatnosti.</span>
+                <span>{kontakt.saglasnost}</span>
               </label>
-              <p id="pp-need-consent" hidden style="margin:12px 0 0; font:500 13px 'IBM Plex Mono',monospace; color:#FECB0F">Označite saglasnost da bismo mogli da odgovorimo na upit.</p>
-              <button type="button" id="pp-submit" class="btn-y" style="margin-top:24px; background:#FECB0F; color:#070707; border:none; font:700 15px 'IBM Plex Sans',system-ui,sans-serif; padding:16px 34px; cursor:pointer">Pošaljite upit →</button>
+              <p id="pp-need-consent" hidden style="margin:12px 0 0; font:500 13px 'IBM Plex Mono',monospace; color:#FECB0F">{kontakt.saglasnostGreska}</p>
+              <button type="button" id="pp-submit" class="btn-y" style="margin-top:24px; background:#FECB0F; color:#070707; border:none; font:700 15px 'IBM Plex Sans',system-ui,sans-serif; padding:16px 34px; cursor:pointer">{kontakt.dugme}</button>
             </div>
             <div id="pp-sent" hidden style="border:1px solid rgba(254,203,15,.4); padding:40px; text-align:left">
-              <p style="margin:0; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.2em; color:#FECB0F">UPIT PRIMLJEN</p>
-              <p style="margin:14px 0 10px; font:700 28px 'IBM Plex Sans',system-ui,sans-serif; color:#fff; letter-spacing:-.02em">Primili smo vaš upit.</p>
-              <p style="margin:0; font:400 15.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.7)">Javljamo se istog radnog dana. Ako je hitno: <a href="tel:+381638185587" style="color:#FECB0F; text-decoration:underline; text-underline-offset:3px">063 81 855 87</a>.</p>
+              <p style="margin:0; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.2em; color:#FECB0F">{kontakt.poslato.oznaka}</p>
+              <p style="margin:14px 0 10px; font:700 28px 'IBM Plex Sans',system-ui,sans-serif; color:#fff; letter-spacing:-.02em">{kontakt.poslato.naslov}</p>
+              <p style="margin:0; font:400 15.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.7)">{kontakt.poslato.tekstPre}<a href={kontakt.telefonHref} style="color:#FECB0F; text-decoration:underline; text-underline-offset:3px">{kontakt.telefon}</a>{kontakt.poslato.tekstPosle}</p>
             </div>
           </div>
         </div>
