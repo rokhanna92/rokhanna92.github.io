@@ -13,9 +13,9 @@
         },
         {
           "id": "pausal-pro",
-          "n": "Pro paket · ključ u ruke",
-          "d": "sve iz Osnovnog + alko-testiranje, zastupanje, linija 24/7",
-          "iznos": "od 12.000",
+          "n": "Pro paket · ključ u rukeeeee",
+          "d": "sve iz Osnovnog + alko-testiranje, zastupanje, linija 21/7",
+          "iznos": "od 18.000",
           "jedinica": "/ mes"
         }
       ]
@@ -55,43 +55,37 @@
           "id": "akt-o-proceni-rizika",
           "n": "Akt o proceni rizika",
           "d": "po radnom mestu, sa merama i rokovima",
-          "iznos": "4.000–7.000",
-          "jedinica": ""
+          "iznos": "4.000–7.000"
         },
         {
           "id": "pravilnik-bzr",
           "n": "Pravilnik o bezbednosti i zdravlju na radu",
           "d": "usklađen sa Zakonom 35/2023",
-          "iznos": "od 15.000",
-          "jedinica": ""
+          "iznos": "od 15.000"
         },
         {
           "id": "pravilnik-lzo",
           "n": "Pravilnik o ličnoj zaštitnoj opremi",
           "d": "sa normativima LZO po radnim mestima",
-          "iznos": "od 10.000",
-          "jedinica": ""
+          "iznos": "od 10.000"
         },
         {
           "id": "pravila-zop",
           "n": "Pravila zaštite od požara sa planom evakuacije",
           "d": "za objekte III kategorije",
-          "iznos": "8.000–15.000",
-          "jedinica": ""
+          "iznos": "8.000–15.000"
         },
         {
           "id": "elaborat-zop",
           "n": "Elaborat zaštite od požara",
           "d": "za složenije objekte i tehnologije",
-          "iznos": "od 25.000",
-          "jedinica": ""
+          "iznos": "od 25.000"
         },
         {
           "id": "elaborat-gradiliste",
           "n": "Elaborat o uređenju gradilišta",
           "d": "za radove duže od tri dana",
-          "iznos": "na upit",
-          "jedinica": ""
+          "iznos": "na upit"
         }
       ]
     },
@@ -131,8 +125,20 @@
   ],
   "note": "Sve cene su u dinarima, bez PDV-a. Cenovnik važi za 2026/27. i menja se objavom na ovoj strani. Za mesečne pakete cena zavisi od broja zaposlenih i delatnosti.",
   "estimator": {
-    "defaults": { "mesta": 5, "zaposleni": 12, "lzo": true, "zop": true, "obuke": true, "pausal": "pro" },
-    "limits": { "mestaMin": 1, "mestaMax": 30, "zaposleniMin": 1, "zaposleniMax": 100 },
+    "defaults": {
+      "mesta": 5,
+      "zaposleni": 12,
+      "lzo": true,
+      "zop": true,
+      "obuke": true,
+      "pausal": "pro"
+    },
+    "limits": {
+      "mestaMin": 1,
+      "mestaMax": 30,
+      "zaposleniMin": 1,
+      "zaposleniMax": 100
+    },
     "rates": {
       "aktPoMestu": 4000,
       "pravilnikBzr": 15000,
@@ -152,14 +158,32 @@
       "bezPausala": "bez paušala"
     },
     "pausalOpts": [
-      { "t": "Bez paušala", "id": "ne" },
-      { "t": "Osnovni", "id": "osnovni" },
-      { "t": "Pro", "id": "pro" }
+      {
+        "t": "Bez paušala",
+        "id": "ne"
+      },
+      {
+        "t": "Osnovni",
+        "id": "osnovni"
+      },
+      {
+        "t": "Pro",
+        "id": "pro"
+      }
     ],
     "checkboxes": [
-      { "id": "lzo", "label": "Pravilnik o ličnoj zaštitnoj opremi" },
-      { "id": "zop", "label": "Pravila zaštite od požara sa planom evakuacije" },
-      { "id": "obuke", "label": "Obuka svih zaposlenih (BZR ili ZOP)" }
+      {
+        "id": "lzo",
+        "label": "Pravilnik o ličnoj zaštitnoj opremi"
+      },
+      {
+        "id": "zop",
+        "label": "Pravila zaštite od požara sa planom evakuacije"
+      },
+      {
+        "id": "obuke",
+        "label": "Obuka svih zaposlenih (BZR ili ZOP)"
+      }
     ]
   }
 }
