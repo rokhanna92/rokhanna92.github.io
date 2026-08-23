@@ -4,6 +4,7 @@ import Footer from '../components/Footer.astro';
 import usluge from '../data/usluge.json';
 import chips from '../data/price-chips.json';
 import { cena } from '../lib/cene';
+import { firma } from '../lib/firma';
 import '../styles/responsive.css';
 
 const { bzr, zop, koordinator, obuke } = usluge;
@@ -247,7 +248,7 @@ const description =
           </div>
           <div style="display:flex; flex-wrap:wrap; gap:12px">
             <a href="/kontakt" class="btn-dark" style="background:#070707; color:#FECB0F; font:700 15px 'IBM Plex Sans',system-ui,sans-serif; padding:16px 28px">Zatražite ponudu</a>
-            <a href="tel:+381638185587" class="btn-outline" style="border:2px solid #070707; color:#070707; font:600 14.5px 'IBM Plex Mono',monospace; padding:14px 24px">063 81 855 87</a>
+            <a href={firma.telefonHref} class="btn-outline" style="border:2px solid #070707; color:#070707; font:600 14.5px 'IBM Plex Mono',monospace; padding:14px 24px">{firma.telefon}</a>
           </div>
         </div>
       </section>

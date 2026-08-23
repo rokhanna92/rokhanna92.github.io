@@ -3,7 +3,7 @@
     {
       "kicker": "POZOVITE",
       "text": "Najbrže. Za hitne situacije (povreda, inspekcija na vratima) zovite u bilo koje doba: ",
-      "link": { "href": "tel:+381638185587", "label": "063 81 855 87" },
+      "link": "telefon",
       "after": "."
     },
     {

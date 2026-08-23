@@ -7,6 +7,7 @@ import faq from '../data/faq.json';
 import formOptions from '../data/form-options.json';
 import tekst from '../data/index.json';
 import { cena } from '../lib/cene';
+import { firma } from '../lib/firma';
 import '../styles/responsive.css';
 
 // 1. januar 2027. u 00:00 po srednjoevropskom vremenu.
@@ -117,7 +118,7 @@ const description = tekst.meta.opis;
               <p style="margin:22px 0 0; font:400 17px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.7); max-width:52ch">{hero.uvod}</p>
               <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:30px; align-items:center">
                 <a href="#kontakt" class="btn-y" style="background:#FECB0F; color:#070707; font:700 14.5px 'IBM Plex Sans',system-ui,sans-serif; padding:15px 26px">{hero.dugmePonuda}</a>
-                <a href={hero.telefonHref} class="btn-ghost" style="border:1px solid rgba(255,255,255,.32); color:#fff; font:600 14px 'IBM Plex Mono',monospace; padding:14px 22px; backdrop-filter:blur(3px)">{hero.telefon}</a>
+                <a href={firma.telefonHref} class="btn-ghost" style="border:1px solid rgba(255,255,255,.32); color:#fff; font:600 14px 'IBM Plex Mono',monospace; padding:14px 22px; backdrop-filter:blur(3px)">{firma.telefon}</a>
                 <a href="/cenovnik" style="font:600 14px 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.85); text-decoration:underline; text-decoration-thickness:1.5px; text-underline-offset:4px; margin-left:8px">{hero.linkCenovnik}</a>
               </div>
             </div>
@@ -385,10 +386,10 @@ const description = tekst.meta.opis;
             <h2 style="margin:0 0 16px; font:700 clamp(32px,3.6vw,48px)/1.04 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.035em; color:#fff">{kontakt.naslov}</h2>
             <p style="margin:0 0 28px; font:400 16px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.65)">{kontakt.uvod}</p>
             <div style="display:grid; gap:14px; font:500 14px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.8)">
-              <a href={kontakt.telefonHref} style="color:#FECB0F">{kontakt.telefon}</a>
-              <a href={`mailto:${kontakt.imejl}`} style="color:rgba(255,255,255,.8)">{kontakt.imejl}</a>
-              <span style="color:rgba(255,255,255,.5)">{kontakt.adresa1}<br />{kontakt.adresa2}</span>
-              <span style="color:rgba(255,255,255,.5)">{kontakt.radnoVreme}</span>
+              <a href={firma.telefonHref} style="color:#FECB0F">{firma.telefon}</a>
+              <a href={`mailto:${firma.imejl}`} style="color:rgba(255,255,255,.8)">{firma.imejl}</a>
+              <span style="color:rgba(255,255,255,.5)">{firma.adresa}<br />{firma.grad}</span>
+              <span style="color:rgba(255,255,255,.5)">{firma.radnoVreme}</span>
             </div>
           </div>
           <div style="flex:1 1 560px; min-width:0" data-rv>
@@ -427,7 +428,7 @@ const description = tekst.meta.opis;
             <div id="pp-sent" hidden style="border:1px solid rgba(254,203,15,.4); padding:40px; text-align:left">
               <p style="margin:0; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.2em; color:#FECB0F">{kontakt.poslato.oznaka}</p>
               <p style="margin:14px 0 10px; font:700 28px 'IBM Plex Sans',system-ui,sans-serif; color:#fff; letter-spacing:-.02em">{kontakt.poslato.naslov}</p>
-              <p style="margin:0; font:400 15.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.7)">{kontakt.poslato.tekstPre}<a href={kontakt.telefonHref} style="color:#FECB0F; text-decoration:underline; text-underline-offset:3px">{kontakt.telefon}</a>{kontakt.poslato.tekstPosle}</p>
+              <p style="margin:0; font:400 15.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.7)">{kontakt.poslato.tekstPre}<a href={firma.telefonHref} style="color:#FECB0F; text-decoration:underline; text-underline-offset:3px">{firma.telefon}</a>{kontakt.poslato.tekstPosle}</p>
             </div>
           </div>
         </div>

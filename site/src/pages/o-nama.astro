@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import onama from '../data/o-nama.json';
+import { firma } from '../lib/firma';
 import '../styles/responsive.css';
 
 const { stats, timeline, tim, teren } = onama;
@@ -148,7 +149,7 @@ const description =
           <p style="margin:0; font:700 clamp(26px,3vw,40px)/1.1 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.03em; max-width:30ch">Upoznajmo se na vašem terenu, ne na sastanku.</p>
           <div style="display:flex; flex-wrap:wrap; gap:12px">
             <a href="/kontakt" class="btn-dark" style="background:#070707; color:#FECB0F; font:700 15px 'IBM Plex Sans',system-ui,sans-serif; padding:16px 28px">Zatražite ponudu</a>
-            <a href="tel:+381638185587" class="btn-outline" style="border:2px solid #070707; color:#070707; font:600 14.5px 'IBM Plex Mono',monospace; padding:14px 24px">063 81 855 87</a>
+            <a href={firma.telefonHref} class="btn-outline" style="border:2px solid #070707; color:#070707; font:600 14.5px 'IBM Plex Mono',monospace; padding:14px 24px">{firma.telefon}</a>
           </div>
         </div>
       </section>

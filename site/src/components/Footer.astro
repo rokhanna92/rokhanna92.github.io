@@ -1,5 +1,6 @@
 ---
 import services from '../data/services.json';
+import { firma } from '../lib/firma';
 
 interface Props {
   /** Prefix for the service anchors: '/usluge' from elsewhere, '' when already on that page. */
@@ -24,7 +25,7 @@ const updated = '21.08.2026.';
           <img src="/logo-mark.png" alt="" width="37" height="24" style="display:block; width:37px; height:24px; flex:none" />
           <span style="font:700 15px 'IBM Plex Sans',system-ui,sans-serif; color:#fff">PREVING<span style="color:#FECB0F">PRO</span></span>
         </div>
-        <p style="margin:0; font:400 13px/1.7 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.5)">Preving Pro agencija za preventivni inženjering i tehničko savetovanje, Boris Sabo PR, Novi Sad<br />Temerinski put 51, Klisa, 21000 Novi Sad<br />Šifra delatnosti 7112</p>
+        <p style="margin:0; font:400 13px/1.7 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.5)">{firma.pravnoIme}<br />{firma.adresa}, {firma.grad}<br />{firma.sifraDelatnosti}</p>
       </div>
       <div>
         <p style="margin:0 0 14px; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.2em; color:rgba(255,255,255,.4)">USLUGE</p>
@@ -42,10 +43,11 @@ const updated = '21.08.2026.';
       <div>
         <p style="margin:0 0 14px; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.2em; color:rgba(255,255,255,.4)">KONTAKT</p>
         <div style="display:grid; gap:10px; font:500 13.5px 'IBM Plex Mono',monospace">
-          <a href="tel:+381638185587" class="ftr-a" style="color:#FECB0F">063 81 855 87</a>
-          <a href="mailto:boris.sabo@previngpro.rs" class="ftr-a" style="color:rgba(255,255,255,.75)">boris.sabo@previngpro.rs</a>
-          <a href="mailto:mira.lainovic@previngpro.rs" class="ftr-a" style="color:rgba(255,255,255,.75)">mira.lainovic@previngpro.rs</a>
-          <span style="color:rgba(255,255,255,.45)">pon–pet 08–16 · linija 24/7</span>
+          <a href={firma.telefonHref} class="ftr-a" style="color:#FECB0F">{firma.telefon}</a>
+          {firma.imejlovi.map((imejl) => (
+            <a href={`mailto:${imejl}`} class="ftr-a" style="color:rgba(255,255,255,.75)">{imejl}</a>
+          ))}
+          <span style="color:rgba(255,255,255,.45)">{firma.radnoVreme}</span>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { firma } from '../lib/firma';
 import '../styles/responsive.css';
 
 const links = [
@@ -64,7 +65,7 @@ const title = 'Strana nije pronađena · Preving Pro';
 
           <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:36px; align-items:center">
             <a href="/kontakt" class="btn-y" style="background:#FECB0F; color:#070707; font:700 14.5px 'IBM Plex Sans',system-ui,sans-serif; padding:15px 26px">Zatražite ponudu</a>
-            <a href="tel:+381638185587" style="font:700 clamp(20px,2.4vw,28px) 'IBM Plex Mono',monospace; color:#FECB0F; letter-spacing:.01em; margin-left:8px">063 81 855 87</a>
+            <a href={firma.telefonHref} style="font:700 clamp(20px,2.4vw,28px) 'IBM Plex Mono',monospace; color:#FECB0F; letter-spacing:.01em; margin-left:8px">{firma.telefon}</a>
           </div>
         </div>
       </section>

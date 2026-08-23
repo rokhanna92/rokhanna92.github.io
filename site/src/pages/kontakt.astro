@@ -3,6 +3,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import kontakt from '../data/kontakt.json';
 import formOptions from '../data/form-options.json';
+import { firma } from '../lib/firma';
 import '../styles/responsive.css';
 
 const { kanali, foto, priprema } = kontakt;
@@ -26,8 +27,7 @@ function belgrade(now: Date) {
 const initial = belgrade(new Date());
 
 const title = 'Kontakt · Preving Pro';
-const description =
-  'Javite se: 063 81 855 87, Temerinski put 51, Klisa, Novi Sad. Odgovaramo isti radni dan, linija 24/7 za hitne situacije.';
+const description = `Javite se: ${firma.telefon}, ${firma.adresa}, Novi Sad. Odgovaramo isti radni dan, linija 24/7 za hitne situacije.`;
 ---
 
 <!doctype html>
@@ -84,10 +84,11 @@ const description =
             <p style="margin:0 0 20px; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45); letter-spacing:.2em"><a href="/" style="color:rgba(255,255,255,.45)">POČETNA</a> / <span style="color:#FECB0F">KONTAKT</span></p>
             <h1 style="margin:0; font:700 clamp(38px,4.6vw,68px)/1 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.035em; color:#fff; max-width:16ch">Javite se. Odgovaramo isti radni dan.</h1>
             <div style="display:grid; gap:14px; margin-top:32px; font:500 15px 'IBM Plex Mono',monospace">
-              <a href="tel:+381638185587" style="font:700 clamp(26px,3vw,40px) 'IBM Plex Mono',monospace; color:#FECB0F; letter-spacing:.01em">063 81 855 87</a>
-              <a href="mailto:boris.sabo@previngpro.rs" style="color:rgba(255,255,255,.8)">boris.sabo@previngpro.rs</a>
-              <a href="mailto:mira.lainovic@previngpro.rs" style="color:rgba(255,255,255,.8)">mira.lainovic@previngpro.rs</a>
-              <span style="color:rgba(255,255,255,.5)">Temerinski put 51, Klisa · 21000 Novi Sad</span>
+              <a href={firma.telefonHref} style="font:700 clamp(26px,3vw,40px) 'IBM Plex Mono',monospace; color:#FECB0F; letter-spacing:.01em">{firma.telefon}</a>
+              {firma.imejlovi.map((imejl) => (
+                <a href={`mailto:${imejl}`} style="color:rgba(255,255,255,.8)">{imejl}</a>
+              ))}
+              <span style="color:rgba(255,255,255,.5)">{firma.adresa} · {firma.grad}</span>
             </div>
           </div>
           <div style="flex:0 1 340px; min-width:0; display:flex; flex-direction:column; align-items:center; gap:18px">
@@ -116,7 +117,7 @@ const description =
           {kanali.map((k, i) => (
             <div data-fd style={`border:1px solid rgba(255,255,255,.14); padding:24px${i === 0 ? '' : `; transition-delay:${(i * 6) / 100}s`}`}>
               <p style="margin:0 0 10px; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.18em; color:#FECB0F">{k.kicker}</p>
-              <p style="margin:0; font:400 14.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.72)">{k.text}{k.link && <a href={k.link.href} style="color:#FECB0F; text-decoration:underline; text-underline-offset:3px">{k.link.label}</a>}{k.after}</p>
+              <p style="margin:0; font:400 14.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.72)">{k.text}{k.link === 'telefon' && <a href={firma.telefonHref} style="color:#FECB0F; text-decoration:underline; text-underline-offset:3px">{firma.telefon}</a>}{k.after}</p>
             </div>
           ))}
           <div data-fd style="position:relative; min-height:180px; transition-delay:.18s">
@@ -179,7 +180,7 @@ const description =
             <div id="pp-sent" hidden style="background:#070707; color:#F2F1EC; padding:40px">
               <p style="margin:0; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.2em; color:#FECB0F">UPIT PRIMLJEN</p>
               <p style="margin:14px 0 10px; font:700 28px 'IBM Plex Sans',system-ui,sans-serif; color:#fff; letter-spacing:-.02em">Primili smo vaš upit.</p>
-              <p style="margin:0; font:400 15.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.7)">Javljamo se isti radni dan. Ako je hitno: <a href="tel:+381638185587" style="color:#FECB0F; text-decoration:underline; text-underline-offset:3px">063 81 855 87</a>.</p>
+              <p style="margin:0; font:400 15.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.7)">Javljamo se isti radni dan. Ako je hitno: <a href={firma.telefonHref} style="color:#FECB0F; text-decoration:underline; text-underline-offset:3px">{firma.telefon}</a>.</p>
             </div>
           </div>
         </div>

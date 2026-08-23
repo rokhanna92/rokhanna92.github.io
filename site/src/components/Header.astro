@@ -1,4 +1,6 @@
 ---
+import { firma } from '../lib/firma';
+
 interface Props {
   /** 'home' is the one-page nav with the script switch, 'inner' is the site-wide nav. */
   variant?: 'home' | 'inner';
@@ -140,7 +142,7 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
       <span style="color:rgba(255,255,255,.3)">/</span>
       <button type="button" data-script-btn="lat" aria-pressed="true" style="all:unset; cursor:pointer; padding:10px 2px; color:#FECB0F; text-decoration:underline; text-underline-offset:4px">LAT</button>
     </span>
-    <a href="tel:+381638185587">063 81 855 87</a>
+    <a href={firma.telefonHref}>{firma.telefon}</a>
   </div>
 </nav>
 
