@@ -1,0 +1,1416 @@
+# Pages CMS konfiguracija za Preving Pro
+# Ovaj fajl stoji u korenu repozitorijuma, ne u site/. Putanje su od korena.
+# Uređivači ga ne vide i ne mogu da ga menjaju.
+#
+# Napomena za održavaoca:
+# settings.content.merge: true je obavezan. Bez njega Pages CMS pri svakom
+# snimanju prepisuje ceo fajl samo onim poljima koja su navedena ispod, pa bi
+# iz cenovnik.json nestali estimator.defaults, estimator.limits,
+# estimator.labels, estimator.pausalOpts i estimator.checkboxes, a build bi pukao.
+#
+# Namerno se NE izlažu prices.json, price-chips.json i usluge.json: njihove cene
+# su refovi na id iz cenovnik.json, pa bi ih uređivač samo pokvario. Isto važi za
+# form-options.json. Sve cene se menjaju na jednom mestu, u Cenovniku ispod.
+
+media:
+  input: site/public
+  output: /
+
+settings:
+  content:
+    merge: true
+  commit:
+    identity: app
+    templates:
+      create: "cms: dodat {filename}"
+      update: "cms: izmenjen {filename}"
+      delete: "cms: obrisan {filename}"
+      rename: "cms: preimenovan {oldFilename} u {newFilename}"
+
+content:
+  # ---------------------------------------------------------------
+  # 1. CENOVNIK - jedini izvor cena na sajtu
+  # ---------------------------------------------------------------
+  - name: cenovnik
+    label: "Cenovnik i kalkulator"
+    description: "Tabela cena na strani Cenovnik i cene koje koristi kalkulator ponude. Ovo je jedino mesto na sajtu gde se cena menja."
+    type: file
+    path: site/src/data/cenovnik.json
+    format: json
+    operations:
+      create: false
+      rename: false
+      delete: false
+    fields:
+      - name: groups
+        label: "Grupe cenovnika"
+        description: "Svaka grupa je jedna tabela na strani Cenovnik. Redosled grupa ovde je redosled na sajtu."
+        type: object
+        required: true
+        list:
+          min: 1
+          collapsible:
+            collapsed: true
+            summary: "{oznaka} · {naziv}"
+        fields:
+          - name: naziv
+            label: "Naziv grupe"
+            description: "Piše se velikim slovima, na primer MESEČNI PAKETI."
+            type: string
+            required: true
+            options:
+              maxlength: 60
+          - name: oznaka
+            label: "Oznaka grupe"
+            description: "Šifra u obliku G-01, G-02 i tako redom. Mora biti jedinstvena i u nizu."
+            type: string
+            required: true
+            pattern:
+              regex: "^G-[0-9]{2}$"
+              message: "Oznaka mora biti u obliku G-01."
+            options:
+              maxlength: 6
+          - name: stavke
+            label: "Stavke u grupi"
+            description: "Redovi tabele. Mora postojati bar jedna stavka."
+            type: object
+            required: true
+            list:
+              min: 1
+              collapsible:
+                collapsed: true
+                summary: "{n} · {iznos}"
+            fields:
+              - name: id
+                label: "Tehnička oznaka stavke"
+                description: "Zaključana. Preko nje ostatak sajta pronalazi ovu cenu. Novu stavku i njenu oznaku upisuje programer, inače build pada."
+                type: string
+                readonly: true
+                required: true
+              - name: n
+                label: "Naziv stavke"
+                description: "Kratak naziv usluge, prikazuje se podebljano."
+                type: string
+                required: true
+                options:
+                  maxlength: 120
+              - name: d
+                label: "Opis stavke"
+                description: "Jedan red sitnim slovima ispod naziva. Može ostati prazno."
+                type: text
+                options:
+                  maxlength: 200
+              - name: iznos
+                label: "Iznos"
+                description: "Samo broj, sa svojim „od\" ako ga ima. Primeri: 3.200, od 15.000, 4.000–7.000, na upit. Bez jedinice i bez oznake RSD."
+                type: string
+                required: true
+                options:
+                  maxlength: 40
+              - name: jedinica
+                label: "Jedinica mere"
+                description: "Samo mera, uz kosu crtu. Primeri: / sat, / mes, / radniku, / aparatu. Ostavite prazno ako se cena ne meri po jedinici."
+                type: string
+                options:
+                  maxlength: 24
+      - name: note
+        label: "Napomena ispod cenovnika"
+        description: "Sitan tekst na dnu strane Cenovnik: valuta, PDV, period važenja."
+        type: text
+        required: true
+        options:
+          maxlength: 400
+      - name: estimator
+        label: "Kalkulator ponude"
+        description: "Cene koje kalkulator množi. Svaka mora biti jednaka donjoj granici iznosa odgovarajuće stavke iznad, inače build pada sa porukom koja kaže koje dve vrednosti se ne slažu."
+        type: object
+        fields:
+          - name: rates
+            label: "Jedinične cene"
+            description: "Sve vrednosti su celi brojevi u dinarima, bez tačke, razmaka i oznake valute. Na primer 8200, ne 8.200."
+            type: object
+            fields:
+              - name: aktPoMestu
+                label: "Akt o proceni rizika, po radnom mestu"
+                type: number
+                required: true
+                options:
+                  min: 100
+                  max: 1000000
+              - name: pravilnikBzr
+                label: "Pravilnik o bezbednosti i zdravlju na radu"
+                type: number
+                required: true
+                options:
+                  min: 100
+                  max: 1000000
+              - name: pravilnikLzo
+                label: "Pravilnik o ličnoj zaštitnoj opremi"
+                type: number
+                required: true
+                options:
+                  min: 100
+                  max: 1000000
+              - name: pravilaZop
+                label: "Pravila zaštite od požara sa planom evakuacije"
+                type: number
+                required: true
+                options:
+                  min: 100
+                  max: 1000000
+              - name: obukaPoRadniku
+                label: "Obuka, po radniku"
+                type: number
+                required: true
+                options:
+                  min: 100
+                  max: 1000000
+              - name: pausalOsnovni
+                label: "Mesečni paušal, Osnovni paket"
+                type: number
+                required: true
+                options:
+                  min: 100
+                  max: 1000000
+              - name: pausalPro
+                label: "Mesečni paušal, Pro paket"
+                type: number
+                required: true
+                options:
+                  min: 100
+                  max: 1000000
+
+  # ---------------------------------------------------------------
+  # 2. NASLOVNA STRANA
+  # ---------------------------------------------------------------
+  - name: naslovna
+    label: "Naslovna strana"
+    description: "Sav tekst naslovne strane: hero, provera obaveza, rokovi i kazne, i uvodi u sekcije."
+    type: file
+    path: site/src/data/index.json
+    format: json
+    operations:
+      create: false
+      rename: false
+      delete: false
+    fields:
+      - name: meta
+        label: "Naslov i opis strane"
+        description: "Ne vidi se na strani. Prikazuje se u kartici pretraživača i pri deljenju linka."
+        type: object
+        fields:
+          - name: naslov
+            label: "Naslov strane"
+            type: string
+            required: true
+            options:
+              maxlength: 70
+          - name: opis
+            label: "Opis strane"
+            type: text
+            required: true
+            options:
+              maxlength: 170
+      - name: hero
+        label: "Zaglavlje naslovne"
+        type: object
+        fields:
+          - name: koordinate
+            label: "Koordinate i mesto"
+            description: "Sitan tekst gore levo, iznad naslova."
+            type: string
+            required: true
+            options:
+              maxlength: 60
+          - name: linija
+            label: "Oznaka dežurne linije"
+            description: "Sitan tekst gore desno, pored žute tačke koja treperi."
+            type: string
+            required: true
+            options:
+              maxlength: 40
+          - name: oznaka
+            label: "Šifre usluga iznad naslova"
+            description: "Na primer BZR_01 / ZOP_02 / KOORDINATOR_03 / OBUKE_04."
+            type: string
+            required: true
+            options:
+              maxlength: 80
+          - name: naslovPre
+            label: "Naslov, prvi deo"
+            description: "Deo naslova pre žute reči. Ne stavljajte razmak na kraju, sam se dodaje."
+            type: string
+            required: true
+            options:
+              maxlength: 90
+          - name: naslovAkcenat
+            label: "Naslov, žuta reč"
+            type: string
+            required: true
+            options:
+              maxlength: 30
+          - name: naslovPosle
+            label: "Naslov, poslednji deo"
+            description: "Obično samo tačka, odmah posle žute reči, bez razmaka."
+            type: string
+            options:
+              maxlength: 20
+          - name: uvod
+            label: "Uvodni pasus"
+            type: text
+            required: true
+            options:
+              maxlength: 400
+          - name: dugmePonuda
+            label: "Natpis na žutom dugmetu"
+            type: string
+            required: true
+            options:
+              maxlength: 40
+          - name: linkCenovnik
+            label: "Natpis na linku ka cenovniku"
+            type: string
+            required: true
+            options:
+              maxlength: 40
+          - name: panel
+            label: "Tabla sa stanjem propisa"
+            description: "Mali okvir desno od naslova. Ne vidi se na užim ekranima."
+            type: object
+            fields:
+              - name: naslov
+                label: "Naslov table"
+                type: string
+                required: true
+                options:
+                  maxlength: 30
+              - name: zivo
+                label: "Oznaka uživo"
+                type: string
+                required: true
+                options:
+                  maxlength: 20
+              - name: redovi
+                label: "Redovi table"
+                type: object
+                required: true
+                list:
+                  min: 1
+                  max: 3
+                  collapsible:
+                    collapsed: true
+                    summary: "{label} · {value}"
+                fields:
+                  - name: label
+                    label: "Naziv reda"
+                    type: string
+                    required: true
+                    options:
+                      maxlength: 40
+                  - name: value
+                    label: "Vrednost desno"
+                    description: "Ispisuje se žutom bojom, na primer NA SNAZI ili 01.01.2027."
+                    type: string
+                    required: true
+                    options:
+                      maxlength: 20
+          - name: traka
+            label: "Žuta traka koja klizi"
+            description: "Stavke se ispisuju u nizu, razdvojene kosom crtom koja se dodaje sama. Pišu se velikim slovima."
+            type: string
+            required: true
+            list:
+              min: 1
+              collapsible: false
+      - name: brojke
+        label: "Traka sa brojkama"
+        description: "Četiri polja ispod zaglavlja."
+        type: object
+        required: true
+        list:
+          min: 1
+          collapsible:
+            collapsed: true
+            summary: "{broj} · {tekst}"
+        fields:
+          - name: broj
+            label: "Broj"
+            description: "Krupna žuta vrednost, na primer 04 ili 24/7."
+            type: string
+            required: true
+            options:
+              maxlength: 10
+          - name: tekst
+            label: "Objašnjenje"
+            type: text
+            required: true
+            options:
+              maxlength: 120
+      - name: provera
+        label: "Provera obaveza"
+        description: "Anketa sa dva pitanja i pet mogućih odgovora."
+        type: object
+        fields:
+          - name: oznaka
+            label: "Oznaka sekcije"
+            type: string
+            required: true
+            options:
+              maxlength: 40
+          - name: naslov
+            label: "Naslov"
+            type: string
+            required: true
+            options:
+              maxlength: 80
+          - name: uvod
+            label: "Uvodni red"
+            type: text
+            required: true
+            options:
+              maxlength: 200
+          - name: pitanje1
+            label: "Prvo pitanje"
+            type: string
+            required: true
+            options:
+              maxlength: 60
+          - name: odgovori1
+            label: "Ponuđeni odgovori na prvo pitanje"
+            description: "Redosled je važan: prvi je bez zaposlenih, poslednji je više od 20. Ne dodajte i ne brišite odgovore, logika rezultata zavisi od njihovog broja."
+            type: string
+            required: true
+            list:
+              min: 3
+              max: 3
+              collapsible: false
+          - name: pitanje2
+            label: "Drugo pitanje"
+            type: string
+            required: true
+            options:
+              maxlength: 60
+          - name: odgovori2
+            label: "Ponuđeni odgovori na drugo pitanje"
+            description: "Redosled je važan: prvi je delatnost povećanog rizika, drugi je kancelarija, treći je nešto drugo. Ne dodajte i ne brišite odgovore."
+            type: string
+            required: true
+            list:
+              min: 3
+              max: 3
+              collapsible: false
+          - name: napomena
+            label: "Napomena ispod ankete"
+            type: text
+            required: true
+            options:
+              maxlength: 300
+          - name: rezultatOznaka
+            label: "Oznaka iznad rezultata"
+            type: string
+            required: true
+            options:
+              maxlength: 20
+          - name: rezultati
+            label: "Odgovori koje anketa prikazuje"
+            description: "Pet unapred pripremljenih rezultata. Ne dodaju se novi, sajt ih traži po imenu."
+            type: object
+            fields:
+              - name: noEmp
+                label: "Bez zaposlenih"
+                type: object
+                fields:
+                  - name: title
+                    label: "Naslov rezultata"
+                    type: string
+                    required: true
+                    options:
+                      maxlength: 60
+                  - name: body
+                    label: "Obrazloženje"
+                    type: text
+                    required: true
+                    options:
+                      maxlength: 500
+                  - name: fine
+                    label: "Prikaži rok i kaznu"
+                    description: "Uključite samo kod rezultata gde obaveza stvarno postoji."
+                    type: boolean
+              - name: many
+                label: "Više od 20 zaposlenih"
+                type: object
+                fields:
+                  - name: title
+                    label: "Naslov rezultata"
+                    type: string
+                    required: true
+                    options:
+                      maxlength: 60
+                  - name: body
+                    label: "Obrazloženje"
+                    type: text
+                    required: true
+                    options:
+                      maxlength: 500
+                  - name: fine
+                    label: "Prikaži rok i kaznu"
+                    type: boolean
+              - name: risk
+                label: "Delatnost povećanog rizika"
+                type: object
+                fields:
+                  - name: title
+                    label: "Naslov rezultata"
+                    type: string
+                    required: true
+                    options:
+                      maxlength: 60
+                  - name: body
+                    label: "Obrazloženje"
+                    type: text
+                    required: true
+                    options:
+                      maxlength: 500
+                  - name: fine
+                    label: "Prikaži rok i kaznu"
+                    type: boolean
+              - name: office
+                label: "Kancelarija, IT, trgovina, usluge"
+                type: object
+                fields:
+                  - name: title
+                    label: "Naslov rezultata"
+                    type: string
+                    required: true
+                    options:
+                      maxlength: 60
+                  - name: body
+                    label: "Obrazloženje"
+                    type: text
+                    required: true
+                    options:
+                      maxlength: 500
+                  - name: fine
+                    label: "Prikaži rok i kaznu"
+                    type: boolean
+              - name: other
+                label: "Nešto drugo"
+                type: object
+                fields:
+                  - name: title
+                    label: "Naslov rezultata"
+                    type: string
+                    required: true
+                    options:
+                      maxlength: 60
+                  - name: body
+                    label: "Obrazloženje"
+                    type: text
+                    required: true
+                    options:
+                      maxlength: 500
+                  - name: fine
+                    label: "Prikaži rok i kaznu"
+                    type: boolean
+          - name: rokOznaka
+            label: "Naziv polja sa rokom"
+            type: string
+            required: true
+            options:
+              maxlength: 20
+          - name: rok
+            label: "Rok"
+            description: "Datum kada propis počinje da važi, na primer 1. januar 2027."
+            type: string
+            required: true
+            options:
+              maxlength: 40
+          - name: kaznaOznaka
+            label: "Naziv polja sa kaznom"
+            type: string
+            required: true
+            options:
+              maxlength: 40
+          - name: kazna
+            label: "Iznos kazne"
+            description: "Ovde se piše i oznaka RSD, za razliku od cenovnika."
+            type: string
+            required: true
+            options:
+              maxlength: 40
+          - name: dugme
+            label: "Natpis na dugmetu"
+            type: string
+            required: true
+            options:
+              maxlength: 40
+      - name: usluge
+        label: "Uvod u sekciju Usluge"
+        description: "Same kartice usluga se menjaju u odeljku Kartice usluga."
+        type: object
+        fields:
+          - name: naslov
+            label: "Naslov"
+            type: string
+            required: true
+            options:
+              maxlength: 60
+          - name: oznaka
+            label: "Oznaka sekcije"
+            type: string
+            required: true
+            options:
+              maxlength: 30
+          - name: vise
+            label: "Natpis na linku u kartici"
+            type: string
+            required: true
+            options:
+              maxlength: 20
+      - name: kako
+        label: "Kako radimo"
+        type: object
+        fields:
+          - name: oznaka
+            label: "Oznaka sekcije"
+            type: string
+            required: true
+            options:
+              maxlength: 30
+          - name: naslov
+            label: "Naslov"
+            type: string
+            required: true
+            options:
+              maxlength: 60
+          - name: uvod
+            label: "Uvodni pasus"
+            type: text
+            required: true
+            options:
+              maxlength: 300
+          - name: koraci
+            label: "Koraci"
+            type: object
+            required: true
+            list:
+              min: 1
+              collapsible:
+                collapsed: true
+                summary: "{n} · {naslov}"
+            fields:
+              - name: n
+                label: "Redni broj"
+                description: "Dve cifre, na primer 01."
+                type: string
+                required: true
+                options:
+                  maxlength: 4
+              - name: naslov
+                label: "Naslov koraka"
+                type: string
+                required: true
+                options:
+                  maxlength: 60
+              - name: tekst
+                label: "Opis koraka"
+                type: text
+                required: true
+                options:
+                  maxlength: 400
+              - name: highlight
+                label: "Istaknut korak"
+                description: "Boji broj u žuto i dodaje crtu ispod. Uključite samo kod poslednjeg."
+                type: boolean
+      - name: rokovi
+        label: "Rokovi i kazne"
+        type: object
+        fields:
+          - name: oznaka
+            label: "Oznaka sekcije"
+            type: string
+            required: true
+            options:
+              maxlength: 40
+          - name: datumRed1
+            label: "Datum, prvi red"
+            description: "Krupni žuti naslov, na primer 1. januar."
+            type: string
+            required: true
+            options:
+              maxlength: 30
+          - name: datumRed2
+            label: "Datum, drugi red"
+            description: "Nastavak krupnog naslova, na primer 2027."
+            type: string
+            required: true
+            options:
+              maxlength: 30
+          - name: tekst
+            label: "Objašnjenje propisa"
+            description: "Ovde se pominju datumi primene. Proverite ih uz svaku izmenu propisa."
+            type: text
+            required: true
+            options:
+              maxlength: 600
+          - name: kazne
+            label: "Kartice sa kaznama"
+            type: object
+            required: true
+            list:
+              min: 1
+              collapsible:
+                collapsed: true
+                summary: "{oznaka} · {iznos}"
+            fields:
+              - name: oznaka
+                label: "Naziv kazne"
+                description: "Na primer KAZNA / PREDUZETNIK."
+                type: string
+                required: true
+                options:
+                  maxlength: 40
+              - name: iznos
+                label: "Iznos"
+                description: "Bez oznake valute, ona se dodaje u sledećem polju. Primeri: 400.000–500.000, 1,5–2 miliona."
+                type: string
+                required: true
+                options:
+                  maxlength: 40
+              - name: valuta
+                label: "Oznaka valute"
+                type: string
+                required: true
+                options:
+                  maxlength: 10
+          - name: gradilistaJako
+            label: "Podebljani početak napomene o gradilištima"
+            description: "Obično jedna reč sa tačkom, na primer Gradilišta."
+            type: string
+            required: true
+            options:
+              maxlength: 40
+          - name: gradilistaTekst
+            label: "Nastavak napomene o gradilištima"
+            description: "Počnite razmakom, da se ne slepi sa podebljanim delom iznad."
+            type: text
+            required: true
+            options:
+              maxlength: 400
+          - name: izvor
+            label: "Izvor propisa"
+            type: text
+            required: true
+            options:
+              maxlength: 300
+      - name: paketi
+        label: "Uvod u sekciju Mesečni paušal"
+        description: "Sami paketi i njihove cene se ne menjaju ovde, cene stoje u Cenovniku."
+        type: object
+        fields:
+          - name: oznaka
+            label: "Oznaka sekcije"
+            type: string
+            required: true
+            options:
+              maxlength: 30
+          - name: naslov
+            label: "Naslov"
+            type: string
+            required: true
+            options:
+              maxlength: 80
+          - name: uvod
+            label: "Uvodni pasus"
+            type: text
+            required: true
+            options:
+              maxlength: 300
+      - name: cenovnik
+        label: "Uvod u sekciju Cenovnik"
+        description: "Kratak blok koji vodi na stranu Cenovnik. Same cene stoje u Cenovniku."
+        type: object
+        fields:
+          - name: oznaka
+            label: "Oznaka sekcije"
+            type: string
+            required: true
+            options:
+              maxlength: 30
+          - name: naslov
+            label: "Naslov"
+            type: string
+            required: true
+            options:
+              maxlength: 60
+          - name: uvod
+            label: "Uvodni pasus"
+            type: text
+            required: true
+            options:
+              maxlength: 300
+          - name: link
+            label: "Natpis na linku ka cenovniku"
+            type: string
+            required: true
+            options:
+              maxlength: 40
+      - name: zasto
+        label: "Zašto Preving Pro"
+        type: object
+        fields:
+          - name: naslov
+            label: "Naslov"
+            type: string
+            required: true
+            options:
+              maxlength: 60
+          - name: oznaka
+            label: "Oznaka sekcije"
+            type: string
+            required: true
+            options:
+              maxlength: 40
+          - name: licence
+            label: "Kartice licenci"
+            type: object
+            required: true
+            list:
+              min: 1
+              collapsible:
+                collapsed: true
+                summary: "{oznaka} · {tekst}"
+            fields:
+              - name: oznaka
+                label: "Oznaka licence"
+                description: "Na primer LICENCA 01."
+                type: string
+                required: true
+                options:
+                  maxlength: 30
+              - name: tekst
+                label: "Naziv licence"
+                type: string
+                required: true
+                options:
+                  maxlength: 90
+          - name: licenceNapomena
+            label: "Napomena ispod licenci"
+            type: text
+            required: true
+            options:
+              maxlength: 200
+          - name: iskustvoOznaka
+            label: "Naslov iznad spiska rafinerija"
+            description: "Piše se velikim slovima."
+            type: string
+            required: true
+            options:
+              maxlength: 80
+          - name: rafinerije
+            label: "Rafinerije"
+            type: object
+            required: true
+            list:
+              min: 1
+              collapsible:
+                collapsed: true
+                summary: "{ime} · {mesto}"
+            fields:
+              - name: ime
+                label: "Naziv"
+                type: string
+                required: true
+                options:
+                  maxlength: 40
+              - name: mesto
+                label: "Mesto i država"
+                description: "Piše se velikim slovima, delovi se razdvajaju znakom ·."
+                type: string
+                required: true
+                options:
+                  maxlength: 60
+          - name: iskustvoTekst
+            label: "Pasus o iskustvu"
+            type: text
+            required: true
+            options:
+              maxlength: 400
+          - name: kartice
+            label: "Kartice sa dokazima"
+            description: "Dve kartice bez podebljanih delova. Treća, Gde radimo, ima svoje polje ispod."
+            type: object
+            required: true
+            list:
+              min: 1
+              collapsible:
+                collapsed: true
+                summary: "{oznaka}"
+            fields:
+              - name: oznaka
+                label: "Naslov kartice"
+                description: "Piše se velikim slovima."
+                type: string
+                required: true
+                options:
+                  maxlength: 40
+              - name: tekst
+                label: "Tekst kartice"
+                type: text
+                required: true
+                options:
+                  maxlength: 400
+          - name: gde
+            label: "Kartica Gde radimo"
+            description: "Posebna kartica, jer u njoj naizmenično idu podebljani i običan tekst."
+            type: object
+            fields:
+              - name: oznaka
+                label: "Naslov kartice"
+                type: string
+                required: true
+                options:
+                  maxlength: 40
+              - name: delovi
+                label: "Delovi teksta"
+                type: object
+                required: true
+                list:
+                  min: 1
+                  collapsible:
+                    collapsed: true
+                    summary: "{jako}"
+                fields:
+                  - name: jako
+                    label: "Podebljani deo"
+                    description: "Naziv područja, na primer Novi Sad i okolina."
+                    type: string
+                    required: true
+                    options:
+                      maxlength: 60
+                  - name: tekst
+                    label: "Običan deo"
+                    description: "Nastavak posle podebljanog dela. Počnite dvotačkom, a završite razmakom ako sledi još jedan deo."
+                    type: string
+                    required: true
+                    options:
+                      maxlength: 200
+          - name: napomena
+            label: "Napomena na dnu sekcije"
+            type: text
+            required: true
+            options:
+              maxlength: 400
+      - name: faq
+        label: "Uvod u sekciju Česta pitanja"
+        description: "Sama pitanja se menjaju u odeljku Česta pitanja."
+        type: object
+        fields:
+          - name: oznaka
+            label: "Oznaka sekcije"
+            type: string
+            required: true
+            options:
+              maxlength: 30
+          - name: naslov
+            label: "Naslov"
+            type: string
+            required: true
+            options:
+              maxlength: 60
+          - name: uvod
+            label: "Uvodni pasus"
+            type: text
+            required: true
+            options:
+              maxlength: 300
+      - name: kontakt
+        label: "Sekcija Kontakt na naslovnoj"
+        description: "Telefon, imejl i adresa se ne menjaju ovde, oni stoje u odeljku Podaci o firmi."
+        type: object
+        fields:
+          - name: oznaka
+            label: "Oznaka sekcije"
+            type: string
+            required: true
+            options:
+              maxlength: 30
+          - name: naslov
+            label: "Naslov"
+            type: string
+            required: true
+            options:
+              maxlength: 60
+          - name: uvod
+            label: "Uvodni pasus"
+            type: text
+            required: true
+            options:
+              maxlength: 300
+          - name: polja
+            label: "Natpisi iznad polja formulara"
+            description: "Pišu se velikim slovima."
+            type: object
+            fields:
+              - name: ime
+                label: "Ime i prezime"
+                type: string
+                required: true
+                options:
+                  maxlength: 40
+              - name: firma
+                label: "Naziv firme"
+                type: string
+                required: true
+                options:
+                  maxlength: 40
+              - name: kontakt
+                label: "Telefon ili imejl"
+                type: string
+                required: true
+                options:
+                  maxlength: 40
+              - name: zaposleni
+                label: "Broj zaposlenih"
+                type: string
+                required: true
+                options:
+                  maxlength: 40
+              - name: delatnost
+                label: "Delatnost"
+                type: string
+                required: true
+                options:
+                  maxlength: 40
+              - name: poruka
+                label: "Poruka"
+                type: string
+                required: true
+                options:
+                  maxlength: 40
+          - name: saglasnost
+            label: "Tekst uz kvadratić za saglasnost"
+            type: text
+            required: true
+            options:
+              maxlength: 300
+          - name: saglasnostGreska
+            label: "Upozorenje kada saglasnost nije označena"
+            type: string
+            required: true
+            options:
+              maxlength: 120
+          - name: dugme
+            label: "Natpis na dugmetu za slanje"
+            type: string
+            required: true
+            options:
+              maxlength: 40
+          - name: poslato
+            label: "Poruka posle slanja"
+            type: object
+            fields:
+              - name: oznaka
+                label: "Oznaka iznad poruke"
+                type: string
+                required: true
+                options:
+                  maxlength: 30
+              - name: naslov
+                label: "Naslov poruke"
+                type: string
+                required: true
+                options:
+                  maxlength: 60
+              - name: tekstPre
+                label: "Tekst pre broja telefona"
+                description: "Završite razmakom, da se ne slepi sa brojem telefona."
+                type: string
+                required: true
+                options:
+                  maxlength: 200
+              - name: tekstPosle
+                label: "Tekst posle broja telefona"
+                description: "Obično samo tačka."
+                type: string
+                options:
+                  maxlength: 40
+
+  # ---------------------------------------------------------------
+  # 3. PODACI O FIRMI - jedini izvor kontakt podataka
+  # ---------------------------------------------------------------
+  - name: firma
+    label: "Podaci o firmi"
+    description: "Telefon, imejlovi, adresa i radno vreme. Menjaju se samo ovde, a prikazuju se na svakoj strani i u podnožju."
+    type: file
+    path: site/src/data/firma.json
+    format: json
+    operations:
+      create: false
+      rename: false
+      delete: false
+    fields:
+      - name: telefon
+        label: "Telefon, kako se ispisuje"
+        description: "Onako kako treba da piše na sajtu, sa razmacima. Na primer 063 81 855 87."
+        type: string
+        required: true
+        options:
+          maxlength: 30
+      - name: telefonHref
+        label: "Telefon, za pozivanje"
+        description: "Isti broj u obliku koji telefon razume: tel: pa pozivni broj bez razmaka, na primer tel:+381638185587. Ako ovde nešto nije u redu, build pada."
+        type: string
+        required: true
+        pattern:
+          regex: "^tel:\\+[0-9]+$"
+          message: "Mora biti u obliku tel:+381638185587."
+        options:
+          maxlength: 30
+      - name: imejlovi
+        label: "Imejl adrese"
+        description: "Prva adresa se prikazuje tamo gde ima mesta samo za jednu. U podnožju i na strani Kontakt prikazuju se sve."
+        type: string
+        required: true
+        list:
+          min: 1
+          collapsible: false
+      - name: ulica
+        label: "Ulica i broj"
+        type: string
+        required: true
+        options:
+          maxlength: 80
+      - name: naselje
+        label: "Naselje"
+        description: "Deo grada, na primer Klisa."
+        type: string
+        required: true
+        options:
+          maxlength: 40
+      - name: grad
+        label: "Poštanski broj i grad"
+        description: "Na primer 21000 Novi Sad."
+        type: string
+        required: true
+        options:
+          maxlength: 60
+      - name: radnoVreme
+        label: "Radno vreme"
+        description: "Jedan red, na primer pon–pet 08–16 · linija 24/7."
+        type: string
+        required: true
+        options:
+          maxlength: 60
+      - name: pravnoIme
+        label: "Pun pravni naziv"
+        description: "Prvi red u podnožju sajta."
+        type: text
+        required: true
+        options:
+          maxlength: 200
+      - name: sifraDelatnosti
+        label: "Šifra delatnosti"
+        description: "Ceo red kako treba da piše, zajedno sa rečima. Na primer Šifra delatnosti 7112."
+        type: string
+        required: true
+        options:
+          maxlength: 60
+
+  # ---------------------------------------------------------------
+  # 4. ČESTA PITANJA
+  # ---------------------------------------------------------------
+  - name: faq
+    label: "Česta pitanja"
+    description: "Lista pitanja i odgovora na naslovnoj strani."
+    type: file
+    path: site/src/data/faq.json
+    format: json
+    list: true
+    operations:
+      create: false
+      rename: false
+      delete: false
+    fields:
+      - name: q
+        label: "Pitanje"
+        type: string
+        required: true
+        options:
+          maxlength: 160
+      - name: a
+        label: "Odgovor"
+        description: "Običan tekst, bez formatiranja. Prelomi redova se ne prikazuju."
+        type: text
+        required: true
+        options:
+          maxlength: 900
+      - name: open
+        label: "Otvoreno pri učitavanju"
+        description: "Uključite samo kod jednog pitanja, inače su svi odgovori odmah otvoreni."
+        type: boolean
+
+  # ---------------------------------------------------------------
+  # 5. KARTICE USLUGA
+  # ---------------------------------------------------------------
+  - name: usluge-kartice
+    label: "Kartice usluga"
+    description: "Četiri kartice na naslovnoj strani i linkovi u podnožju. Broj kartica je zaključan na četiri."
+    type: file
+    path: site/src/data/services.json
+    format: json
+    list: true
+    operations:
+      create: false
+      rename: false
+      delete: false
+    fields:
+      - name: id
+        label: "Sidro na strani Usluge"
+        description: "Tehnička oznaka koja vodi na deo strane Usluge. Zaključana je jer bi izmena pokvarila link."
+        type: string
+        readonly: true
+        required: true
+      - name: num
+        label: "Redni broj"
+        description: "Oznaka u uglu kartice, na primer 1.1. Zaključana da bi numeracija ostala u nizu."
+        type: string
+        readonly: true
+        required: true
+      - name: title
+        label: "Naslov kartice"
+        type: string
+        required: true
+        options:
+          maxlength: 60
+      - name: text
+        label: "Opis kartice"
+        type: text
+        required: true
+        options:
+          maxlength: 300
+      - name: featured
+        label: "Istaknuta kartica"
+        description: "Boji karticu u žuto. Uključite samo kod jedne."
+        type: boolean
+
+  # ---------------------------------------------------------------
+  # 6. O NAMA
+  # ---------------------------------------------------------------
+  - name: o-nama
+    label: "Strana O nama"
+    description: "Brojevi, radna biografija, tim i oprema na strani O nama."
+    type: file
+    path: site/src/data/o-nama.json
+    format: json
+    operations:
+      create: false
+      rename: false
+      delete: false
+    fields:
+      - name: stats
+        label: "Brojevi u zaglavlju"
+        type: object
+        required: true
+        list:
+          min: 1
+          collapsible:
+            collapsed: true
+            summary: "{label} · {value}"
+        fields:
+          - name: label
+            label: "Opis broja"
+            type: string
+            required: true
+            options:
+              maxlength: 90
+          - name: value
+            label: "Broj"
+            description: "Kratka vrednost desno, na primer 4 ili 10."
+            type: string
+            required: true
+            options:
+              maxlength: 10
+      - name: timeline
+        label: "Radna biografija"
+        description: "Stavke se prikazuju odozgo nadole, redosledom iz ove liste."
+        type: object
+        required: true
+        list:
+          min: 1
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: tag
+            label: "Oznaka perioda"
+            description: "Sitan tekst velikim slovima, na primer NITRA · SLOVAČKA."
+            type: string
+            required: true
+            options:
+              maxlength: 60
+          - name: title
+            label: "Naslov"
+            type: string
+            required: true
+            options:
+              maxlength: 90
+          - name: text
+            label: "Opis"
+            type: text
+            required: true
+            options:
+              maxlength: 500
+          - name: chips
+            label: "Pločice ispod opisa"
+            description: "Neobavezno. Kratke oznake velikim slovima, jedna po redu. Ostavite praznu listu ako ih nema."
+            type: string
+            list: true
+      - name: tim
+        label: "Tim"
+        type: object
+        required: true
+        list:
+          min: 1
+          collapsible:
+            collapsed: true
+            summary: "{name}"
+        fields:
+          - name: id
+            label: "Tehnička oznaka"
+            type: string
+            hidden: true
+          - name: photo
+            label: "Opis mesta za fotografiju"
+            description: "Tekst koji stoji u praznom okviru dok fotografija ne stigne. Služi i kao opis slike za čitače ekrana."
+            type: string
+            required: true
+            options:
+              maxlength: 80
+          - name: name
+            label: "Ime i prezime"
+            type: string
+            required: true
+            options:
+              maxlength: 60
+          - name: role
+            label: "Uloga"
+            description: "Piše se velikim slovima, delovi se razdvajaju znakom ·."
+            type: string
+            required: true
+            options:
+              maxlength: 90
+          - name: bio
+            label: "Kratka biografija"
+            type: text
+            required: true
+            options:
+              maxlength: 400
+      - name: teren
+        label: "Šta donosimo na teren"
+        type: object
+        required: true
+        list:
+          min: 1
+          collapsible:
+            collapsed: true
+            summary: "{label}"
+        fields:
+          - name: label
+            label: "Naslov reda"
+            description: "Piše se velikim slovima, na primer OPREMA."
+            type: string
+            required: true
+            options:
+              maxlength: 40
+          - name: text
+            label: "Opis"
+            type: text
+            required: true
+            options:
+              maxlength: 400
+
+  # ---------------------------------------------------------------
+  # 7. KONTAKT
+  # ---------------------------------------------------------------
+  - name: kontakt
+    label: "Strana Kontakt"
+    description: "Kanali za kontakt, mesto za fotografiju i podsetnik šta pripremiti pre poziva. Sam broj telefona stoji u odeljku Podaci o firmi."
+    type: file
+    path: site/src/data/kontakt.json
+    format: json
+    operations:
+      create: false
+      rename: false
+      delete: false
+    fields:
+      - name: kanali
+        label: "Kanali za kontakt"
+        type: object
+        required: true
+        list:
+          min: 1
+          collapsible:
+            collapsed: true
+            summary: "{kicker}"
+        fields:
+          - name: kicker
+            label: "Naslov kanala"
+            description: "Jedna reč velikim slovima, na primer POZOVITE."
+            type: string
+            required: true
+            options:
+              maxlength: 30
+          - name: text
+            label: "Tekst"
+            description: "Ako kanal prikazuje broj telefona, završite ovaj tekst razmakom da se broj ne slepi sa njim."
+            type: text
+            required: true
+            options:
+              maxlength: 400
+          - name: link
+            label: "Link u tekstu"
+            description: "Izaberite Telefon da se na kraj teksta doda broj iz odeljka Podaci o firmi. Bez linka znači da kanal prikazuje samo tekst."
+            type: select
+            options:
+              values:
+                - name: ""
+                  label: "Bez linka"
+                - name: "telefon"
+                  label: "Telefon"
+          - name: after
+            label: "Tekst posle linka"
+            description: "Obično samo tačka. Ostavite prazno ako kanal nema link."
+            type: string
+            options:
+              maxlength: 40
+      - name: foto
+        label: "Mesto za fotografiju"
+        type: object
+        fields:
+          - name: placeholder
+            label: "Opis praznog okvira"
+            description: "Tekst u okviru dok fotografija ne stigne. Služi i kao opis slike za čitače ekrana."
+            type: string
+            required: true
+            options:
+              maxlength: 80
+      - name: priprema
+        label: "Podsetnik za bržu ponudu"
+        type: object
+        fields:
+          - name: kicker
+            label: "Naslov podsetnika"
+            description: "Piše se velikim slovima."
+            type: string
+            required: true
+            options:
+              maxlength: 60
+          - name: stavke
+            label: "Stavke podsetnika"
+            description: "Jedna stavka po redu. Tačka na početku, na primer: · matični broj firme."
+            type: string
+            required: true
+            list:
+              min: 1
+              collapsible: false

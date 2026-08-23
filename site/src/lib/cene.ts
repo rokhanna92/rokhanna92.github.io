@@ -14,6 +14,13 @@ const spoji = (iznos: string, jedinica: string) => `${iznos} ${jedinica}`.trim()
 const mapa = new Map<string, Cena>();
 for (const g of cenovnik.groups) {
   for (const s of g.stavke) {
+    // Urednik koji doda stavku kroz CMS dobija prazan id, jer je polje zakljucano.
+    // Bolje da build stane nego da stavka tiho ostane bez veze sa ostatkom sajta.
+    if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(s.id)) {
+      throw new Error(
+        `Cenovnik: stavka "${s.n}" u grupi "${g.naziv}" ima id "${s.id}", koji nije dozvoljen. Id pise programer, malim slovima sa crticama, na primer "sat-savetnika".`
+      );
+    }
     if (mapa.has(s.id)) {
       throw new Error(`Cenovnik: id "${s.id}" postoji dva puta u cenovnik.json. Svaka stavka mora imati jedinstven id.`);
     }
@@ -71,7 +78,20 @@ for (const [ref, putanja] of refovi) {
   }
 }
 
-// ---- Assertion 2 i 3: estimator.rates mora biti broj i mora se poklapati ----
+// ---- Assertion 2: kalkulator mora zadrzati sve svoje delove ----
+
+// .pages.yml izlaze samo estimator.rates. Ostalo cuva settings.content.merge.
+// Ako taj prekidac ikad otpadne, Pages CMS brise nenavedene kljuceve, pa ovde
+// pada build sa jasnom porukom umesto sa TypeError-om duboko u strani.
+for (const kljuc of ['defaults', 'limits', 'rates', 'labels', 'pausalOpts', 'checkboxes'] as const) {
+  if (cenovnik.estimator[kljuc] === undefined) {
+    throw new Error(
+      `Cenovnik: kalkulatoru nedostaje estimator.${kljuc} u cenovnik.json. Najverovatnije je iz .pages.yml ispao settings.content.merge: true, pa je CMS obrisao polja koja ne prikazuje.`
+    );
+  }
+}
+
+// ---- Assertion 3 i 4: estimator.rates mora biti broj i mora se poklapati ----
 
 // Svaki kljuc u estimator.rates je vezan za tacno jednu stavku cenovnika.
 const stavkaZaRate: Record<string, string> = {
