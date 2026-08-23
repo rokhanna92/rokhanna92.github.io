@@ -1,10 +1,9 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import cenovnik from '../data/cenovnik.json';
+import { grupe, napomena, estimator } from '../lib/cene';
 import '../styles/responsive.css';
 
-const { groups, note, estimator } = cenovnik;
 const { defaults, limits, rates, labels, pausalOpts, checkboxes } = estimator;
 
 const fmt = (n: number) => new Intl.NumberFormat('sr-RS').format(n);
@@ -40,8 +39,8 @@ const initial = estimate(defaults);
 // Naslovni blok: brojevi se izvode iz podataka, ne kucaju se rucno.
 const meta = {
   izdanje: '2026/27',
-  grupa: String(groups.length).padStart(2, '0'),
-  stavki: String(groups.reduce((n, g) => n + g.stavke.length, 0)).padStart(2, '0'),
+  grupa: String(grupe.length).padStart(2, '0'),
+  stavki: String(grupe.reduce((n, g) => n + g.stavke.length, 0)).padStart(2, '0'),
   valuta: 'RSD',
   pdv: 'BEZ PDV-a',
 };
@@ -218,7 +217,7 @@ const description =
           resistance="750"
           return-duration="1.5"></dot-grid>
         <div style="max-width:1080px; margin:0 auto; position:relative; z-index:1">
-          {groups.map((g) => (
+          {grupe.map((g) => (
             <div data-sheet class="sheet" style={`margin-bottom:36px; --dur:${(g.stavke.length * 55 + 420) / 1000}s`}>
               <div class="sheet-head"><span>{g.naziv}</span><b>{g.oznaka}</b></div>
               <table style="width:100%; border-collapse:collapse">
@@ -234,7 +233,7 @@ const description =
               </table>
             </div>
           ))}
-          <p style="margin:0; font:400 13px/1.6 'IBM Plex Mono',monospace; color:rgba(7,7,7,.5)">{note}</p>
+          <p style="margin:0; font:400 13px/1.6 'IBM Plex Mono',monospace; color:rgba(7,7,7,.5)">{napomena}</p>
         </div>
       </section>
 

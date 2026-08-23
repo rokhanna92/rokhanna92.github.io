@@ -5,14 +5,18 @@
       "oznaka": "G-01",
       "stavke": [
         {
+          "id": "pausal-osnovni",
           "n": "Osnovni paket",
           "d": "imenovanje savetnika, mesečni obilazak, izveštaj, evidencije",
-          "c": "od 8.200 / mes"
+          "iznos": "od 8.200",
+          "jedinica": "/ mes"
         },
         {
+          "id": "pausal-pro",
           "n": "Pro paket · ključ u ruke",
           "d": "sve iz Osnovnog + alko-testiranje, zastupanje, linija 24/7",
-          "c": "od 12.000 / mes"
+          "iznos": "od 12.000",
+          "jedinica": "/ mes"
         }
       ]
     },
@@ -21,19 +25,25 @@
       "oznaka": "G-02",
       "stavke": [
         {
+          "id": "sat-savetnika",
           "n": "Savetnik za BZR · referent ZOP · koordinator",
           "d": "rad na vašoj lokaciji ili dokumentaciji",
-          "c": "3.200 / sat"
+          "iznos": "3.200",
+          "jedinica": "/ sat"
         },
         {
+          "id": "fotoreporting",
           "n": "Kontrola gradilišta sa fotoreportingom",
           "d": "geotagovane fotografije i protokol u imejlu",
-          "c": "6.400 / sat"
+          "iznos": "6.400",
+          "jedinica": "/ sat"
         },
         {
+          "id": "zastupanje-inspekcija",
           "n": "Zastupanje pred Inspekcijom rada",
           "d": "priprema dokumentacije i prisustvo kontroli",
-          "c": "7.500 / sat"
+          "iznos": "7.500",
+          "jedinica": "/ sat"
         }
       ]
     },
@@ -42,34 +52,46 @@
       "oznaka": "G-03",
       "stavke": [
         {
+          "id": "akt-o-proceni-rizika",
           "n": "Akt o proceni rizika",
           "d": "po radnom mestu, sa merama i rokovima",
-          "c": "4.000–7.000"
+          "iznos": "4.000–7.000",
+          "jedinica": ""
         },
         {
+          "id": "pravilnik-bzr",
           "n": "Pravilnik o bezbednosti i zdravlju na radu",
           "d": "usklađen sa Zakonom 35/2023",
-          "c": "od 15.000"
+          "iznos": "od 15.000",
+          "jedinica": ""
         },
         {
+          "id": "pravilnik-lzo",
           "n": "Pravilnik o ličnoj zaštitnoj opremi",
           "d": "sa normativima LZO po radnim mestima",
-          "c": "od 10.000"
+          "iznos": "od 10.000",
+          "jedinica": ""
         },
         {
+          "id": "pravila-zop",
           "n": "Pravila zaštite od požara sa planom evakuacije",
           "d": "za objekte III kategorije",
-          "c": "8.000–15.000"
+          "iznos": "8.000–15.000",
+          "jedinica": ""
         },
         {
+          "id": "elaborat-zop",
           "n": "Elaborat zaštite od požara",
           "d": "za složenije objekte i tehnologije",
-          "c": "od 25.000"
+          "iznos": "od 25.000",
+          "jedinica": ""
         },
         {
+          "id": "elaborat-gradiliste",
           "n": "Elaborat o uređenju gradilišta",
           "d": "za radove duže od tri dana",
-          "c": "na upit"
+          "iznos": "na upit",
+          "jedinica": ""
         }
       ]
     },
@@ -78,14 +100,18 @@
       "oznaka": "G-04",
       "stavke": [
         {
+          "id": "obuka-bzr-zop-visina",
           "n": "BZR, ZOP ili rad na visini",
           "d": "teorija + praksa + test + evidencija",
-          "c": "2.000 / radniku"
+          "iznos": "2.000",
+          "jedinica": "/ radniku"
         },
         {
+          "id": "obuka-specijalisticka",
           "n": "Vatrogasna brigada · čuvar ulaza · rukovanje mašinama",
           "d": "specijalističke obuke po potrebi posla",
-          "c": "1.200 / radniku"
+          "iznos": "1.200",
+          "jedinica": "/ radniku"
         }
       ]
     },
@@ -94,9 +120,11 @@
       "oznaka": "G-05",
       "stavke": [
         {
+          "id": "revizija-pp-aparata",
           "n": "Revizija PP aparata",
           "d": "na vašoj adresi, sa nalepnicom i zapisnikom",
-          "c": "od 250 / aparatu"
+          "iznos": "od 250",
+          "jedinica": "/ aparatu"
         }
       ]
     }

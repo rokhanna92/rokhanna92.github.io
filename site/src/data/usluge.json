@@ -38,10 +38,10 @@
       }
     ],
     "prices": [
-      { "label": "Pravila zaštite od požara sa planom evakuacije", "value": "8.000–15.000" },
-      { "label": "Elaborat zaštite od požara", "value": "od 25.000" },
+      { "label": "Pravila zaštite od požara sa planom evakuacije", "ref": "pravila-zop" },
+      { "label": "Elaborat zaštite od požara", "ref": "elaborat-zop" },
       { "label": "Plan evakuacije i uputstva u boji, po spratu", "value": "na upit" },
-      { "label": "Obuka zaposlenih iz oblasti ZOP, po radniku", "value": "2.000" }
+      { "label": "Obuka zaposlenih iz oblasti ZOP, po radniku", "ref": "obuka-bzr-zop-visina" }
     ]
   },
   "koordinator": {
@@ -75,13 +75,13 @@
   "obuke": {
     "tiers": [
       {
-        "price": "2.000",
+        "ref": "obuka-bzr-zop-visina",
         "unit": "RSD / RADNIKU",
         "text": "Bezbedan i zdrav rad · zaštita od požara · rad na visini",
         "dark": true
       },
       {
-        "price": "1.200",
+        "ref": "obuka-specijalisticka",
         "unit": "RSD / RADNIKU",
         "text": "Vatrogasna brigada · čuvar ulaza u skučeni prostor · uputstva za rukovanje mašinama",
         "dark": false

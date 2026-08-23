@@ -1,12 +1,12 @@
 {
   "bzr": [
-    "AKT O PROCENI RIZIKA · 4.000–7.000 / RADNOM MESTU",
-    "PRAVILNIK O BZR · OD 15.000",
-    "SAT RADA SAVETNIKA · 3.200"
+    { "label": "AKT O PROCENI RIZIKA", "ref": "akt-o-proceni-rizika", "suffix": "/ RADNOM MESTU" },
+    { "label": "PRAVILNIK O BZR", "ref": "pravilnik-bzr", "suffix": "" },
+    { "label": "SAT RADA SAVETNIKA", "ref": "sat-savetnika", "suffix": "" }
   ],
   "koordinator": [
-    "SAT KOORDINATORA · 3.200",
-    "KONTROLA SA FOTOREPORTINGOM · 6.400 / SATU",
-    "ZASTUPANJE PRED INSPEKCIJOM · 7.500"
+    { "label": "SAT KOORDINATORA", "ref": "sat-savetnika", "suffix": "" },
+    { "label": "KONTROLA SA FOTOREPORTINGOM", "ref": "fotoreporting", "suffix": "/ SATU" },
+    { "label": "ZASTUPANJE PRED INSPEKCIJOM", "ref": "zastupanje-inspekcija", "suffix": "" }
   ]
 }

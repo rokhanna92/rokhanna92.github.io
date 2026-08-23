@@ -5,6 +5,7 @@ import services from '../data/services.json';
 import prices from '../data/prices.json';
 import faq from '../data/faq.json';
 import formOptions from '../data/form-options.json';
+import { cena } from '../lib/cene';
 import '../styles/responsive.css';
 
 // 1. januar 2027. u 00:00 po srednjoevropskom vremenu.
@@ -315,7 +316,7 @@ const description =
                   <span style="position:absolute; top:-14px; right:24px; background:#070707; color:#FECB0F; font:700 10.5px 'IBM Plex Mono',monospace; letter-spacing:.16em; padding:6px 12px">{p.badge}</span>
                 )}
                 <p style="margin:0; font:700 18px 'IBM Plex Sans',system-ui,sans-serif">{p.name}</p>
-                <p style="margin:8px 0 20px; font:700 34px 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.02em">{p.price} <span style="font:500 13px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.5)">{p.unit}</span></p>
+                <p style="margin:8px 0 20px; font:700 34px 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.02em">{`${cena(p.ref).iznos} ${p.suffix}`.trim()} <span style="font:500 13px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.5)">{p.unit}</span></p>
                 <div style={`display:grid; gap:12px; font:400 15px/1.5 "IBM Plex Sans",system-ui,sans-serif; color:rgba(7,7,7,${p.featured ? '.85' : '.8'})`}>
                   {p.features.map((f) => (
                     <div style="display:flex; gap:10px"><span style={p.featured ? 'font-weight:700' : 'color:#070707; font-weight:700'}>+</span>{f}</div>
@@ -344,7 +345,7 @@ const description =
             </div>
             <div style="flex:1 1 520px; min-width:0; font:400 15.5px 'IBM Plex Sans',system-ui,sans-serif" data-rv>
               {prices.items.map((it) => (
-                <div style="display:flex; justify-content:space-between; gap:24px; border-bottom:1px solid rgba(7,7,7,.2); padding:14px 0"><span>{it.label}</span><strong style={it.tabular ? 'font-variant-numeric:tabular-nums; white-space:nowrap' : 'white-space:nowrap'}>{it.value}</strong></div>
+                <div style="display:flex; justify-content:space-between; gap:24px; border-bottom:1px solid rgba(7,7,7,.2); padding:14px 0"><span>{it.label}</span><strong style={it.tabular ? 'font-variant-numeric:tabular-nums; white-space:nowrap' : 'white-space:nowrap'}>{cena(it.ref).iznos}</strong></div>
               ))}
               <p style="margin:12px 0 0; font:400 13px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.45)">{prices.itemsNote}</p>
             </div>

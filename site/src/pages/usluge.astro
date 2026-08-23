@@ -3,9 +3,17 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import usluge from '../data/usluge.json';
 import chips from '../data/price-chips.json';
+import { cena } from '../lib/cene';
 import '../styles/responsive.css';
 
 const { bzr, zop, koordinator, obuke } = usluge;
+
+// Cip je jedan red velikih slova, pa i "od" iz iznosa ide u velika.
+const cip = (c: { label: string; ref: string; suffix: string }) =>
+  `${c.label} · ${cena(c.ref).iznos.toUpperCase()} ${c.suffix}`.trim();
+
+// Jedan red u ZOP tabeli nema stavku u cenovniku, pa nosi svoj tekst.
+const iznosReda = (row: { ref?: string; value?: string }) => (row.ref ? cena(row.ref).iznos : row.value);
 
 // Staggered reveal, mirroring the mockup: prvi element bez kašnjenja.
 const delay = (i: number, step: number) => (i === 0 ? '' : `; transition-delay:${(i * step) / 100}s`);
@@ -112,7 +120,7 @@ const description =
               </div>
               <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:26px; font:600 12px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.7)">
                 {chips.bzr.map((chip) => (
-                  <span style="border:1px solid rgba(255,255,255,.2); padding:9px 13px">{chip}</span>
+                  <span style="border:1px solid rgba(255,255,255,.2); padding:9px 13px">{cip(chip)}</span>
                 ))}
               </div>
             </div>
@@ -156,13 +164,13 @@ const description =
                   <div
                     data-fd
                     style={`border-top:1px solid rgba(7,7,7,.2);${i === zop.prices.length - 1 ? ' border-bottom:1px solid rgba(7,7,7,.2);' : ''} padding:13px 0; display:flex; justify-content:space-between; gap:20px${delay(i, 6)}`}
-                  ><span>{row.label}</span><strong style="white-space:nowrap">{row.value}</strong></div>
+                  ><span>{row.label}</span><strong style="white-space:nowrap">{iznosReda(row)}</strong></div>
                 ))}
               </div>
             </div>
             <div data-fd style="flex:0 1 340px; min-width:0; align-self:flex-start; background:#070707; color:#F2F1EC; padding:28px 28px 26px; transition-delay:.1s">
               <p style="margin:0; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.2em; color:#FECB0F">NAJLAKŠI PRVI POSAO</p>
-              <p style="margin:12px 0 8px; font:700 34px 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.02em">od 250 <span style="font:500 13px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.5)">RSD / APARATU</span></p>
+              <p style="margin:12px 0 8px; font:700 34px 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.02em">{cena('revizija-pp-aparata').iznos} <span style="font:500 13px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.5)">RSD / APARATU</span></p>
               <p style="margin:0 0 18px; font:400 14.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.7)">Revizija PP aparata na vašoj adresi, sa nalepnicom i zapisnikom. Pozovite, dolazimo: pa se upoznajemo na poslu, ne na sastanku.</p>
               <a href="/kontakt" class="btn-y" style="display:inline-block; background:#FECB0F; color:#070707; font:700 13.5px 'IBM Plex Sans',system-ui,sans-serif; padding:12px 20px">Zakažite reviziju →</a>
             </div>
@@ -192,7 +200,7 @@ const description =
           </div>
           <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:26px; font:600 12px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.7)">
             {chips.koordinator.map((chip) => (
-              <span style="border:1px solid rgba(255,255,255,.2); padding:9px 13px">{chip}</span>
+              <span style="border:1px solid rgba(255,255,255,.2); padding:9px 13px">{cip(chip)}</span>
             ))}
           </div>
         </div>
@@ -214,7 +222,7 @@ const description =
                     : `flex:1 1 300px; background:#fff; border:1px solid rgba(7,7,7,.18); padding:26px${delay(i, 8)}`
                 }
               >
-                <p style={t.dark ? 'margin:0; font:700 34px "IBM Plex Sans",system-ui,sans-serif; letter-spacing:-.02em; color:#FECB0F' : 'margin:0; font:700 34px "IBM Plex Sans",system-ui,sans-serif; letter-spacing:-.02em'}>{t.price} <span style={t.dark ? "font:500 13px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.5)" : "font:500 13px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.5)"}>{t.unit}</span></p>
+                <p style={t.dark ? 'margin:0; font:700 34px "IBM Plex Sans",system-ui,sans-serif; letter-spacing:-.02em; color:#FECB0F' : 'margin:0; font:700 34px "IBM Plex Sans",system-ui,sans-serif; letter-spacing:-.02em'}>{cena(t.ref).iznos} <span style={t.dark ? "font:500 13px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.5)" : "font:500 13px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.5)"}>{t.unit}</span></p>
                 <p style={t.dark ? 'margin:12px 0 0; font:400 15px/1.6 "IBM Plex Sans",system-ui,sans-serif; color:rgba(255,255,255,.75)' : 'margin:12px 0 0; font:400 15px/1.6 "IBM Plex Sans",system-ui,sans-serif; color:rgba(7,7,7,.7)'}>{t.text}</p>
               </div>
             ))}
