@@ -138,7 +138,26 @@ const description =
         </div>
       </section>
 
-      <section style="background:#EFEDE6; padding:0 32px; position:relative; z-index:1">
+      {/* Tačkasta mreža pokriva ceo svetli deo strane, od tamnog zaglavlja do
+          podnožja, a ne samo tabele. Omotač je jedini pozicionirani predak, pa
+          se mreža (position:absolute; inset:0) razvuče preko sve tri sekcije.
+          Sekcije unutra nemaju svoju pozadinu: ista je kao pozadina strane
+          (#EFEDE6), pa bi samo prekrile tačke. */}
+      <div style="position:relative">
+        <dot-grid
+          aria-hidden="true"
+          style="background-image:radial-gradient(#DDDBD4 2px,transparent 2px); background-size:25px 25px"
+          dot-size="4"
+          gap="21"
+          base-color="#DDDBD4"
+          active-color="#FECB0F"
+          proximity="120"
+          shock-radius="250"
+          shock-strength="5"
+          resistance="750"
+          return-duration="1.5"></dot-grid>
+
+      <section style="padding:0 32px; position:relative; z-index:1">
         <div style="max-width:1360px; margin:-1px auto 0; box-sizing:border-box; background:#070707; color:#F2F1EC; transform:translateY(0); padding:38px 38px 34px; display:flex; flex-wrap:wrap; gap:44px; box-shadow:0 30px 60px rgba(7,7,7,.18)">
           <div style="flex:1 1 440px; min-width:0">
             <p style="margin:0 0 4px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:#FECB0F">PROCENA / INTERAKTIVNO</p>
@@ -193,18 +212,6 @@ const description =
       </section>
 
       <section style="padding:88px 32px 40px; position:relative">
-        <dot-grid
-          aria-hidden="true"
-          style="background-image:radial-gradient(#DDDBD4 2px,transparent 2px); background-size:25px 25px"
-          dot-size="4"
-          gap="21"
-          base-color="#DDDBD4"
-          active-color="#FECB0F"
-          proximity="120"
-          shock-radius="250"
-          shock-strength="5"
-          resistance="750"
-          return-duration="1.5"></dot-grid>
         <div style="max-width:1080px; margin:0 auto; position:relative; z-index:1">
           {grupe.map((g) => (
             <div data-sheet class="sheet" style={`margin-bottom:36px; --dur:${(g.stavke.length * 55 + 420) / 1000}s`}>
@@ -235,6 +242,7 @@ const description =
           <a href="/kontakt" class="btn-dark" style="background:#070707; color:#FECB0F; font:700 15px 'IBM Plex Sans',system-ui,sans-serif; padding:16px 28px; flex:none">Zatražite ponudu</a>
         </div>
       </section>
+      </div>
 
       <Footer serviceHref="/usluge" lastLink={null} />
     </div>
