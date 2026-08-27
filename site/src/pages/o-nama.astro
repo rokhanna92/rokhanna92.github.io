@@ -146,7 +146,10 @@ const description =
     <div id="pg-onama">
       <Header variant="inner" active="/o-nama" />
 
-      <section data-parallax="hero" style="position:relative; z-index:0; will-change:transform; background:#040404; padding:88px 32px 56px">
+      {/* Zaglavlje sedi nize nego na ostalim stranama: mapa desno je visok blok,
+          pa mu treba vazduha ispod trake. Telefon ovo ne oseti, responsive.css
+          ispod 640px svakoj sekciji spusta gornji razmak na 56px. */}
+      <section data-parallax="hero" style="position:relative; z-index:0; will-change:transform; background:#040404; padding:128px 32px 56px">
         <div class="hero-grid" style="max-width:1360px; margin:0 auto; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,auto); gap:56px; align-items:start">
           <div style="min-width:0">
             <p style="margin:0 0 20px; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45); letter-spacing:.2em"><a href="/" style="color:rgba(255,255,255,.45)">POČETNA</a> / <span style="color:#FECB0F">O NAMA</span></p>
