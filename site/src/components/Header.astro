@@ -1,5 +1,6 @@
 ---
 import { firma } from '../lib/firma';
+import Wordmark from './Wordmark.astro';
 
 interface Props {
   /** 'home' is the one-page nav with the script switch, 'inner' is the site-wide nav. */
@@ -59,13 +60,7 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
 <div style="position:sticky; top:0; z-index:60; background:#040404; border-bottom:1px solid rgba(254,203,15,.16)">
   <div class="hdr-bar" style="max-width:1360px; margin:0 auto; padding:0 32px; height:64px; display:flex; align-items:center; justify-content:space-between; gap:24px">
     <a href={logoHref} class="hdr-logo" style="display:flex; align-items:center; gap:11px; flex:none; color:#fff">
-      <img src="/logo-mark.png" alt="" width="43" height="28" style="display:block; width:43px; height:28px; flex:none" />
-      <span style="display:flex; flex-direction:column; gap:3px">
-        <!-- Black Ops One ima samo rez 400; 700 bi naterao pregledac na lazno
-             podebljanje, pa stoji 400. Plex ostaje kao rezerva dok se font ne ucita. -->
-        <span class="hdr-name" style="font:400 16.5px/1 'Black Ops One','IBM Plex Sans',system-ui,sans-serif; color:#fff; letter-spacing:-.01em">PREVING<span style="color:#FECB0F">PRO</span></span>
-        <span class="hdr-tag" style="font:600 8.5px/1 'IBM Plex Mono',monospace; letter-spacing:.15em; color:rgba(255,255,255,.52)">PREVENTIVNI INŽENJERING</span>
-      </span>
+      <Wordmark />
     </a>
     <nav class="hdr-nav" style={navStyle}>
       {nav.map((item) => (
@@ -289,10 +284,14 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
   @media (max-width: 360px) {
     .hdr-bar { padding: 0 12px !important; gap: 8px !important; }
     .hdr-logo { gap: 8px !important; }
-    .hdr-name { font-size: 13px !important; }
-    /* Cirilica je sira od latinice ("ПРЕВЕНТИВНИ ИНЖЕЊЕРИНГ"), pa potpis
+    /* Znak dolazi iz Wordmark.astro, pa ima svoj data-astro-cid: bez :global()
+       ovo pravilo ne bi pogodilo nista. Skupljanje stoji ovde a ne u samoj
+       komponenti, jer je to ogranicenje trake sa menijem, a ne osobina znaka:
+       u podnozju ima mesta i znak ostaje pun.
+       Cirilica je sira od latinice ("ПРЕВЕНТИВНИ ИНЖЕЊЕРИНГ"), pa potpis
        mora da ima rezervu da stane i u jednom i u drugom pismu. */
-    .hdr-tag { font-size: 7.5px !important; letter-spacing: .1em !important; }
+    .hdr-logo :global(.wm-name) { font-size: 13px !important; }
+    .hdr-logo :global(.wm-tag) { font-size: 7.5px !important; letter-spacing: .1em !important; }
     .hdr-right { gap: 4px !important; }
     .tape-btn { width: 40px; height: 40px; }
     .tape-ico { width: 34px; height: 34px; }

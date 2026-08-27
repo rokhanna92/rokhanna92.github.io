@@ -2,6 +2,7 @@
 import services from '../data/services.json';
 import { cena } from '../lib/cene';
 import { firma } from '../lib/firma';
+import Wordmark from './Wordmark.astro';
 
 interface Props {
   /** Prefix for the service anchors: '/usluge' from elsewhere, '' when already on that page. */
@@ -22,9 +23,8 @@ const updated = '21.08.2026.';
   <div style="max-width:1360px; margin:0 auto">
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr)); gap:40px; padding-bottom:48px">
       <div>
-        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px">
-          <img src="/logo-mark.png" alt="" width="37" height="24" style="display:block; width:37px; height:24px; flex:none" />
-          <span style="font:700 15px 'IBM Plex Sans',system-ui,sans-serif; color:#fff">PREVING<span style="color:#FECB0F">PRO</span></span>
+        <div style="display:flex; align-items:center; gap:11px; margin-bottom:16px">
+          <Wordmark />
         </div>
         <p style="margin:0; font:400 13px/1.7 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.5)">{firma.pravnoIme}<br />{firma.adresa}, {firma.grad}<br />{firma.sifraDelatnosti}</p>
       </div>
