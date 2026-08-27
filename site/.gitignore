@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # wrangler local state
 .wrangler/
+
+# design canvas mockups: radni materijal, ne ide u javni repo (2.7 MB)
+mockup/
