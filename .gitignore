@@ -5,5 +5,14 @@
 .DS_Store
 Thumbs.db
 
-# client pitch: PDFs, pricing, build scripts - must not reach the public repo
+# client pitch: PDFs, pricing, build scripts - must not reach the public repo.
+# Repo je javan (rokhanna92.github.io), pa i arhiva mora da bude pokrivena:
+# bez ovoga bi "git add -A" gurnuo 37 MB ponude na internet.
 presentation/
+presentation*.zip
+
+# lokalna podesavanja agenta, ne ticu se projekta
+.claude/
+
+# ostatak odbacene cloudflare procene
+.wrangler/
