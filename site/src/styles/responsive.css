@@ -70,3 +70,65 @@ video,
 table {
   max-width: 100%;
 }
+
+/* ---- traka za skrol: ista traka upozorenja kao dugme menija i favicon ----
+   Drška je kosa žuto-crna šara sa žutim obrubom, kanal je taman sa istom
+   žutom linijom kao donja ivica zaglavlja. Pod mišem obrub zasvetli, pri
+   prevlačenju drška postane puna žuta, da se oseti zahvat. Pravila su
+   globalna, pa isti izgled dobija i svaki budući okvir sa unutrašnjim
+   klizanjem, i vodoravno i uspravno. Čisto CSS, bez skripti.
+   Širina 16px: između Linux (15) i Windows (17) podrazumevane, da hvatanje
+   ne bude teže nego sa fabričkom trakom. */
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+  border-left: 1px solid rgba(254, 203, 15, 0.16);
+}
+::-webkit-scrollbar-track:horizontal {
+  border-left: 0;
+  border-top: 1px solid rgba(254, 203, 15, 0.16);
+}
+::-webkit-scrollbar-thumb {
+  background: repeating-linear-gradient(45deg, #fecb0f 0 6px, #0d0d0d 6px 12px);
+  /* Poluprovidan žut obrub crta granicu drške: bez njega se tamna pruga šare
+     (#0d0d0d) stopi sa kanalom (#0a0a0a) i ne vidi se gde drška počinje ni
+     koliko je duga. padding-box je tu nosiv: ne pušta šaru pod providan obrub. */
+  border: 1px solid rgba(254, 203, 15, 0.45);
+  background-clip: padding-box;
+  min-height: 40px;
+  min-width: 40px;
+}
+/* background skraćenica vraća background-clip na border-box, pa se
+   padding-box mora ponoviti u svakom stanju koje menja pozadinu. */
+::-webkit-scrollbar-thumb:hover {
+  background: repeating-linear-gradient(45deg, #ffdf6e 0 6px, #0d0d0d 6px 12px);
+  background-clip: padding-box;
+  border-color: #fecb0f;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #fecb0f;
+  background-clip: padding-box;
+  border-color: #fecb0f;
+}
+::-webkit-scrollbar-corner {
+  background: #0a0a0a;
+}
+
+/* Kad meni preko celog ekrana zaključa klizanje (body overflow:hidden), traka
+   bi nestala i cela strana bi skočila 16px udesno, sa dugmetom pod prstom.
+   Ovo drži žleb rezervisanim, pa ništa ne mrda. */
+html {
+  scrollbar-gutter: stable;
+}
+
+/* Firefox ne ume šaru na drški, ali ume dve boje. Blok mora da bude ograđen:
+   čim se scrollbar-color zada, Chrome baci sva ::-webkit-scrollbar pravila,
+   pa bi bez ograde gornja traka nestala baš u Chromeu. */
+@supports not selector(::-webkit-scrollbar) {
+  :root {
+    scrollbar-color: #fecb0f #0a0a0a;
+  }
+}
