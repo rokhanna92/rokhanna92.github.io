@@ -8,8 +8,10 @@
 //   - crtanje stoji dok je pozadina van ekrana, jer je sekcija visoka
 //   - postuje se prefers-reduced-motion: mreza se iscrta jednom, bez kretanja
 //   - odnos piksela je ogranicen na 2, isto kao u refinery-scene.js
-import { gsap } from 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/+esm';
-import { InertiaPlugin } from 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/InertiaPlugin.js/+esm';
+// gsap 3.13.0, kopija u public/vendor umesto tudjeg CDN-a.
+// Za nadogradnju vidi site/public/vendor/README.md.
+import { gsap } from '/vendor/gsap.esm.js';
+import { InertiaPlugin } from '/vendor/gsap-inertia.esm.js';
 
 gsap.registerPlugin(InertiaPlugin);
 

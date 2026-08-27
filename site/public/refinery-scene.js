@@ -1,4 +1,7 @@
-import * as THREE from 'https://unpkg.com/three@0.184.0/build/three.module.js';
+// three 0.184.0, sazet samostalan gradnja, kopija u public/vendor.
+// Ne ucitava se sa tudjeg CDN-a: strani izvor bi mogao da servira bilo koji
+// kod, a i ovako je upola lakse. Za nadogradnju vidi site/public/vendor/README.md.
+import * as THREE from '/vendor/three.esm.js';
 
 class RefineryScene extends HTMLElement {
   connectedCallback() {
