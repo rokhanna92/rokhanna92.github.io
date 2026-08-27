@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Seo from '../components/Seo.astro';
 import { firma } from '../lib/firma';
 import '../styles/responsive.css';
 
@@ -16,21 +17,9 @@ const title = 'Strana nije pronađena · Preving Pro';
 ---
 
 <!doctype html>
-<html lang="sr">
+<html lang="sr-Latn">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-    <meta name="robots" content="noindex" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=Black+Ops+One&display=swap"
-    />
+    <Seo title={title} noindex />
     <style is:global>
       html{scroll-behavior:smooth}
       body{margin:0;background:#040404;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#F2F1EC;-webkit-font-smoothing:antialiased;text-wrap:pretty}

@@ -1,0 +1,114 @@
+---
+// Jedno mesto za sve sto ide u <head> na svakoj strani: naslov, opis, kanonska
+// adresa, kartice za deljenje i podaci o firmi za pretragu. Pre ovoga je svaka
+// strana imala svoj blok, pa je izmena morala rucno na sest mesta.
+import { firma } from '../lib/firma';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Strukturirani podaci o firmi. Samo pocetna i kontakt, da se ne ponavlja. */
+  business?: boolean;
+  /** 404 ne sme u indeks pretrazivaca. */
+  noindex?: boolean;
+}
+
+const { title, description, business = false, noindex = false } = Astro.props;
+
+if (!Astro.site) {
+  throw new Error(
+    'Seo: astro.config.mjs mora imati "site", inace kanonske adrese i kartice za deljenje ispadaju relativne i ne rade.'
+  );
+}
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const slika = new URL('/og.png', Astro.site).href;
+
+// "21000 Novi Sad" -> schema.org trazi postanski broj odvojen od mesta.
+const gradDelovi = firma.grad.match(/^(\d{4,6})\s+(.+)$/);
+const postanskiBroj = gradDelovi?.[1] ?? '';
+const mesto = gradDelovi?.[2] ?? firma.grad;
+
+// Radno vreme je u firma.json proza ("pon-pet 08-16 · linija 24/7"), a pretraga
+// trazi brojeve. Citamo sate iz te proze; ako se tekst promeni tako da se ne
+// prepozna, radno vreme se izostavlja umesto da ostane pogresno.
+const sati = firma.radnoVreme.match(/(\d{1,2})\s*[–—-]\s*(\d{1,2})/);
+const radnoVremeLd = sati
+  ? [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: `${sati[1].padStart(2, '0')}:00`,
+        closes: `${sati[2].padStart(2, '0')}:00`,
+      },
+    ]
+  : [];
+
+const firmaLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': new URL('/#firma', Astro.site).href,
+  name: 'Preving Pro',
+  legalName: firma.pravnoIme,
+  url: new URL('/', Astro.site).href,
+  logo: new URL('/logo-mark.png', Astro.site).href,
+  image: slika,
+  description,
+  telephone: firma.telefonHref.replace(/^tel:/, ''),
+  email: firma.imejlovi,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: firma.adresa,
+    addressLocality: mesto,
+    ...(postanskiBroj ? { postalCode: postanskiBroj } : {}),
+    addressCountry: 'RS',
+  },
+  // Iz hero koordinata na pocetnoj: 45.29°N / 19.85°E.
+  geo: { '@type': 'GeoCoordinates', latitude: 45.29, longitude: 19.85 },
+  ...(radnoVremeLd.length ? { openingHoursSpecification: radnoVremeLd } : {}),
+  areaServed: { '@type': 'Country', name: 'Srbija' },
+  knowsLanguage: ['sr'],
+};
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" href="/favicon.ico" />
+<meta name="generator" content={Astro.generator} />
+
+<title>{title}</title>
+{description && <meta name="description" content={description} />}
+{/* 404 se prikazuje na bilo kojoj nepostojecoj adresi, pa kanonska adresa
+    "/404/" ne bi bila tacna ni za jednu od njih. Zato je nema. */}
+{!noindex && <link rel="canonical" href={canonical} />}
+{noindex && <meta name="robots" content="noindex, follow" />}
+
+{/* Boja okvira pregledaca na telefonu, da se ne belasa oko tamne strane. */}
+<meta name="theme-color" content="#040404" />
+
+{/* Deljenje na Vajberu, Vocapu, Fejsbuku i Linkedinu. Bez ovoga se povuce
+    nasumican tekst sa strane i nikakva slika. */}
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Preving Pro" />
+<meta property="og:locale" content="sr_RS" />
+<meta property="og:title" content={title} />
+{description && <meta property="og:description" content={description} />}
+{!noindex && <meta property="og:url" content={canonical} />}
+<meta property="og:image" content={slika} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Preving Pro - bezbednost i zdravlje na radu i zaštita od požara" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+{description && <meta name="twitter:description" content={description} />}
+<meta name="twitter:image" content={slika} />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=Black+Ops+One&display=swap"
+/>
+
+{business && <script type="application/ld+json" set:html={JSON.stringify(firmaLd)} is:inline />}
