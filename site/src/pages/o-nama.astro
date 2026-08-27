@@ -146,13 +146,13 @@ const description =
     <div id="pg-onama">
       <Header variant="inner" active="/o-nama" />
 
-      {/* Zaglavlje sedi nize nego na ostalim stranama: mapa desno je visok blok,
-          pa mu treba vazduha ispod trake. Telefon ovo ne oseti, responsive.css
-          ispod 640px svakoj sekciji spusta gornji razmak na 56px. */}
-      <section data-parallax="hero" style="position:relative; z-index:0; will-change:transform; background:#040404; padding:128px 32px 56px">
-        <div class="hero-grid" style="max-width:1360px; margin:0 auto; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,auto); gap:56px; align-items:start">
+      <section data-parallax="hero" style="position:relative; z-index:0; will-change:transform; background:#040404; padding:88px 32px 56px">
+        {/* Mrvica ide u svoj red preko obe kolone. Zato mapa desno pocinje tacno
+            u visini naslova, a ne uz mrvicu: bez ovoga panel visi iznad h1 i
+            zaglavlje izgleda nakrivo. Red-razmak je 0, razmak drzi margina mrvice. */}
+        <div class="hero-grid" style="max-width:1360px; margin:0 auto; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,auto); gap:0 56px; align-items:start">
+          <p class="hero-crumb" style="grid-column:1 / -1; margin:0 0 20px; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45); letter-spacing:.2em"><a href="/" style="color:rgba(255,255,255,.45)">POČETNA</a> / <span style="color:#FECB0F">O NAMA</span></p>
           <div style="min-width:0">
-            <p style="margin:0 0 20px; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45); letter-spacing:.2em"><a href="/" style="color:rgba(255,255,255,.45)">POČETNA</a> / <span style="color:#FECB0F">O NAMA</span></p>
             <h1 style="margin:0; font:700 clamp(38px,4.6vw,68px)/1 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.035em; color:#fff; max-width:16ch">Dva čoveka. Deset godina rafinerija.</h1>
             <p style="margin:22px 0 0; font:400 17px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.68); max-width:58ch">Preving Pro je agencija za preventivni inženjering i tehničko savetovanje iz Novog Sada. Iza imena stoje dvoje ljudi i deset godina rada na projektima gde se bezbednost ne dokazuje pečatom, nego praksom.</p>
             <div style="display:flex; flex-wrap:wrap; gap:0; margin-top:40px; border-top:1px solid rgba(255,255,255,.14); max-width:760px">
