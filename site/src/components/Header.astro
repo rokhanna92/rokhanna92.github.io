@@ -60,7 +60,10 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
   <div class="hdr-bar" style="max-width:1360px; margin:0 auto; padding:0 32px; height:64px; display:flex; align-items:center; justify-content:space-between; gap:24px">
     <a href={logoHref} class="hdr-logo" style="display:flex; align-items:center; gap:11px; flex:none; color:#fff">
       <img src="/logo-mark.png" alt="" width="43" height="28" style="display:block; width:43px; height:28px; flex:none" />
-      <span style="font:700 16.5px 'IBM Plex Sans',system-ui,sans-serif; color:#fff; letter-spacing:-.01em">PREVING<span style="color:#FECB0F">PRO</span></span>
+      <span style="display:flex; flex-direction:column; gap:3px">
+        <span class="hdr-name" style="font:700 16.5px/1 'IBM Plex Sans',system-ui,sans-serif; color:#fff; letter-spacing:-.01em">PREVING<span style="color:#FECB0F">PRO</span></span>
+        <span class="hdr-tag" style="font:600 8.5px/1 'IBM Plex Mono',monospace; letter-spacing:.15em; color:rgba(255,255,255,.52)">PREVENTIVNI INŽENJERING</span>
+      </span>
     </a>
     <nav class="hdr-nav" style={navStyle}>
       {nav.map((item) => (
@@ -74,69 +77,34 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
         <button type="button" data-script-btn="lat" aria-pressed="true" style="all:unset; cursor:pointer; padding:12px 2px; color:#FECB0F; text-decoration:underline; text-underline-offset:4px">LAT</button>
       </span>
       <a href={ctaHref} class="hdr-cta" style="background:#FECB0F; color:#070707; font:700 13px 'IBM Plex Sans',system-ui,sans-serif; padding:11px 18px; flex:none">Zatražite ponudu</a>
-      <button type="button" class="cone-btn" id="hdr-cone" aria-expanded="false" aria-controls="hdr-menu" aria-label="Meni">
-        <svg class="cone" viewBox="0 0 48 48" aria-hidden="true">
+      <button type="button" class="tape-btn" id="hdr-tape" aria-expanded="false" aria-controls="hdr-menu" aria-label="Meni">
+        <svg class="tape-ico" viewBox="0 0 48 48" aria-hidden="true">
           <defs>
-            <linearGradient id="cone-gy" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stop-color="#9a7206"></stop><stop offset=".28" stop-color="#e0ab0b"></stop>
-              <stop offset=".5" stop-color="#FECB0F"></stop><stop offset=".56" stop-color="#ffdf6e"></stop>
-              <stop offset=".66" stop-color="#FECB0F"></stop><stop offset=".85" stop-color="#cf9d0a"></stop>
-              <stop offset="1" stop-color="#8a6605"></stop>
-            </linearGradient>
-            <linearGradient id="cone-gw" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stop-color="#b9b9b9"></stop><stop offset=".3" stop-color="#eeeeee"></stop>
-              <stop offset=".5" stop-color="#ffffff"></stop><stop offset=".7" stop-color="#e6e6e6"></stop>
-              <stop offset="1" stop-color="#adadad"></stop>
-            </linearGradient>
-            <linearGradient id="cone-gp" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#f6c60f"></stop><stop offset="1" stop-color="#bd930a"></stop>
-            </linearGradient>
-            <linearGradient id="cone-gh" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#ffe27a"></stop><stop offset=".45" stop-color="#FECB0F"></stop>
-              <stop offset="1" stop-color="#d9a90c"></stop>
-            </linearGradient>
-            <linearGradient id="cone-gbr" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#e7b70d"></stop><stop offset="1" stop-color="#a07806"></stop>
-            </linearGradient>
+            <!-- Kosa zuto-crna sara trake upozorenja; korak 12 na 45 stepeni. -->
+            <pattern id="tape-hz" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <rect width="12" height="12" fill="#FECB0F"></rect>
+              <rect width="6" height="12" fill="#0d0d0d"></rect>
+            </pattern>
           </defs>
-          <!-- postolje u perspektivi: debljina pa gornja ploha -->
-          <g class="plate">
-            <rect x="11" y="23.5" width="26" height="26" rx="7" fill="#6e5203" transform="translate(24 39) scale(1 .48) rotate(45) translate(-24 -36.5)"></rect>
-            <rect x="11" y="23.5" width="26" height="26" rx="7" fill="url(#cone-gp)" transform="translate(24 36.7) scale(1 .48) rotate(45) translate(-24 -36.5)"></rect>
-          </g>
-          <ellipse class="cone-shadow" cx="24" cy="36" rx="11.5" ry="2.7" fill="#000" opacity=".28"></ellipse>
-          <!-- telo kupe: zaobljen vrh, elipsasto dno, beli pojas prati obim -->
-          <g class="cone-core">
-            <path d="M14 35 C15 26.5 17.6 15.5 19.8 10.8 Q24 7.6 28.2 10.8 C30.4 15.5 33 26.5 34 35 A10 3 0 0 1 14 35 Z" fill="url(#cone-gy)"></path>
-            <path d="M16.5 28.2 Q24 30.6 31.5 28.2 L30.4 20.8 Q24 22.8 17.6 20.8 Z" fill="url(#cone-gw)"></path>
-          </g>
-          <!-- slem: obod, kupola, greben, otvori -->
-          <g class="hat">
-            <g class="hat-in">
-              <ellipse cx="24" cy="14.3" rx="11" ry="3.4" fill="#8a6605"></ellipse>
-              <ellipse cx="24" cy="13.5" rx="11" ry="3.4" fill="url(#cone-gbr)"></ellipse>
-              <path d="M15.6 13 C15.6 5.9 19.1 2.6 24 2.6 C28.9 2.6 32.4 5.9 32.4 13 Q24 15.4 15.6 13 Z" fill="url(#cone-gh)"></path>
-              <path d="M21.6 3 Q24 2.1 26.4 3 L25.9 6.3 Q24 5.7 22.1 6.3 Z" fill="#ffe9a0" opacity=".85"></path>
-              <g fill="#8a6605" opacity=".8" transform="rotate(-14 29 5)">
-                <rect x="27" y="4.2" width="1.1" height="2" rx=".5"></rect>
-                <rect x="28.8" y="4.4" width="1.1" height="2" rx=".5"></rect>
-                <rect x="30.6" y="4.8" width="1.1" height="2" rx=".5"></rect>
-              </g>
-            </g>
-          </g>
+          <!-- Tri odsecka trake: zatvoreno su hamburger, otvoreno se ukrste u X. -->
+          <rect class="tape-bar tape-bar1" x="6" y="12" width="36" height="5.5" rx="1" fill="url(#tape-hz)"></rect>
+          <rect class="tape-bar tape-bar2" x="6" y="21.25" width="36" height="5.5" rx="1" fill="url(#tape-hz)"></rect>
+          <rect class="tape-bar tape-bar3" x="6" y="30.5" width="36" height="5.5" rx="1" fill="url(#tape-hz)"></rect>
         </svg>
       </button>
     </div>
   </div>
 </div>
 
-<nav class="cone-menu" id="hdr-menu" aria-label="Glavna navigacija">
-  <div class="cone-menu-grid">
+<nav class="tape-menu" id="hdr-menu" aria-label="Glavna navigacija">
+  <i class="tape-seal tape-seal-top" aria-hidden="true"></i>
+  <div class="tape-menu-grid">
     {nav.map((item) => (
-      <a href={item.href}><span>{item.n}</span>{item.label}</a>
+      <a href={item.href}><span>{item.n}</span>{item.label}<i class="tape-line" aria-hidden="true"></i></a>
     ))}
   </div>
-  <div class="cone-menu-foot">
+  <a href={ctaHref} class="tape-menu-cta">Zatražite ponudu</a>
+  <div class="tape-menu-foot">
     <span data-no-cyr style="display:flex; align-items:center; gap:5px; font:500 12px 'IBM Plex Mono',monospace">
       <button type="button" data-script-btn="cir" aria-pressed="false" style="all:unset; cursor:pointer; padding:10px 2px; color:rgba(255,255,255,.5)">ЋИР</button>
       <span style="color:rgba(255,255,255,.3)">/</span>
@@ -144,6 +112,7 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
     </span>
     <a href={firma.telefonHref}>{firma.telefon}</a>
   </div>
+  <i class="tape-seal tape-seal-bot" aria-hidden="true"></i>
 </nav>
 
 <style>
@@ -157,8 +126,8 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
      nestane na zutoj traci. Ostaje crn i podvucen na svim stranama. */
   .hdr-banner-a:hover { color: #070707 !important; text-decoration: underline !important; }
 
-  /* ---- kupa: dugme koje zamenjuje navigaciju na tabletu i telefonu ---- */
-  .cone-btn {
+  /* ---- traka upozorenja: dugme koje zamenjuje navigaciju na tabletu i telefonu ---- */
+  .tape-btn {
     all: unset;
     width: 46px;
     height: 46px;
@@ -168,77 +137,112 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
     flex: none;
     -webkit-tap-highlight-color: transparent;
   }
-  .cone-btn:focus-visible { outline: 2px solid #FECB0F; outline-offset: 2px; }
-  .cone { width: 38px; height: 38px; display: block; overflow: visible; }
+  .tape-btn:focus-visible { outline: 2px solid #FECB0F; outline-offset: 2px; }
+  .tape-ico { width: 38px; height: 38px; display: block; overflow: visible; }
 
-  /* Slem odleti sa kupe kad se meni otvori i lebdi dok je otvoren;
-     na zatvaranju se vrati. Kupa blago odahne kad tezina ode. */
-  .hat {
+  /* Zatvoreno: tri odsecka trake, zalepljena rukom, svaki pod svojim uglom.
+     Otvoreno: gornji i donji se ukrste u X, srednji se smota na rolnu. */
+  .tape-bar {
     transform-box: fill-box;
     transform-origin: center;
-    transition: transform .55s cubic-bezier(.34, 1.45, .45, 1);
+    transition: transform .42s cubic-bezier(.34, 1.3, .5, 1);
   }
-  .cone-btn[aria-expanded="true"] .hat { transform: translate(-2px, -7px) rotate(-16deg); }
-  .hat-in {
-    transform-box: fill-box;
-    transform-origin: center;
-    transform: rotate(-6deg);
-  }
-  .cone-btn[aria-expanded="true"] .hat-in { animation: hatFloat 2.2s ease-in-out .55s infinite alternate; }
-  @keyframes hatFloat {
-    from { transform: rotate(-6deg) translateY(0); }
-    to { transform: rotate(-6deg) translateY(-1.2px); }
-  }
-  .cone-core {
-    transform-box: fill-box;
-    transform-origin: 50% 100%;
-    transition: transform .55s cubic-bezier(.34, 1.45, .45, 1);
-  }
-  .cone-btn[aria-expanded="true"] .cone-core { transform: scaleY(1.04); }
-  .cone-shadow { transition: opacity .55s ease; }
-  .cone-btn[aria-expanded="true"] .cone-shadow { opacity: .2; }
+  .tape-bar1 { transform: rotate(-2.2deg); }
+  .tape-bar2 { transform: rotate(1.4deg); }
+  .tape-bar3 { transform: rotate(-1.1deg); }
+  .tape-btn[aria-expanded="true"] .tape-bar1 { transform: translateY(9.25px) rotate(45deg); }
+  .tape-btn[aria-expanded="true"] .tape-bar2 { transform: scaleX(0); }
+  .tape-btn[aria-expanded="true"] .tape-bar3 { transform: translateY(-9.25px) rotate(-45deg); }
 
-  /* ---- meni preko celog ekrana, otvara se kružno iz kupe ---- */
-  .cone-menu {
+  /* ---- meni preko celog ekrana: traka se odmotava red po red ---- */
+  .tape-menu {
+    --tape: repeating-linear-gradient(45deg, #FECB0F 0 9px, #0d0d0d 9px 18px);
     position: fixed;
     inset: 0;
-    z-index: 59; /* ispod trake (60), pa kupa ostaje vidljiva i pritisliva */
+    z-index: 59; /* ispod trake (60), pa dugme ostaje vidljivo i pritisljivo */
     background: rgba(4, 4, 4, .97);
     -webkit-backdrop-filter: blur(6px);
     backdrop-filter: blur(6px);
     display: none;
     flex-direction: column;
     justify-content: center;
-    padding: 110px 24px 40px;
+    padding: 96px 24px 40px;
     box-sizing: border-box;
-    clip-path: circle(0% at calc(100% - 39px) 41px);
-    transition: clip-path .52s cubic-bezier(.4, 0, .2, 1);
+    opacity: 0;
     pointer-events: none;
+    transition: opacity .22s ease;
   }
-  .cone-menu.open { clip-path: circle(145% at calc(100% - 39px) 41px); pointer-events: auto; }
-  .cone-menu-grid { display: grid; gap: 2px; max-width: 520px; width: 100%; margin: 0 auto; }
-  .cone-menu-grid a {
+  .tape-menu.open { opacity: 1; pointer-events: auto; }
+
+  /* Traka se odmotava zdesna, odakle stoji dugme. Sirina raste umesto
+     scaleX, da se kosa sara ne razvuce dok putuje. */
+  .tape-seal {
+    position: absolute;
+    right: -6%;
+    width: 0;
+    height: 14px;
+    background-image: var(--tape);
+    background-position: right center;
+    transition: width .44s cubic-bezier(.22, .61, .36, 1);
+  }
+  .tape-seal-top { top: 72px; transform: rotate(-1.6deg); }
+  .tape-seal-bot { bottom: 52px; transform: rotate(1.1deg); }
+  .tape-menu.open .tape-seal { width: 112%; }
+  .tape-menu.open .tape-seal-top { transition-delay: .05s; }
+  .tape-menu.open .tape-seal-bot { transition-delay: .12s; }
+
+  .tape-menu-grid { display: grid; gap: 2px; max-width: 520px; width: 100%; margin: 0 auto; }
+  .tape-menu-grid a {
+    position: relative;
     display: flex;
     align-items: baseline;
     gap: 14px;
-    padding: 14px 4px;
-    border-bottom: 1px solid rgba(255, 255, 255, .1);
+    padding: 14px 4px 16px;
     font: 800 clamp(22px, 6.4vw, 32px)/1.05 'IBM Plex Sans', system-ui, sans-serif;
     letter-spacing: -.03em;
     color: #fff;
-    opacity: 0;
-    transform: translateY(14px);
-    transition: opacity .4s ease, transform .4s ease;
   }
-  .cone-menu.open .cone-menu-grid a { opacity: 1; transform: none; }
-  .cone-menu.open .cone-menu-grid a:nth-child(1) { transition-delay: .16s; }
-  .cone-menu.open .cone-menu-grid a:nth-child(2) { transition-delay: .21s; }
-  .cone-menu.open .cone-menu-grid a:nth-child(3) { transition-delay: .26s; }
-  .cone-menu.open .cone-menu-grid a:nth-child(4) { transition-delay: .31s; }
-  .cone-menu.open .cone-menu-grid a:nth-child(5) { transition-delay: .36s; }
-  .cone-menu.open .cone-menu-grid a:nth-child(6) { transition-delay: .41s; }
-  .cone-menu-grid a span { font: 700 12px 'IBM Plex Mono', monospace; color: #FECB0F; flex: none; }
-  .cone-menu-foot {
+  .tape-menu-grid a span { font: 700 12px 'IBM Plex Mono', monospace; color: #FECB0F; flex: none; }
+  /* Naslov se pojavi tek kad traka prodje ispod njega. */
+  .tape-menu-grid a > span, .tape-menu-grid a { transition: opacity .3s ease, transform .3s ease; }
+  .tape-menu-grid a { opacity: 0; transform: translateY(10px); }
+  .tape-menu.open .tape-menu-grid a { opacity: 1; transform: none; }
+  /* Odmotana traka stoji umesto crte ispod stavke. */
+  .tape-line {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    height: 7px;
+    background-image: var(--tape);
+    background-position: right center;
+    transition: width .32s cubic-bezier(.22, .61, .36, 1);
+  }
+  .tape-menu.open .tape-line { width: 100%; }
+  .tape-menu.open .tape-menu-grid a:nth-child(1), .tape-menu.open .tape-menu-grid a:nth-child(1) .tape-line { transition-delay: .16s; }
+  .tape-menu.open .tape-menu-grid a:nth-child(2), .tape-menu.open .tape-menu-grid a:nth-child(2) .tape-line { transition-delay: .21s; }
+  .tape-menu.open .tape-menu-grid a:nth-child(3), .tape-menu.open .tape-menu-grid a:nth-child(3) .tape-line { transition-delay: .26s; }
+  .tape-menu.open .tape-menu-grid a:nth-child(4), .tape-menu.open .tape-menu-grid a:nth-child(4) .tape-line { transition-delay: .31s; }
+  .tape-menu.open .tape-menu-grid a:nth-child(5), .tape-menu.open .tape-menu-grid a:nth-child(5) .tape-line { transition-delay: .36s; }
+  .tape-menu.open .tape-menu-grid a:nth-child(6), .tape-menu.open .tape-menu-grid a:nth-child(6) .tape-line { transition-delay: .41s; }
+
+  /* Dugme za ponudu zivi u meniju samo tamo gde je sklonjeno iz trake. */
+  .tape-menu-cta {
+    display: none;
+    max-width: 520px;
+    width: 100%;
+    margin: 24px auto 0;
+    box-sizing: border-box;
+    padding: 14px 18px;
+    background: #FECB0F;
+    color: #070707;
+    text-align: center;
+    font: 700 15px 'IBM Plex Sans', system-ui, sans-serif;
+    opacity: 0;
+    transition: opacity .34s ease;
+  }
+  .tape-menu.open .tape-menu-cta { opacity: 1; transition-delay: .46s; }
+  .tape-menu-foot {
     max-width: 520px;
     width: 100%;
     margin: 26px auto 0;
@@ -250,12 +254,12 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
     font: 600 12px 'IBM Plex Mono', monospace;
     color: rgba(255, 255, 255, .5);
     opacity: 0;
-    transition: opacity .4s ease .44s;
+    transition: opacity .34s ease;
   }
-  .cone-menu.open .cone-menu-foot { opacity: 1; }
-  .cone-menu-foot a { font: 700 15px 'IBM Plex Mono', monospace; color: #FECB0F; }
+  .tape-menu.open .tape-menu-foot { opacity: 1; transition-delay: .5s; }
+  .tape-menu-foot a { font: 700 15px 'IBM Plex Mono', monospace; color: #FECB0F; }
 
-  /* Tablet i telefon: navigacija u traci nestaje, kupa je preuzima.
+  /* Tablet i telefon: navigacija u traci nestaje, dugme je preuzima.
      Desktop iznad 900px ostaje netaknut. */
   @media (max-width: 900px) {
     .hdr-bar {
@@ -266,32 +270,34 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
     .hdr-nav { display: none !important; }
     .hdr-scripts { display: none !important; } /* prekidač živi u meniju */
     .hdr-right { gap: 8px !important; }
-    .cone-btn { display: grid; }
-    .cone-menu { display: flex; }
+    .tape-btn { display: grid; }
+    .tape-menu { display: flex; }
     /* Traka sa rokom ide samo na desktop. Na telefonu i tabletu zauzima
        pola prvog ekrana, a isti rok stoji nize u sadrzaju strane. */
     .hdr-banner { display: none !important; }
   }
 
-  @media (max-width: 460px) {
-    .hdr-cta { padding: 11px 12px !important; font-size: 12px !important; }
+  /* Telefon: dugme za ponudu iz trake stiska logo i meni, pa se seli u meni. */
+  @media (max-width: 640px) {
+    .hdr-cta { display: none !important; }
+    .tape-menu-cta { display: block; }
   }
 
-  /* Najuži telefoni: logo, dugme i kupa moraju stati u 320px. */
+  /* Najuži telefoni: logo i dugme moraju stati u 320px. */
   @media (max-width: 360px) {
     .hdr-bar { padding: 0 12px !important; gap: 8px !important; }
     .hdr-logo { gap: 8px !important; }
-    /* Cirilica je sira od latinice ("Затражите понуду" +7px), pa ovaj red
+    .hdr-name { font-size: 13px !important; }
+    /* Cirilica je sira od latinice ("ПРЕВЕНТИВНИ ИНЖЕЊЕРИНГ"), pa potpis
        mora da ima rezervu da stane i u jednom i u drugom pismu. */
-    .hdr-logo > span:last-child { font-size: 13px !important; }
+    .hdr-tag { font-size: 7.5px !important; letter-spacing: .1em !important; }
     .hdr-right { gap: 4px !important; }
-    .hdr-cta { padding: 10px 6px !important; font-size: 10.5px !important; }
-    .cone-btn { width: 40px; height: 40px; }
-    .cone { width: 34px; height: 34px; }
+    .tape-btn { width: 40px; height: 40px; }
+    .tape-ico { width: 34px; height: 34px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hat, .hat-in, .cone-core, .cone-shadow, .cone-menu, .cone-menu-grid a, .cone-menu-foot { transition: none !important; animation: none !important; }
+    .tape-bar, .tape-menu, .tape-seal, .tape-line, .tape-menu-grid a, .tape-menu-cta, .tape-menu-foot { transition: none !important; animation: none !important; }
   }
 </style>
 
@@ -423,7 +429,7 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
   });
   applyScript();
 
-  const btn = document.getElementById('hdr-cone');
+  const btn = document.getElementById('hdr-tape');
   const menu = document.getElementById('hdr-menu');
 
   if (btn && menu) {
