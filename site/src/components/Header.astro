@@ -61,7 +61,9 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
     <a href={logoHref} class="hdr-logo" style="display:flex; align-items:center; gap:11px; flex:none; color:#fff">
       <img src="/logo-mark.png" alt="" width="43" height="28" style="display:block; width:43px; height:28px; flex:none" />
       <span style="display:flex; flex-direction:column; gap:3px">
-        <span class="hdr-name" style="font:700 16.5px/1 'IBM Plex Sans',system-ui,sans-serif; color:#fff; letter-spacing:-.01em">PREVING<span style="color:#FECB0F">PRO</span></span>
+        <!-- Black Ops One ima samo rez 400; 700 bi naterao pregledac na lazno
+             podebljanje, pa stoji 400. Plex ostaje kao rezerva dok se font ne ucita. -->
+        <span class="hdr-name" style="font:400 16.5px/1 'Black Ops One','IBM Plex Sans',system-ui,sans-serif; color:#fff; letter-spacing:-.01em">PREVING<span style="color:#FECB0F">PRO</span></span>
         <span class="hdr-tag" style="font:600 8.5px/1 'IBM Plex Mono',monospace; letter-spacing:.15em; color:rgba(255,255,255,.52)">PREVENTIVNI INŽENJERING</span>
       </span>
     </a>
