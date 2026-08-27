@@ -73,6 +73,18 @@ const firmaLd = {
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+{/* GitHub Pages ne dozvoljava svoje HTTP zaglavlje, pa pravila idu ovako.
+    Vazi za sve sto dolazi ispod, zato stoji na vrhu <head>.
+    'unsafe-inline' je nuzan jer boje i razmaci stoje u style atributima, a
+    skripte su ubacene u stranu. I ovako, strani domen ne moze da ubaci skriptu,
+    ne moze <object>, ne moze da se podmetne <base> niti da se posalje forma.
+    frame-ancestors se ne moze zadati preko <meta>, za to treba pravi zaglavlje. */}
+<meta
+  http-equiv="Content-Security-Policy"
+  content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests"
+/>
+<meta name="referrer" content="strict-origin-when-cross-origin" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="icon" href="/favicon.ico" />
 <meta name="generator" content={Astro.generator} />
