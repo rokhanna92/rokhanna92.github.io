@@ -6,7 +6,52 @@ import onama from '../data/o-nama.json';
 import { firma } from '../lib/firma';
 import '../styles/responsive.css';
 
-const { stats, timeline, tim, teren } = onama;
+const { stats, timeline, tim, teren, mapa } = onama;
+
+// ---- Mapa iskustva: gde su te godine odradjene, i gde se sada slecu ----
+// Projekcija je ekvidistantna, sa ispravkom po kosinusu srednje sirine. Bez
+// te ispravke bi na 48 stepeni severno razmak po duzini bio razvucen skoro
+// duplo, pa bi Srednja Evropa izgledala siroko i pogresno.
+const svePozicije = [...mapa.tacke, mapa.cilj];
+const lonMin = Math.min(...svePozicije.map((t) => t.lon));
+const lonMax = Math.max(...svePozicije.map((t) => t.lon));
+const latMin = Math.min(...svePozicije.map((t) => t.lat));
+const latMax = Math.max(...svePozicije.map((t) => t.lat));
+const kosSirine = Math.cos((((latMin + latMax) / 2) * Math.PI) / 180);
+
+// Crtez: samo polje sa tackama i malo vazduha. Imena ne stoje na mapi nego u
+// legendi pored: tri lokacije oko 48. paralele su medjusobno na svega devet
+// piksela, pa bi im se natpisi preklopili i mapa bi bila necitljiva.
+const POLJE_H = 260;
+const POLJE_W = Math.round(POLJE_H * (((lonMax - lonMin) * kosSirine) / (latMax - latMin)));
+const PAD = 20;
+const PAD_GORE = 26; // mesto za broj iznad prve tacke
+const VB_W = POLJE_W + PAD * 2;
+const VB_H = POLJE_H + PAD_GORE + PAD;
+
+// Uvlacenje: krajnje tacke (Unipetrol gore levo, Novi Sad dole desno) inace
+// sednu tacno na okvir polja i znak im se preseca sa linijom okvira.
+const UVUCI = 0.08;
+const naCrtez = (t: { lon: number; lat: number }) => ({
+  x: PAD + POLJE_W * (UVUCI + ((t.lon - lonMin) / (lonMax - lonMin)) * (1 - 2 * UVUCI)),
+  y: PAD_GORE + POLJE_H * (UVUCI + ((latMax - t.lat) / (latMax - latMin)) * (1 - 2 * UVUCI)),
+});
+
+const ciljXY = naCrtez(mapa.cilj);
+const tackeXY = mapa.tacke.map((t, i) => ({
+  ...t,
+  ...naCrtez(t),
+  broj: String(i + 1).padStart(2, '0'),
+  kasnjenje: 0.25 + i * 0.12,
+}));
+const ciljBroj = String(mapa.tacke.length + 1).padStart(2, '0');
+const kasnjenjeCilja = (0.25 + (mapa.tacke.length - 1) * 0.12 + 0.55).toFixed(2);
+
+// Celi stepeni unutar okvira: mreza koja crtez cini kartom, a ne ukrasom.
+const mrezaLon = [];
+for (let d = Math.ceil(lonMin); d <= Math.floor(lonMax); d++) mrezaLon.push(naCrtez({ lon: d, lat: latMax }).x);
+const mrezaLat = [];
+for (let d = Math.ceil(latMin); d <= Math.floor(latMax); d++) mrezaLat.push(naCrtez({ lon: lonMin, lat: d }).y);
 
 const title = 'O nama · Preving Pro';
 const description =
@@ -37,6 +82,57 @@ const description =
       .btn-dark:hover{background:#1c1c1c !important;color:#FECB0F !important}
       .btn-outline:hover{background:#070707 !important;color:#FECB0F !important}
 
+      /* ---- Mapa iskustva u zaglavlju ---- */
+      .mapa{width:clamp(380px,38vw,520px);border:1px solid rgba(254,203,15,.22);background:#070707}
+      .mapa-telo{display:flex;align-items:stretch;gap:4px;padding:14px 16px}
+      .mapa-svg{flex:0 0 auto;width:50%;max-width:236px}
+      /* Imena stoje ovde, a ne na mapi: tri lokacije oko 48. paralele su
+         medjusobno na svega devet piksela, pa bi se natpisi preklopili. */
+      .mapa-legenda{flex:1 1 auto;min-width:0;list-style:none;margin:0;padding:0 0 0 14px;
+        display:flex;flex-direction:column;justify-content:center;gap:2px;
+        border-left:1px solid rgba(255,255,255,.09)}
+      .mapa-legenda li{display:grid;grid-template-columns:auto 1fr;column-gap:9px;align-items:baseline;
+        padding:5px 0;opacity:0;animation:mapaTiho .45s ease var(--k,0s) forwards}
+      .mapa-legenda i{grid-row:span 2;font:600 10px 'IBM Plex Mono',monospace;font-style:normal;
+        color:rgba(255,255,255,.35);letter-spacing:.06em}
+      .mapa-legenda b{font:700 12px 'IBM Plex Mono',monospace;color:#fff;letter-spacing:.04em;
+        overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+      .mapa-legenda span{font:400 9.5px 'IBM Plex Mono',monospace;color:rgba(255,255,255,.42);letter-spacing:.1em}
+      .mapa-legenda-cilj{margin-top:4px;border-top:1px dotted rgba(255,255,255,.16);padding-top:8px !important}
+      .mapa-legenda-cilj i,.mapa-legenda-cilj b{color:#FECB0F}
+      .mapa-head,.mapa-foot{display:flex;justify-content:space-between;align-items:center;gap:14px;
+        padding:10px 14px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.18em;color:rgba(255,255,255,.45)}
+      .mapa-head{border-bottom:1px solid rgba(254,203,15,.22)}
+      .mapa-head b{color:#FECB0F;font-weight:600}
+      .mapa-foot{border-top:1px solid rgba(254,203,15,.22);letter-spacing:.1em}
+      .mapa-foot b{color:#FECB0F;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+      /* Mreža prva, tiho. */
+      .mapa-mreza{opacity:0;animation:mapaTiho .7s ease .1s forwards}
+      /* Svaka linija se iscrtava od svog gradilišta ka Novom Sadu. pathLength="1"
+         stoji kao atribut na <line> (u CSS-u ne bi radio) i svodi dužinu na 1,
+         pa isti dasharray daje isto trajanje za linije različite dužine. */
+      .mapa-linije line{stroke-dasharray:1;stroke-dashoffset:1;opacity:.55;
+        animation:mapaCrta .9s cubic-bezier(.4,0,.2,1) var(--k,0s) forwards}
+      /* Znak i natpis stižu tačno kad linija krene iz njih. */
+      .mapa-tacka{opacity:0;animation:mapaTiho .45s ease var(--k,0s) forwards}
+      .mapa-cilj{opacity:0;animation:mapaTiho .5s ease var(--k,0s) forwards}
+      .mapa-puls{transform-origin:center;transform-box:fill-box;
+        animation:mapaPuls 2.6s ease-out var(--k,0s) infinite}
+      @keyframes mapaTiho{to{opacity:1}}
+      @keyframes mapaCrta{to{stroke-dashoffset:0}}
+      @keyframes mapaPuls{0%{transform:scale(.55);opacity:.9}70%{transform:scale(1.5);opacity:0}100%{transform:scale(1.5);opacity:0}}
+
+      /* Zaglavlje se lomi u jednu kolonu čim mapa počne da steže tekst. */
+      @media (max-width:1000px){
+        .hero-grid{grid-template-columns:minmax(0,1fr) !important;gap:44px !important}
+        .mapa{width:100%;max-width:460px}
+      }
+      @media (prefers-reduced-motion:reduce){
+        .mapa-mreza,.mapa-linije line,.mapa-tacka,.mapa-cilj,.mapa-legenda li{animation:none;opacity:1}
+        .mapa-linije line{stroke-dashoffset:0}
+        .mapa-puls{animation:none}
+      }
+
       /* Mesto za fotografiju. Zamenite <img> tagom kad slika stigne. */
       .img-slot{display:block;position:relative;font:13px/1.3 'IBM Plex Sans',system-ui,sans-serif;width:100%;height:100%;aspect-ratio:3/2}
       .img-slot-frame{position:absolute;inset:0;overflow:hidden;background:rgba(127,127,127,.08)}
@@ -51,15 +147,75 @@ const description =
       <Header variant="inner" active="/o-nama" />
 
       <section data-parallax="hero" style="position:relative; z-index:0; will-change:transform; background:#040404; padding:88px 32px 56px">
-        <div style="max-width:1360px; margin:0 auto">
-          <p style="margin:0 0 20px; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45); letter-spacing:.2em"><a href="/" style="color:rgba(255,255,255,.45)">POČETNA</a> / <span style="color:#FECB0F">O NAMA</span></p>
-          <h1 style="margin:0; font:700 clamp(38px,4.6vw,68px)/1 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.035em; color:#fff; max-width:16ch">Dva čoveka. Deset godina rafinerija.</h1>
-          <p style="margin:22px 0 0; font:400 17px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.68); max-width:58ch">Preving Pro je agencija za preventivni inženjering i tehničko savetovanje iz Novog Sada. Iza imena stoje dvoje ljudi i deset godina rada na projektima gde se bezbednost ne dokazuje pečatom, nego praksom.</p>
-          <div style="display:flex; flex-wrap:wrap; gap:0; margin-top:40px; border-top:1px solid rgba(255,255,255,.14); max-width:760px">
-            {stats.map((s, i) => (
-              <div style={`display:flex; justify-content:space-between; gap:20px; width:100%;${i === stats.length - 1 ? '' : ' border-bottom:1px dotted rgba(255,255,255,.2);'} padding:11px 0; font:500 14px 'IBM Plex Mono',monospace`}><span style="color:rgba(255,255,255,.55)">{s.label}</span><span style="color:#FECB0F">{s.value}</span></div>
-            ))}
+        <div class="hero-grid" style="max-width:1360px; margin:0 auto; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,auto); gap:56px; align-items:start">
+          <div style="min-width:0">
+            <p style="margin:0 0 20px; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45); letter-spacing:.2em"><a href="/" style="color:rgba(255,255,255,.45)">POČETNA</a> / <span style="color:#FECB0F">O NAMA</span></p>
+            <h1 style="margin:0; font:700 clamp(38px,4.6vw,68px)/1 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.035em; color:#fff; max-width:16ch">Dva čoveka. Deset godina rafinerija.</h1>
+            <p style="margin:22px 0 0; font:400 17px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.68); max-width:58ch">Preving Pro je agencija za preventivni inženjering i tehničko savetovanje iz Novog Sada. Iza imena stoje dvoje ljudi i deset godina rada na projektima gde se bezbednost ne dokazuje pečatom, nego praksom.</p>
+            <div style="display:flex; flex-wrap:wrap; gap:0; margin-top:40px; border-top:1px solid rgba(255,255,255,.14); max-width:760px">
+              {stats.map((s, i) => (
+                <div style={`display:flex; justify-content:space-between; gap:20px; width:100%;${i === stats.length - 1 ? '' : ' border-bottom:1px dotted rgba(255,255,255,.2);'} padding:11px 0; font:500 14px 'IBM Plex Mono',monospace`}><span style="color:rgba(255,255,255,.55)">{s.label}</span><span style="color:#FECB0F">{s.value}</span></div>
+              ))}
+            </div>
           </div>
+
+          {/* Mapa iskustva: svaka linija je jedno gradiliste koje se slilo u
+              Novi Sad. Ovo je jedina takva slika na sajtu, pa se pocetna i
+              ova strana ne ponavljaju. Sve je inline SVG, bez ijedne skripte. */}
+          <figure class="mapa" style="margin:0; min-width:0">
+            <div class="mapa-head">
+              <span>{mapa.oznaka}</span>
+              <b>{String(mapa.tacke.length + 1).padStart(2, '0')} LOKACIJA</b>
+            </div>
+            <div class="mapa-telo">
+              {/* Crtez je sakriven za citace ekrana: legenda odmah pored nosi
+                  ista imena kao pravi tekst, pa bi opis mape samo udvostrucio
+                  citanje. Geografski raspored je dodatak, ne nosi podatak. */}
+              <svg class="mapa-svg" viewBox={`0 0 ${VB_W} ${VB_H}`} aria-hidden="true">
+                <g class="mapa-mreza">
+                  <g stroke="rgba(255,255,255,.10)" stroke-width="1">
+                    {mrezaLon.map((x) => <line x1={x} y1={PAD_GORE} x2={x} y2={PAD_GORE + POLJE_H} />)}
+                    {mrezaLat.map((y) => <line x1={PAD} y1={y} x2={PAD + POLJE_W} y2={y} />)}
+                  </g>
+                  {/* Okvir polja: bez njega mreza lebdi i crtez ne izgleda kao karta. */}
+                  <rect x={PAD} y={PAD_GORE} width={POLJE_W} height={POLJE_H} fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1" />
+                </g>
+
+                {/* Linije ka Novom Sadu: svaka se iscrta u svom trenutku. */}
+                <g class="mapa-linije" stroke="#FECB0F" stroke-width="1.1" fill="none">
+                  {tackeXY.map((t) => (
+                    <line x1={t.x} y1={t.y} x2={ciljXY.x} y2={ciljXY.y} pathLength="1" style={`--k:${t.kasnjenje}s`} />
+                  ))}
+                </g>
+
+                {tackeXY.map((t) => (
+                  <g class="mapa-tacka" style={`--k:${t.kasnjenje}s`}>
+                    <rect x={t.x - 3.5} y={t.y - 3.5} width="7" height="7" fill="#040404" stroke="#FECB0F" stroke-width="1.5" />
+                    <text x={t.x} y={t.y - 9} text-anchor="middle" fill="rgba(255,255,255,.7)" font-family="'IBM Plex Mono',monospace" font-size="11" font-weight="600">{t.broj}</text>
+                  </g>
+                ))}
+
+                {/* Cilj: pun znak sa prstenom koji dise. Broj namerno ne stoji
+                    ovde: tacno na tom mestu se sastaje svih sest linija, pa bi
+                    se natpis izgubio. U legendi je red 07 ionako zut. */}
+                <g class="mapa-cilj" style={`--k:${kasnjenjeCilja}s`}>
+                  <circle class="mapa-puls" cx={ciljXY.x} cy={ciljXY.y} r="9" fill="none" stroke="#FECB0F" stroke-width="1.5" />
+                  <circle cx={ciljXY.x} cy={ciljXY.y} r="5.5" fill="#FECB0F" />
+                </g>
+              </svg>
+
+              <ol class="mapa-legenda">
+                {tackeXY.map((t) => (
+                  <li style={`--k:${t.kasnjenje}s`}><i>{t.broj}</i><b>{t.naziv}</b><span>{t.mesto}</span></li>
+                ))}
+                <li class="mapa-legenda-cilj" style={`--k:${kasnjenjeCilja}s`}><i>{ciljBroj}</i><b>{mapa.cilj.naziv}</b><span>{mapa.cilj.mesto}</span></li>
+              </ol>
+            </div>
+            <figcaption class="mapa-foot">
+              <span>{mapa.legenda}</span>
+              <b>{mapa.cilj.lat}°N / {mapa.cilj.lon}°E</b>
+            </figcaption>
+          </figure>
         </div>
       </section>
 

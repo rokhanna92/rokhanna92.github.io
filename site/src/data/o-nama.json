@@ -5,6 +5,19 @@
     { "label": "Rafinerije: Slovnaft · MOL · Unipetrol · OMV · INA", "value": "5" },
     { "label": "Ljudi koje dobijate na telefon", "value": "2" }
   ],
+  "mapa": {
+    "oznaka": "MAPA ISKUSTVA",
+    "legenda": "RAFINERIJE I GRADILIŠTA · 2014-2026",
+    "cilj": { "naziv": "NOVI SAD", "mesto": "PREVING PRO", "lat": 45.29, "lon": 19.85 },
+    "tacke": [
+      { "naziv": "NITRA", "mesto": "SLOVAČKA", "lat": 48.31, "lon": 18.09 },
+      { "naziv": "SLOVNAFT", "mesto": "BRATISLAVA", "lat": 48.13, "lon": 17.14 },
+      { "naziv": "UNIPETROL", "mesto": "ČEŠKA", "lat": 50.6, "lon": 13.62 },
+      { "naziv": "OMV", "mesto": "AUSTRIJA", "lat": 48.14, "lon": 16.48 },
+      { "naziv": "MOL", "mesto": "MAĐARSKA", "lat": 47.31, "lon": 18.92 },
+      { "naziv": "INA", "mesto": "HRVATSKA", "lat": 45.49, "lon": 16.37 }
+    ]
+  },
   "timeline": [
     {
       "tag": "NITRA · SLOVAČKA",
