@@ -222,7 +222,11 @@ const description =
                     <tr class="pr" style={`--d:${(i * 55 + 140) / 1000}s`}>
                       <td class="pr-idx">{String(i + 1).padStart(2, '0')}</td>
                       <th scope="row" style="text-align:left; font:400 15px 'IBM Plex Sans',system-ui,sans-serif; padding:13px 16px; border-bottom:1px solid rgba(7,7,7,.09)">{r.n}<span style="display:block; font:400 12.5px 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.5); margin-top:2px">{r.d}</span></th>
-                      <td style="text-align:right; font:700 15px 'IBM Plex Mono',monospace; padding:13px 16px; border-bottom:1px solid rgba(7,7,7,.09); white-space:nowrap; font-variant-numeric:tabular-nums">{r.c}</td>
+                      {/* Iznos i jedinica su dva neprelomljiva komada, a ne
+                          jedan: "6.400 / izlasku na teren" u jednom redu gura
+                          celu tabelu preko ivice ekrana na telefonu. Ovako se
+                          jedinica spusti u novi red, a broj ostaje ceo. */}
+                      <td style="text-align:right; font:700 15px 'IBM Plex Mono',monospace; padding:13px 16px; border-bottom:1px solid rgba(7,7,7,.09); font-variant-numeric:tabular-nums"><span style="white-space:nowrap">{r.iznos}</span>{r.jedinica && <> <span style="white-space:nowrap">{r.jedinica}</span></>}</td>
                     </tr>
                   ))}
                 </tbody>

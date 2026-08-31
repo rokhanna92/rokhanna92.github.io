@@ -1,0 +1,124 @@
+---
+// Zajednicki okvir za tri pravna dokumenta: odricanje od odgovornosti, politiku
+// privatnosti i uslove koriscenja. Sve tri strane su isti raspored sa drugim
+// tekstom, pa okvir stoji ovde, a strane u src/pages su po cetiri reda.
+//
+// Podaci o firmi se ne prepisuju u pravno.json nego se citaju iz firma.json,
+// da adresa i telefon i dalje stoje na jednom mestu.
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import Seo from './Seo.astro';
+import { dokumenti, azurirano } from '../lib/pravno';
+import { firma } from '../lib/firma';
+import '../styles/responsive.css';
+
+interface Props {
+  /** id dokumenta iz src/data/pravno.json */
+  id: string;
+}
+
+const { id } = Astro.props;
+
+const doc = dokumenti.find((d) => d.id === id);
+if (!doc) {
+  throw new Error(
+    `PravnaStrana: ne postoji dokument sa id "${id}" u pravno.json. Postojeci: ${dokumenti.map((d) => d.id).join(', ')}.`
+  );
+}
+
+// Adresa strane mora da odgovara id-u dokumenta, inace bi unakrsni linkovi na
+// dnu vodili u prazno. Bolje da gradnja stane nego da se objavi mrtav link.
+if (Astro.url.pathname.replace(/\/+$/, '') !== `/${doc.id}`) {
+  throw new Error(
+    `PravnaStrana: dokument "${doc.id}" se prikazuje na adresi "${Astro.url.pathname}". Ime fajla u src/pages mora biti "${doc.id}.astro".`
+  );
+}
+
+const ostali = dokumenti.filter((d) => d.id !== doc.id);
+
+const title = `${doc.naslov} · Preving Pro`;
+---
+
+<!doctype html>
+<html lang="sr-Latn">
+  <head>
+    <Seo title={title} description={doc.opis} />
+    <style is:global>
+      html{scroll-behavior:smooth}
+      body{margin:0;background:#EFEDE6;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#070707;-webkit-font-smoothing:antialiased;text-wrap:pretty}
+      a{color:#070707;text-decoration:none}
+      ::selection{background:#FECB0F;color:#070707}
+
+      /* !important je obavezan: osnovne boje su u inline style atributima,
+         koji inače pobeđuju svako pravilo iz stilova. */
+      .crumb-a:hover{color:#FECB0F !important}
+      .pravno-veza:hover{border-color:#070707 !important}
+      .btn-dark:hover{background:#1c1c1c !important;color:#FECB0F !important}
+    </style>
+  </head>
+  <body>
+    <div id="pg-pravno">
+      <Header variant="inner" />
+
+      <section style="background:#070707; color:#F2F1EC; padding:80px 32px 72px">
+        <div style="max-width:1080px; margin:0 auto">
+          <p style="margin:0 0 20px; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45); letter-spacing:.2em"><a href="/" class="crumb-a" style="color:rgba(255,255,255,.45)">POČETNA</a> / <span style="color:#FECB0F">{doc.oznaka}</span></p>
+          <h1 style="margin:0; font:700 clamp(34px,4.2vw,60px)/1.02 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.035em; color:#fff">{doc.naslov}</h1>
+          <p style="margin:22px 0 0; font:400 17px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.68); max-width:62ch">{doc.uvod}</p>
+        </div>
+      </section>
+
+      <section style="padding:72px 32px 40px">
+        <div style="max-width:1080px; margin:0 auto">
+          {doc.sekcije.map((s, i) => (
+            <div style={`border-top:1px solid rgba(7,7,7,.18); padding:26px 0 4px; display:flex; flex-wrap:wrap; gap:18px 40px${i === 0 ? '; border-top-width:3px; border-top-color:#070707' : ''}`}>
+              <div style="flex:0 0 auto; width:200px; max-width:100%">
+                <p style="margin:0; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.18em; color:rgba(7,7,7,.4)">{String(i + 1).padStart(2, '0')}</p>
+                <h2 style="margin:8px 0 0; font:700 18px/1.25 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.01em">{s.naslov}</h2>
+              </div>
+              <div style="flex:1 1 420px; min-width:0">
+                {s.stavovi.map((p) => (
+                  <p style="margin:0 0 14px; font:400 15.5px/1.65 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.75); max-width:74ch">{p}</p>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section style="padding:20px 32px 40px">
+        <div style="max-width:1080px; margin:0 auto; background:#fff; border:1px solid rgba(7,7,7,.16); padding:28px 30px">
+          <p style="margin:0 0 14px; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.2em; color:rgba(7,7,7,.5)">RUKOVALAC I IZDAVAČ</p>
+          <p style="margin:0 0 16px; font:400 15px/1.7 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.8)">{firma.pravnoIme}<br />{firma.adresa}, {firma.grad}<br />{firma.sifraDelatnosti}</p>
+          <div style="display:grid; gap:8px; font:500 13.5px 'IBM Plex Mono',monospace">
+            <a href={firma.telefonHref} class="crumb-a" style="color:#070707">{firma.telefon}</a>
+            {firma.imejlovi.map((imejl) => (
+              <a href={`mailto:${imejl}`} class="crumb-a" style="color:rgba(7,7,7,.75)">{imejl}</a>
+            ))}
+          </div>
+          <p style="margin:18px 0 0; font:400 12.5px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.45)">Ažurirano: {azurirano}</p>
+        </div>
+      </section>
+
+      <section style="padding:0 32px 88px">
+        <div style="max-width:1080px; margin:0 auto; display:flex; flex-wrap:wrap; gap:12px">
+          {ostali.map((d) => (
+            <a href={`/${d.id}`} class="pravno-veza" style="border:1px solid rgba(7,7,7,.3); font:600 12.5px 'IBM Plex Mono',monospace; padding:11px 16px; color:rgba(7,7,7,.8)">{d.naslov} →</a>
+          ))}
+          <a href="/kontakt" class="btn-dark" style="background:#070707; color:#FECB0F; font:700 13px 'IBM Plex Sans',system-ui,sans-serif; padding:11px 20px">Zatražite ponudu</a>
+        </div>
+      </section>
+
+      <Footer serviceHref="/usluge" lastLink={{ href: '/cenovnik', label: 'Cenovnik 2026/27' }} />
+    </div>
+
+    <script>
+      // Odbrojavanje u traci, isto kao na ostalim stranama.
+      const target = Date.parse('2027-01-01T00:00:00+01:00');
+      const days = String(Math.max(0, Math.floor((target - Date.now()) / 864e5)));
+      document.querySelectorAll<HTMLElement>('[data-cd="days"]').forEach((el) => {
+        if (el.textContent !== days) el.textContent = days;
+      });
+    </script>
+  </body>
+</html>

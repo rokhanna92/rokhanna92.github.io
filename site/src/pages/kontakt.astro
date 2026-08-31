@@ -5,9 +5,14 @@ import Footer from '../components/Footer.astro';
 import kontakt from '../data/kontakt.json';
 import formOptions from '../data/form-options.json';
 import { firma } from '../lib/firma';
+import { deliSaglasnost, putanjaPolitike } from '../lib/pravno';
 import '../styles/responsive.css';
 
 const { kanali, foto, priprema } = kontakt;
+
+const saglasnost = deliSaglasnost(
+  'Slažem se da Preving Pro obradi moje podatke radi odgovora na ovaj upit, u skladu sa Politikom privatnosti.'
+);
 
 // Sat i status kancelarije po beogradskom vremenu, isto kao u klijentskoj skripti.
 function belgrade(now: Date) {
@@ -134,42 +139,42 @@ const description = `Javite se: ${firma.telefon}, ${firma.adresa}, Novi Sad. Odg
             </div>
           </div>
           <div style="flex:1 1 560px; min-width:0">
-            <div id="pp-form">
+            <div id="pp-form" data-prima={firma.imejl}>
               <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr)); gap:18px">
                 <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(7,7,7,.55)">IME I PREZIME
-                  <input type="text" autocomplete="name" class="field" style="background:#fff; border:1px solid rgba(7,7,7,.3); color:#070707; font-size:15px; padding:14px; outline:none" />
+                  <input type="text" data-pp="ime" autocomplete="name" class="field" style="background:#fff; border:1px solid rgba(7,7,7,.3); color:#070707; font-size:15px; padding:14px; outline:none" />
                 </label>
                 <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(7,7,7,.55)">NAZIV FIRME
-                  <input type="text" autocomplete="organization" class="field" style="background:#fff; border:1px solid rgba(7,7,7,.3); color:#070707; font-size:15px; padding:14px; outline:none" />
+                  <input type="text" data-pp="firma" autocomplete="organization" class="field" style="background:#fff; border:1px solid rgba(7,7,7,.3); color:#070707; font-size:15px; padding:14px; outline:none" />
                 </label>
                 <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(7,7,7,.55)">TELEFON ILI IMEJL
-                  <input type="text" inputmode="email" class="field" style="background:#fff; border:1px solid rgba(7,7,7,.3); color:#070707; font-size:15px; padding:14px; outline:none" />
+                  <input type="text" data-pp="kontakt" inputmode="email" class="field" style="background:#fff; border:1px solid rgba(7,7,7,.3); color:#070707; font-size:15px; padding:14px; outline:none" />
                 </label>
                 <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(7,7,7,.55)">BROJ ZAPOSLENIH
-                  <select class="field" style="background:#fff; border:1px solid rgba(7,7,7,.3); color:#070707; font-size:15px; padding:14px 10px; outline:none">
+                  <select data-pp="zaposleni" class="field" style="background:#fff; border:1px solid rgba(7,7,7,.3); color:#070707; font-size:15px; padding:14px 10px; outline:none">
                     {formOptions.zaposleni.map((o) => (<option>{o}</option>))}
                   </select>
                 </label>
                 <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(7,7,7,.55); grid-column:1/-1">DELATNOST
-                  <select class="field" style="background:#fff; border:1px solid rgba(7,7,7,.3); color:#070707; font-size:15px; padding:14px 10px; outline:none">
+                  <select data-pp="delatnost" class="field" style="background:#fff; border:1px solid rgba(7,7,7,.3); color:#070707; font-size:15px; padding:14px 10px; outline:none">
                     {formOptions.delatnost.map((o) => (<option>{o}</option>))}
                   </select>
                 </label>
                 <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(7,7,7,.55); grid-column:1/-1">PORUKA (OPCIONO)
-                  <textarea rows="3" class="field" style="background:#fff; border:1px solid rgba(7,7,7,.3); color:#070707; font-size:15px; padding:14px; outline:none; resize:vertical"></textarea>
+                  <textarea rows="3" data-pp="poruka" class="field" style="background:#fff; border:1px solid rgba(7,7,7,.3); color:#070707; font-size:15px; padding:14px; outline:none; resize:vertical"></textarea>
                 </label>
               </div>
               <label style="display:flex; gap:12px; align-items:flex-start; margin-top:20px; font:400 13.5px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.65); cursor:pointer">
                 <input type="checkbox" id="pp-consent" style="width:18px; height:18px; margin-top:2px; accent-color:#070707; flex:none" />
-                <span>Slažem se da Preving Pro obradi moje podatke radi odgovora na ovaj upit, u skladu sa Politikom privatnosti.</span>
+                <span>{saglasnost.pre}{saglasnost.veza && <a href={putanjaPolitike} style="color:#070707; text-decoration:underline; text-underline-offset:3px">{saglasnost.veza}</a>}{saglasnost.posle}</span>
               </label>
               <p id="pp-need-consent" hidden style="margin:12px 0 0; font:500 13px 'IBM Plex Mono',monospace; color:#070707; background:#FECB0F; display:inline-block; padding:8px 12px">Označite saglasnost da bismo mogli da odgovorimo na upit.</p>
               <div><button type="button" id="pp-submit" class="btn-dark" style="margin-top:24px; background:#070707; color:#FECB0F; border:none; font:700 15px 'IBM Plex Sans',system-ui,sans-serif; padding:16px 34px; cursor:pointer">Pošaljite upit →</button></div>
             </div>
             <div id="pp-sent" hidden style="background:#070707; color:#F2F1EC; padding:40px">
-              <p style="margin:0; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.2em; color:#FECB0F">UPIT PRIMLJEN</p>
-              <p style="margin:14px 0 10px; font:700 28px 'IBM Plex Sans',system-ui,sans-serif; color:#fff; letter-spacing:-.02em">Primili smo vaš upit.</p>
-              <p style="margin:0; font:400 15.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.7)">Javljamo se isti radni dan. Ako je hitno: <a href={firma.telefonHref} style="color:#FECB0F; text-decoration:underline; text-underline-offset:3px">{firma.telefon}</a>.</p>
+              <p style="margin:0; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.2em; color:#FECB0F">UPIT SPREMAN</p>
+              <p style="margin:14px 0 10px; font:700 28px 'IBM Plex Sans',system-ui,sans-serif; color:#fff; letter-spacing:-.02em">Otvorili smo vaš imejl program.</p>
+              <p style="margin:0; font:400 15.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.7)">Upit je popunjen, ostaje samo da ga pošaljete. Ako se ništa nije otvorilo, pozovite nas: <a href={firma.telefonHref} style="color:#FECB0F; text-decoration:underline; text-underline-offset:3px">{firma.telefon}</a>.</p>
             </div>
           </div>
         </div>
@@ -208,22 +213,7 @@ const description = `Javite se: ${firma.telefon}, ${firma.adresa}, Novi Sad. Odg
       tick();
       setInterval(tick, 1000);
 
-      // Kontakt forma.
-      const consent = document.getElementById('pp-consent') as HTMLInputElement | null;
-      const needConsent = document.getElementById('pp-need-consent');
-      const formBox = document.getElementById('pp-form');
-      const sentBox = document.getElementById('pp-sent');
-      consent?.addEventListener('change', () => {
-        if (needConsent) needConsent.hidden = true;
-      });
-      document.getElementById('pp-submit')?.addEventListener('click', () => {
-        if (consent?.checked) {
-          if (formBox) formBox.hidden = true;
-          if (sentBox) sentBox.hidden = false;
-        } else if (needConsent) {
-          needConsent.hidden = false;
-        }
-      });
+      // Kontakt forma je u /upit.js, jer stoji i na pocetnoj.
 
       // Fade-up za kartice kanala.
       const fade = document.querySelectorAll<HTMLElement>('[data-fd]');
@@ -243,5 +233,7 @@ const description = `Javite se: ${firma.telefon}, ${firma.adresa}, Novi Sad. Odg
         fade.forEach((el) => el.classList.add('fd-on'));
       }
     </script>
+
+    <script type="module" src="/upit.js" is:inline></script>
   </body>
 </html>

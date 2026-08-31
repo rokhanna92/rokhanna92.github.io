@@ -1,0 +1,183 @@
+{
+  "azurirano": "31.08.2026.",
+  "dokumenti": [
+    {
+      "id": "odricanje-od-odgovornosti",
+      "oznaka": "PRAVNO / 01",
+      "naslov": "Odricanje od odgovornosti",
+      "opis": "Sadržaj sajta Preving Pro je informativan i ne zamenjuje akt o proceni rizika, stručno mišljenje ni zaključen ugovor.",
+      "uvod": "Sadržaj ovog sajta je informativan. Pomaže vam da razumete šta propisi traže od poslodavca, ali ne zamenjuje procenu vaše konkretne situacije.",
+      "sekcije": [
+        {
+          "naslov": "Informativni karakter sadržaja",
+          "stavovi": [
+            "Tekstovi na sajtu opisuju obaveze poslodavaca uopšteno. Svaka firma ima svoju delatnost, svoja radna mesta i svoje rizike, pa se konkretne obaveze utvrđuju tek pregledom dokumentacije i radnih mesta.",
+            "Ništa na ovom sajtu nije akt o proceni rizika, pravilnik, stručno mišljenje niti pravni savet."
+          ]
+        },
+        {
+          "naslov": "Provera obaveza i procena troška",
+          "stavovi": [
+            "Provera obaveza na početnoj strani i procena troška na strani Cenovnik daju okvirni odgovor na osnovu dva do tri podatka. To je orijentacija, ne ocena vašeg slučaja.",
+            "Rezultat tih alata ne obavezuje ni vas ni nas. Za tačan odgovor pozovite nas sa matičnim brojem firme i brojem zaposlenih."
+          ]
+        },
+        {
+          "naslov": "Cene",
+          "stavovi": [
+            "Cene objavljene na sajtu su informativne. Obavezuje samo pisana ponuda ili zaključen ugovor.",
+            "Cenovnik važi za period naveden na strani Cenovnik i menja se objavom na toj strani, bez posebne najave."
+          ]
+        },
+        {
+          "naslov": "Propisi se menjaju",
+          "stavovi": [
+            "Tekstovi prate propise koji su na snazi na dan ažuriranja naveden na dnu ove strane. Propisi se menjaju, a prelazni rokovi se pomeraju.",
+            "Za obavezujuće tumačenje propisa nadležni su Inspektorat za rad, Ministarstvo unutrašnjih poslova i sudovi Republike Srbije, a ne ovaj sajt."
+          ]
+        },
+        {
+          "naslov": "Odgovornost",
+          "stavovi": [
+            "Ne odgovaramo za štetu nastalu odlukama donetim isključivo na osnovu sadržaja ovog sajta, bez provere stanja u vašoj firmi.",
+            "Naša odgovornost prema klijentu nastaje zaključenjem ugovora i postoji u obimu i pod uslovima koje taj ugovor propisuje."
+          ]
+        },
+        {
+          "naslov": "Spoljni izvori",
+          "stavovi": [
+            "Sajt na pojedinim mestima navodi propise i zvanične izvore. Za sadržaj i dostupnost stranica kojima ne upravljamo ne odgovaramo."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "politika-privatnosti",
+      "oznaka": "PRAVNO / 02",
+      "naslov": "Politika privatnosti",
+      "opis": "Koje podatke o ličnosti Preving Pro prikuplja preko sajta, zašto, koliko ih čuva i koja su vaša prava po Zakonu o zaštiti podataka o ličnosti.",
+      "uvod": "Ova politika objašnjava koje podatke o ličnosti prikupljamo preko ovog sajta, zašto ih prikupljamo i koja prava imate. Pisana je prema Zakonu o zaštiti podataka o ličnosti („Sl. glasnik RS\" br. 87/2018).",
+      "sekcije": [
+        {
+          "naslov": "Rukovalac podacima",
+          "stavovi": [
+            "Rukovalac je agencija čiji puni podaci stoje na dnu ove strane. Za svako pitanje o obradi podataka pišite na navedeni imejl ili pozovite navedeni broj."
+          ]
+        },
+        {
+          "naslov": "Kako podaci stižu do nas",
+          "stavovi": [
+            "Formular za upit na ovom sajtu ne šalje ništa preko interneta. Klikom na dugme vaš uređaj otvara vaš program za elektronsku poštu sa unapred popunjenom porukom, koju vi sami pošaljete ili odustanete. Do tog trenutka sve što ste otkucali ostaje na vašem uređaju.",
+            "Sajt nema server koji prima podatke, nema bazu i ne šalje formular u pozadini. Podatke dobijamo tek kada nam pošaljete imejl, pozovete nas ili nam pišete."
+          ]
+        },
+        {
+          "naslov": "Koje podatke prikupljamo",
+          "stavovi": [
+            "Iz upita poslatog preko formulara: ime i prezime, naziv firme, telefon ili imejl, broj zaposlenih, delatnost i tekst poruke. Sva polja popunjavate vi.",
+            "Iz poziva ili poruke: samo ono što nam sami kažete ili napišete.",
+            "Ne tražimo da nam u ovoj fazi šaljete podatke o zdravlju zaposlenih, podatke o povredama sa imenima niti druge naročito osetljive podatke. Takvi podaci se razmenjuju tek posle zaključenja ugovora, na način koji ugovor propisuje."
+          ]
+        },
+        {
+          "naslov": "Svrha i pravni osnov",
+          "stavovi": [
+            "Podatke koristimo isključivo da odgovorimo na vaš upit i pripremimo ponudu.",
+            "Pravni osnov je vaš pristanak, koji dajete označavanjem polja uz formular i slanjem poruke, i preduzimanje radnji pre zaključenja ugovora, na vaš zahtev.",
+            "Pristanak možete povući u svakom trenutku porukom na naš imejl. Povlačenje ne utiče na obradu izvršenu pre povlačenja."
+          ]
+        },
+        {
+          "naslov": "Koliko dugo čuvamo",
+          "stavovi": [
+            "Prepisku po upitu koji nije doveo do posla čuvamo najduže dve godine, pa je brišemo.",
+            "Ako zaključimo ugovor, dokumentaciju i prepisku čuvamo onoliko koliko traže propisi o bezbednosti i zdravlju na radu i propisi o računovodstvu."
+          ]
+        },
+        {
+          "naslov": "Kome dajemo podatke",
+          "stavovi": [
+            "Nikome. Podatke ne prodajemo, ne ustupamo trećim licima i ne koristimo za marketing.",
+            "Izuzetak je zahtev nadležnog organa, kada smo po zakonu dužni da postupimo."
+          ]
+        },
+        {
+          "naslov": "Kolačići i merenje poseta",
+          "stavovi": [
+            "Sajt ne postavlja kolačiće za praćenje i ne koristi alate za analitiku posete.",
+            "U memoriju vašeg pregledača upisuje se samo izbor pisma, ćirilica ili latinica, pod oznakom „pp-script\". Taj podatak ostaje na vašem uređaju i do nas ne stiže."
+          ]
+        },
+        {
+          "naslov": "Hosting i pisma",
+          "stavovi": [
+            "Sajt je postavljen na GitHub Pages, pa vaša IP adresa i osnovni podaci o pregledaču stižu do tog servisa pri svakom otvaranju strane.",
+            "Pisma se učitavaju sa servisa Google Fonts, koji pri učitavanju takođe vidi vašu IP adresu. Ništa drugo mu ne prosleđujemo."
+          ]
+        },
+        {
+          "naslov": "Vaša prava",
+          "stavovi": [
+            "Imate pravo da tražite pristup svojim podacima, ispravku netačnih, brisanje, ograničenje obrade i prenosivost, kao i da uložite prigovor na obradu.",
+            "Zahtev šaljete na naš imejl. Odgovaramo u rokovima propisanim zakonom.",
+            "Ako smatrate da vaše podatke obrađujemo suprotno zakonu, možete podneti pritužbu Povereniku za informacije od javnog značaja i zaštitu podataka o ličnosti, Bulevar kralja Aleksandra 15, 11120 Beograd."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "uslovi-koriscenja",
+      "oznaka": "PRAVNO / 03",
+      "naslov": "Uslovi korišćenja",
+      "opis": "Uslovi pod kojima se koristi sajt Preving Pro: dozvoljena upotreba, autorska prava, dostupnost i merodavno pravo.",
+      "uvod": "Korišćenjem ovog sajta prihvatate uslove opisane na ovoj strani. Ako se sa njima ne slažete, sajt nemojte koristiti.",
+      "sekcije": [
+        {
+          "naslov": "Izdavač",
+          "stavovi": [
+            "Sajt izdaje i održava agencija čiji puni podaci stoje na dnu ove strane."
+          ]
+        },
+        {
+          "naslov": "Šta smete",
+          "stavovi": [
+            "Sajt smete da čitate, štampate i da delite linkove ka njemu, za sopstvene poslovne potrebe.",
+            "Tekstove smete da citirate uz navođenje izvora i linka ka strani sa koje je citat uzet."
+          ]
+        },
+        {
+          "naslov": "Šta ne smete",
+          "stavovi": [
+            "Nije dozvoljeno automatsko preuzimanje sadržaja, kopiranje celih strana niti objavljivanje naših tekstova pod svojim imenom.",
+            "Nije dozvoljeno ometati rad sajta niti pokušavati pristup delovima koji nisu javno objavljeni."
+          ]
+        },
+        {
+          "naslov": "Autorska prava",
+          "stavovi": [
+            "Tekstovi, fotografije, crteži i kod ovog sajta su autorsko delo i pripadaju agenciji, osim gde je izričito navedeno drugačije.",
+            "Nazivi propisa i citati iz službenih glasila su javni i navedeni su kao izvor."
+          ]
+        },
+        {
+          "naslov": "Dostupnost",
+          "stavovi": [
+            "Trudimo se da sajt radi bez prekida, ali neprekidnu dostupnost ne garantujemo. Sajt povremeno menjamo, dopunjujemo i privremeno gasimo radi održavanja."
+          ]
+        },
+        {
+          "naslov": "Izmene uslova",
+          "stavovi": [
+            "Uslove menjamo objavom na ovoj strani. Važe uslovi objavljeni na dan kada sajt koristite. Datum poslednje izmene stoji na dnu strane."
+          ]
+        },
+        {
+          "naslov": "Merodavno pravo",
+          "stavovi": [
+            "Na ove uslove primenjuje se pravo Republike Srbije. Za sporove koji se ne reše dogovorom nadležan je stvarno nadležni sud u Novom Sadu."
+          ]
+        }
+      ]
+    }
+  ]
+}

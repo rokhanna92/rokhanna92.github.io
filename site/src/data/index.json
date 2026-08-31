@@ -204,9 +204,9 @@
     "saglasnostGreska": "Označite saglasnost da bismo mogli da odgovorimo na upit.",
     "dugme": "Pošaljite upit →",
     "poslato": {
-      "oznaka": "UPIT PRIMLJEN",
-      "naslov": "Primili smo vaš upit.",
-      "tekstPre": "Javljamo se istog radnog dana. Ako je hitno: ",
+      "oznaka": "UPIT SPREMAN",
+      "naslov": "Otvorili smo vaš imejl program.",
+      "tekstPre": "Upit je popunjen, ostaje samo da ga pošaljete. Ako se ništa nije otvorilo, pozovite nas: ",
       "tekstPosle": "."
     }
   }

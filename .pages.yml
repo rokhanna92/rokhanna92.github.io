@@ -1414,3 +1414,96 @@ content:
             list:
               min: 1
               collapsible: false
+
+  # ---------------------------------------------------------------
+  # 8. PRAVNE STRANE
+  # ---------------------------------------------------------------
+  - name: pravno
+    label: "Pravne strane"
+    description: "Odricanje od odgovornosti, politika privatnosti i uslovi korišćenja. Broj dokumenata je zaključan na tri, jer svaki ima svoju stranu na sajtu."
+    type: file
+    path: site/src/data/pravno.json
+    format: json
+    operations:
+      create: false
+      rename: false
+      delete: false
+    fields:
+      - name: azurirano
+        label: "Datum poslednje izmene"
+        description: "Piše se na dnu sve tri pravne strane, na primer 31.08.2026. Promenite ga kad god izmenite neki od tekstova."
+        type: string
+        required: true
+        options:
+          maxlength: 12
+      - name: dokumenti
+        label: "Dokumenti"
+        description: "Tri pravna teksta. Novi se ne može dodati kroz CMS jer svaki mora imati i svoju stranu na sajtu."
+        type: object
+        required: true
+        list:
+          min: 3
+          max: 3
+          collapsible:
+            collapsed: true
+            summary: "{naslov}"
+        fields:
+          - name: id
+            label: "Adresa strane"
+            description: "Tehnička oznaka koja je ujedno i adresa strane. Zaključana je jer bi izmena pokvarila linkove u podnožju i zaustavila objavljivanje."
+            type: string
+            readonly: true
+            required: true
+          - name: oznaka
+            label: "Oznaka iznad naslova"
+            description: "Sitan tekst velikim slovima, na primer PRAVNO / 01."
+            type: string
+            required: true
+            options:
+              maxlength: 30
+          - name: naslov
+            label: "Naslov strane"
+            description: "Stoji i kao naslov strane i kao tekst linka u podnožju."
+            type: string
+            required: true
+            options:
+              maxlength: 60
+          - name: opis
+            label: "Opis za pretraživače"
+            description: "Jedna rečenica. Prikazuje se u rezultatima pretrage i pri deljenju linka."
+            type: text
+            required: true
+            options:
+              maxlength: 200
+          - name: uvod
+            label: "Uvodni pasus"
+            description: "Prvi pasus, ispod naslova, na tamnoj podlozi."
+            type: text
+            required: true
+            options:
+              maxlength: 400
+          - name: sekcije
+            label: "Odeljci"
+            description: "Numerišu se automatski, redosledom iz ove liste."
+            type: object
+            required: true
+            list:
+              min: 1
+              collapsible:
+                collapsed: true
+                summary: "{naslov}"
+            fields:
+              - name: naslov
+                label: "Naslov odeljka"
+                type: string
+                required: true
+                options:
+                  maxlength: 60
+              - name: stavovi
+                label: "Pasusi"
+                description: "Jedan pasus po polju. Običan tekst, bez formatiranja. Prelomi redova se ne prikazuju."
+                type: text
+                required: true
+                list:
+                  min: 1
+                  collapsible: false

@@ -13,5 +13,11 @@
   <!-- Black Ops One ima samo rez 400; 700 bi naterao pregledac na lazno
        podebljanje, pa stoji 400. Plex ostaje kao rezerva dok se font ne ucita. -->
   <span class="wm-name" style="font:400 16.5px/1 'Black Ops One','IBM Plex Sans',system-ui,sans-serif; color:#fff; letter-spacing:-.01em">PREVING<span style="color:#FECB0F">PRO</span></span>
-  <span class="wm-tag" style="font:600 8.5px/1 'IBM Plex Mono',monospace; letter-spacing:.15em; color:rgba(255,255,255,.52)">PREVENTIVNI INŽENJERING</span>
+  <!-- Potpis mora da bude tacno iste sirine kao ime iznad njega, po zahtevu
+       klijenta. Ime "PREVINGPRO" u Black Ops One 16.5px meri 112.11px, a
+       potpis ima 23 znaka u Plex Mono, cija je sirina znaka 0.6em. Otuda
+       112.11 / (23 * 0.6) = 8.12px, uz tracking 0: sa tracking .15em, kakav je
+       stajao ranije, potpis je bio 146.64px, dakle 34.5px siri od imena.
+       Ako se ime, njegov rez ili velicina promene, ova mera se ponovo racuna. -->
+  <span class="wm-tag" style="font:600 8.12px/1 'IBM Plex Mono',monospace; letter-spacing:0; color:rgba(255,255,255,.52)">PREVENTIVNI INŽENJERING</span>
 </span>

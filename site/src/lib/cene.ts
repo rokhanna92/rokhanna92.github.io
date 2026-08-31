@@ -71,10 +71,14 @@ export function cena(id: string): Cena {
 export const labelReda = (row: { ref?: string; label?: string }) =>
   row.label ?? (row.ref ? cena(row.ref).naziv : '');
 
-// Cenovnik za prikaz: polje "c" se izvodi, ne cuva se u JSON-u.
+// Cenovnik za prikaz: polje "c" se izvodi, ne cuva se u JSON-u. Iznos i jedinica
+// se iznose i odvojeno, da tabela moze da ih prelomi u dva reda na telefonu.
 export const grupe = cenovnik.groups.map((g) => ({
   ...g,
-  stavke: g.stavke.map((s) => ({ ...s, c: cena(s.id).c })),
+  stavke: g.stavke.map((s) => {
+    const c = cena(s.id);
+    return { ...s, c: c.c, iznos: c.iznos, jedinica: c.jedinica };
+  }),
 }));
 
 export const napomena = cenovnik.note;

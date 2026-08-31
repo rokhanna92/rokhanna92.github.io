@@ -1,5 +1,6 @@
 ---
 import services from '../data/services.json';
+import { dokumenti as pravniDokumenti } from '../lib/pravno';
 import { cena } from '../lib/cene';
 import { firma } from '../lib/firma';
 import Wordmark from './Wordmark.astro';
@@ -16,7 +17,7 @@ const {
   lastLink = { href: '#paketi', label: cena('pausal-pro').naziv },
 } = Astro.props;
 
-const updated = '21.08.2026.';
+const updated = '31.08.2026.';
 ---
 
 <footer style="position:relative; z-index:2; background:#040404; color:#F2F1EC; border-top:1px solid rgba(255,255,255,.1); padding:64px 32px 0">
@@ -53,7 +54,7 @@ const updated = '21.08.2026.';
       </div>
     </div>
     <div style="border-top:1px solid rgba(255,255,255,.1); padding:20px 0 24px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:14px; font:400 12px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.35)">
-      <span>© 2026 Preving Pro · Politika privatnosti · Uslovi korišćenja</span>
+      <span>© 2026 Preving Pro · {pravniDokumenti.map((d, i) => (<>{i > 0 && ' · '}<a href={`/${d.id}`} class="ftr-a" style="color:rgba(255,255,255,.35)">{d.naslov}</a></>))}</span>
       <span>ЋИР / LAT · Ažurirano: {updated}</span>
     </div>
   </div>

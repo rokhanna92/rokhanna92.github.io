@@ -9,6 +9,7 @@ import formOptions from '../data/form-options.json';
 import tekst from '../data/index.json';
 import { cena, labelReda } from '../lib/cene';
 import { firma } from '../lib/firma';
+import { deliSaglasnost, putanjaPolitike } from '../lib/pravno';
 import '../styles/responsive.css';
 
 // 1. januar 2027. u 00:00 po srednjoevropskom vremenu.
@@ -25,6 +26,7 @@ const cd = {
 // Sav tekst naslovne strane stoji u src/data/index.json, da urednik moze da ga
 // menja kroz CMS. U kodu ostaju samo strukturne labele i prelom.
 const { hero, brojke, provera, kako, rokovi, paketi, zasto, kontakt } = tekst;
+const saglasnost = deliSaglasnost(kontakt.saglasnost);
 const uslugeTekst = tekst.usluge;
 const cenovnikTekst = tekst.cenovnik;
 const faqTekst = tekst.faq;
@@ -382,34 +384,34 @@ const description = tekst.meta.opis;
             </div>
           </div>
           <div style="flex:1 1 560px; min-width:0" data-rv>
-            <div id="pp-form">
+            <div id="pp-form" data-prima={firma.imejl}>
               <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr)); gap:18px">
                 <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.55)">{kontakt.polja.ime}
-                  <input type="text" autocomplete="name" class="field" style="background:#0e0e0e; border:1px solid rgba(255,255,255,.2); color:#fff; font-size:15px; padding:14px 14px; outline:none; min-height:20px" />
+                  <input type="text" data-pp="ime" autocomplete="name" class="field" style="background:#0e0e0e; border:1px solid rgba(255,255,255,.2); color:#fff; font-size:15px; padding:14px 14px; outline:none; min-height:20px" />
                 </label>
                 <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.55)">{kontakt.polja.firma}
-                  <input type="text" autocomplete="organization" class="field" style="background:#0e0e0e; border:1px solid rgba(255,255,255,.2); color:#fff; font-size:15px; padding:14px 14px; outline:none" />
+                  <input type="text" data-pp="firma" autocomplete="organization" class="field" style="background:#0e0e0e; border:1px solid rgba(255,255,255,.2); color:#fff; font-size:15px; padding:14px 14px; outline:none" />
                 </label>
                 <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.55)">{kontakt.polja.kontakt}
-                  <input type="text" inputmode="email" class="field" style="background:#0e0e0e; border:1px solid rgba(255,255,255,.2); color:#fff; font-size:15px; padding:14px 14px; outline:none" />
+                  <input type="text" data-pp="kontakt" inputmode="email" class="field" style="background:#0e0e0e; border:1px solid rgba(255,255,255,.2); color:#fff; font-size:15px; padding:14px 14px; outline:none" />
                 </label>
                 <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.55)">{kontakt.polja.zaposleni}
-                  <select class="field" style="background:#0e0e0e; border:1px solid rgba(255,255,255,.2); color:#fff; font-size:15px; padding:14px 10px; outline:none">
+                  <select data-pp="zaposleni" class="field" style="background:#0e0e0e; border:1px solid rgba(255,255,255,.2); color:#fff; font-size:15px; padding:14px 10px; outline:none">
                     {formOptions.zaposleni.map((o) => (<option>{o}</option>))}
                   </select>
                 </label>
                 <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.55); grid-column:1/-1">{kontakt.polja.delatnost}
-                  <select class="field" style="background:#0e0e0e; border:1px solid rgba(255,255,255,.2); color:#fff; font-size:15px; padding:14px 10px; outline:none">
+                  <select data-pp="delatnost" class="field" style="background:#0e0e0e; border:1px solid rgba(255,255,255,.2); color:#fff; font-size:15px; padding:14px 10px; outline:none">
                     {formOptions.delatnost.map((o) => (<option>{o}</option>))}
                   </select>
                 </label>
                 <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.55); grid-column:1/-1">{kontakt.polja.poruka}
-                  <textarea rows="3" class="field" style="background:#0e0e0e; border:1px solid rgba(255,255,255,.2); color:#fff; font-size:15px; padding:14px 14px; outline:none; resize:vertical"></textarea>
+                  <textarea rows="3" data-pp="poruka" class="field" style="background:#0e0e0e; border:1px solid rgba(255,255,255,.2); color:#fff; font-size:15px; padding:14px 14px; outline:none; resize:vertical"></textarea>
                 </label>
               </div>
               <label style="display:flex; gap:12px; align-items:flex-start; margin-top:20px; font:400 13.5px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.6); cursor:pointer">
                 <input type="checkbox" id="pp-consent" style="width:18px; height:18px; margin-top:2px; accent-color:#FECB0F; flex:none" />
-                <span>{kontakt.saglasnost}</span>
+                <span>{saglasnost.pre}{saglasnost.veza && <a href={putanjaPolitike} style="color:#FECB0F; text-decoration:underline; text-underline-offset:3px">{saglasnost.veza}</a>}{saglasnost.posle}</span>
               </label>
               <p id="pp-need-consent" hidden style="margin:12px 0 0; font:500 13px 'IBM Plex Mono',monospace; color:#FECB0F">{kontakt.saglasnostGreska}</p>
               <button type="button" id="pp-submit" class="btn-y" style="margin-top:24px; background:#FECB0F; color:#070707; border:none; font:700 15px 'IBM Plex Sans',system-ui,sans-serif; padding:16px 34px; cursor:pointer">{kontakt.dugme}</button>
@@ -428,6 +430,7 @@ const description = tekst.meta.opis;
 
     <script type="application/json" id="pp-results" set:html={JSON.stringify(results)} is:inline></script>
     <script type="module" src="/refinery-scene.js" is:inline></script>
+    <script type="module" src="/upit.js" is:inline></script>
 
     <script>
       type Result = { title: string; body: string; fine: boolean };
@@ -495,22 +498,7 @@ const description = tekst.meta.opis;
         });
       });
 
-      // Kontakt forma.
-      const consent = document.getElementById('pp-consent') as HTMLInputElement | null;
-      const needConsent = document.getElementById('pp-need-consent');
-      const formBox = document.getElementById('pp-form');
-      const sentBox = document.getElementById('pp-sent');
-      consent?.addEventListener('change', () => {
-        if (needConsent) needConsent.hidden = true;
-      });
-      document.getElementById('pp-submit')?.addEventListener('click', () => {
-        if (consent?.checked) {
-          if (formBox) formBox.hidden = true;
-          if (sentBox) sentBox.hidden = false;
-        } else if (needConsent) {
-          needConsent.hidden = false;
-        }
-      });
+      // Kontakt forma je u /upit.js, jer stoji i na strani Kontakt.
 
       // Otkrivanje pri skrolovanju.
       const revealed = document.querySelectorAll<HTMLElement>('[data-rv]');
