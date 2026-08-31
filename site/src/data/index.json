@@ -19,21 +19,20 @@
       "redovi": [
         { "label": "Zakon 35/2023", "value": "NA SNAZI" },
         { "label": "4 nova pravilnika", "value": "01.01.2027." },
-        { "label": "Lične licence", "value": "4 / 4" }
+        { "label": "Lične licence", "value": "3 / 3" }
       ]
     },
     "traka": [
       "AKT O PROCENI RIZIKA",
       "OBUKA ZAPOSLENIH",
       "PLAN EVAKUACIJE",
-      "ELABORAT O UREĐENJU GRADILIŠTA",
       "REVIZIJA PP APARATA",
       "ZASTUPANJE PRED INSPEKCIJOM",
       "GEOTAGOVANI FOTOREPORTING"
     ]
   },
   "brojke": [
-    { "broj": "04", "tekst": "lične licence Inspektorata za rad i MUP-a Republike Srbije" },
+    { "broj": "03", "tekst": "lične licence Inspektorata za rad i MUP-a Republike Srbije" },
     { "broj": "10", "tekst": "godina na investicionim projektima i remontima u EU" },
     { "broj": "05", "tekst": "rafinerija: Slovnaft, MOL, Unipetrol, OMV i INA" },
     { "broj": "24/7", "tekst": "telefonska linija i hitan izlazak na teren" }
@@ -91,20 +90,20 @@
     "vise": "Više →"
   },
   "kako": {
-    "oznaka": "02 / PROCEDURA",
+    "oznaka": "PROCEDURA",
     "naslov": "Kako radimo",
     "uvod": "Sve počinje ulaznim auditom, bez obaveze. Posle njega tačno znate šta vam nedostaje, koliko košta i kojim redom se rešava.",
     "koraci": [
       {
         "n": "01",
         "naslov": "Ulazni BZR audit",
-        "tekst": "Pregledamo dokumentaciju, radna mesta i evidencije. Dobijate spisak nedostataka i redosled rešavanja, bez obaveze da nastavite sa nama.",
+        "tekst": "Pregledamo dokumentaciju, radna mesta i evidencije. Dobijate izlazni audit i predloge rešavanja, bez obaveze da nastavite sa nama.",
         "highlight": false
       },
       {
         "n": "02",
         "naslov": "Dokumentacija po meri",
-        "tekst": "Akt o proceni rizika za svako radno mesto, pravilnik o BZR, pravilnik o LZO, pravila i planovi zaštite od požara, uputstva u boji. Na USB ključu i u štampanom obliku.",
+        "tekst": "Akt o proceni rizika za svako radno mesto, pravilnik o BZR, pravilnik o LZO, pravila i planovi zaštite od požara, uputstva u boji. Na USB ključu ili po dogovoru na ruke, i u štampanom obliku.",
         "highlight": false
       },
       {
@@ -116,13 +115,13 @@
       {
         "n": "04",
         "naslov": "Mesečna kontrola",
-        "tekst": "Izlazak na teren, geotagovane fotografije nedostataka i protokol sa predlogom mera u vašem imejlu. Uz izveštaj ide i faktura.",
+        "tekst": "Izlazak na teren jednom mesečno ili po dogovoru, geotagovane fotografije nedostataka i protokol sa predlogom mera u vašem imejlu.",
         "highlight": true
       }
     ]
   },
   "rokovi": {
-    "oznaka": "03 / ROKOVI KOJI VAS SE TIČU",
+    "oznaka": "02 / ROKOVI KOJI VAS SE TIČU",
     "datumRed1": "1. januar",
     "datumRed2": "2027.",
     "tekst": "Od tog dana primenjuju se četiri nova pravilnika: o proceni rizika, o radu na visini, o pregledu opreme za rad i električnih i gromobranskih instalacija, i o vođenju evidencija. Primena je pomerena sa 1. jula 2026. godine. Dobili ste vreme, ne oproštaj.",
@@ -132,28 +131,27 @@
       { "oznaka": "KAZNA / ODGOVORNO LICE", "iznos": "50.000–150.000", "valuta": "RSD" }
     ],
     "gradilistaJako": "Gradilišta.",
-    "gradilistaTekst": " Prijavu o početku rada dostavljate inspekciji rada najmanje osam dana pre početka radova, a elaborat o uređenju gradilišta izrađujete ako radovi traju duže od tri dana neprekidno.",
+    "gradilistaTekst": " Prijavu o početku rada dostavljamo inspekciji rada najmanje osam dana pre početka radova, a uz to dobijate i usluge koordinatora gradilišta u fazi izvođenja radova.",
     "izvor": "Izvor: Zakon o BZR („Sl. glasnik RS\" br. 35/2023) i prateći pravilnici („Sl. glasnik RS\" br. 57/2026)."
   },
   "paketi": {
-    "oznaka": "04 / MESEČNI PAUŠAL",
+    "oznaka": "03 / MESEČNI PAUŠAL",
     "naslov": "BZR i ZOP po sistemu ključ u ruke",
     "uvod": "Mesečni paušal po meri vaše firme. Vi dobijate stručno lice, dokumentaciju i rokove pod kontrolom, bez zaposlenog inženjera na platnom spisku."
   },
   "cenovnik": {
-    "oznaka": "05 / CENOVNIK",
+    "oznaka": "04 / CENOVNIK",
     "naslov": "Cene bez iznenađenja",
     "uvod": "Objavljujemo cene. Niko drugi u ovom poslu to ne radi. Mi mislimo da je to prvi test poverenja.",
     "link": "CEO CENOVNIK →"
   },
   "zasto": {
     "naslov": "Zašto Preving Pro",
-    "oznaka": "06 / DOKAZI, NE PRIDEVI",
+    "oznaka": "05 / DOKAZI, NE PRIDEVI",
     "licence": [
       { "oznaka": "LICENCA 01", "tekst": "Savetnik za bezbednost i zdravlje na radu" },
-      { "oznaka": "LICENCA 02", "tekst": "Koordinator gradilišta u fazi izrade projekta" },
-      { "oznaka": "LICENCA 03", "tekst": "Koordinator gradilišta u fazi izvođenja radova" },
-      { "oznaka": "LICENCA 04", "tekst": "Referent zaštite od požara" }
+      { "oznaka": "LICENCA 02", "tekst": "Koordinator gradilišta u fazi izvođenja radova" },
+      { "oznaka": "LICENCA 03", "tekst": "Referent zaštite od požara" }
     ],
     "licenceNapomena": "Izdate od Inspektorata za rad i MUP-a Republike Srbije.",
     "iskustvoOznaka": "DESET GODINA NA NAJZAHTEVNIJIM PROJEKTIMA U EU",
@@ -168,7 +166,7 @@
     "kartice": [
       {
         "oznaka": "OPREMA NA TERENU",
-        "tekst": "Alcovisor Mark X Plus za kontrolu alkohola sa protokolom o testiranju, fotoaparat za geotagovani fotoreporting, projektor za obuke na terenu."
+        "tekst": "Alcovisor Mark X Plus za kontrolu alkohola sa protokolom o testiranju, fotoaparat Olympus OM System TG-6 za geotagovani fotoreporting, projektor Epson EB-W05 za obuke na terenu."
       },
       {
         "oznaka": "DOSTUPNOST",
@@ -186,12 +184,12 @@
     "napomena": "Poslove obavljamo na osnovu ličnih licenci izdatih od Inspektorata za rad i MUP-a Republike Srbije, uz akt poslodavca o imenovanju savetnika za BZR i ugovor koji ostaje u vašoj dokumentaciji."
   },
   "faq": {
-    "oznaka": "07 / PITANJA",
+    "oznaka": "06 / PITANJA",
     "naslov": "Ono što nas svi pitaju",
     "uvod": "Ako vaše pitanje nije ovde, pozovite. Odgovaramo istog radnog dana."
   },
   "kontakt": {
-    "oznaka": "08 / KONTAKT",
+    "oznaka": "07 / KONTAKT",
     "naslov": "Zatražite ponudu",
     "uvod": "Pošaljite osnovne podatke i dobijate konkretnu ponudu, bez obaveze. Odgovaramo istog radnog dana.",
     "polja": {

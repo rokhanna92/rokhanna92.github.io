@@ -43,12 +43,12 @@ const meta = {
   grupa: String(grupe.length).padStart(2, '0'),
   stavki: String(grupe.reduce((n, g) => n + g.stavke.length, 0)).padStart(2, '0'),
   valuta: 'RSD',
-  pdv: 'BEZ PDV-a',
+  pdv: 'NIJE U SISTEMU',
 };
 
 const title = 'Cenovnik 2026/27 · Preving Pro';
 const description =
-  'Objavljeni cenovnik za BZR, zaštitu od požara, koordinaciju gradilišta i obuke. Cene su u dinarima, bez PDV-a, sa procenom troška za vašu firmu.';
+  'Objavljeni cenovnik za BZR, zaštitu od požara, koordinaciju gradilišta i obuke. Cene su u dinarima, sa procenom troška za vašu firmu.';
 ---
 
 <!doctype html>
@@ -126,7 +126,7 @@ const description =
         <div style="max-width:1360px; margin:0 auto">
           <p style="margin:0 0 20px; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45); letter-spacing:.2em"><a href="/" class="crumb-a" style="color:rgba(255,255,255,.45)">POČETNA</a> / <span style="color:#FECB0F">CENOVNIK 2026/27</span></p>
           <h1 style="margin:0; font:700 clamp(38px,4.6vw,68px)/1 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.035em; color:#fff">Cene bez iznenađenja.</h1>
-          <p style="margin:22px 0 0; font:400 17px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.68); max-width:58ch">Objavljujemo cenovnik. U ovom poslu to gotovo niko ne radi, a mi mislimo da je to prvi test poverenja. Cene su u dinarima, bez PDV-a, informativne: tačna ponuda stiže u roku od jednog radnog dana.</p>
+          <p style="margin:22px 0 0; font:400 17px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.68); max-width:58ch">Objavljujemo cenovnik. U ovom poslu to gotovo niko ne radi, a mi mislimo da je to prvi test poverenja. Cene su u dinarima i informativne: tačna ponuda stiže u roku od jednog radnog dana.</p>
 
           <dl class="titleblock">
             <div><dt>IZDANJE</dt><dd>{meta.izdanje}</dd></div>

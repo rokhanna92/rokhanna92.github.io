@@ -33,10 +33,10 @@
         },
         {
           "id": "fotoreporting",
-          "n": "Kontrola gradilišta sa fotoreportingom",
+          "n": "Kontrola gradilišta/radilišta sa fotoreportingom",
           "d": "geotagovane fotografije i protokol u imejlu",
           "iznos": "6.400",
-          "jedinica": "/ sat"
+          "jedinica": "/ izlasku na teren"
         },
         {
           "id": "zastupanje-inspekcija",
@@ -80,12 +80,6 @@
           "n": "Elaborat zaštite od požara",
           "d": "za složenije objekte i tehnologije",
           "iznos": "od 25.000"
-        },
-        {
-          "id": "elaborat-gradiliste",
-          "n": "Elaborat o uređenju gradilišta",
-          "d": "za radove duže od tri dana",
-          "iznos": "na upit"
         }
       ]
     },
@@ -123,7 +117,7 @@
       ]
     }
   ],
-  "note": "Sve cene su u dinarima, bez PDV-a. Cenovnik važi za 2026/27. i menja se objavom na ovoj strani. Za mesečne pakete cena zavisi od broja zaposlenih i delatnosti.",
+  "note": "Sve cene su u dinarima. Poreski obveznik nije u sistemu PDV-a na osnovu člana 33. Zakona o PDV-u. Cenovnik važi za 2026/27. i menja se objavom na ovoj strani. Za mesečne pakete cena zavisi od broja zaposlenih i delatnosti.",
   "estimator": {
     "defaults": {
       "mesta": 5,

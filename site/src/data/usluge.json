@@ -56,7 +56,6 @@
   },
   "koordinator": {
     "licences": [
-      "LICENCA · FAZA IZRADE PROJEKTA",
       "LICENCA · FAZA IZVOĐENJA RADOVA"
     ],
     "cards": [
@@ -64,16 +63,6 @@
         "metric": "8 DANA",
         "title": "Prijava radova",
         "text": "Najmanje osam dana pre početka radova prijava ide inspekciji rada. Pripremamo je i predajemo za vas."
-      },
-      {
-        "metric": "> 3 DANA",
-        "title": "Elaborat o uređenju gradilišta",
-        "text": "Obavezan za radove koji traju duže od tri dana neprekidno. Izrađujemo ga i usklađujemo sa izvođačima."
-      },
-      {
-        "metric": "FAZA 1",
-        "title": "Izrada projekta",
-        "text": "Plan preventivnih mera i koordinacija projektanata, da se bezbednost ne dodaje naknadno nego ugradi u projekat."
       },
       {
         "metric": "FAZA 2",
@@ -101,7 +90,7 @@
       {
         "n": "01",
         "title": "Teorija",
-        "text": "Uživo kod vas ili onlajn, sa projektorom koji donosimo.",
+        "text": "Uživo kod vas, kod nas u agenciji ili onlajn, sa projektorom koji donosimo.",
         "highlight": false
       },
       {

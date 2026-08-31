@@ -1,6 +1,6 @@
 {
   "stats": [
-    { "label": "Lične licence", "value": "4" },
+    { "label": "Lične licence", "value": "3" },
     { "label": "Godine prakse na tržištu EU", "value": "10" },
     { "label": "Rafinerije: Slovnaft · MOL · Unipetrol · OMV · INA", "value": "5" },
     { "label": "Ljudi koje dobijate na telefon", "value": "2" }
@@ -45,8 +45,8 @@
     },
     {
       "tag": "SRBIJA",
-      "title": "Četiri lične licence",
-      "text": "Savetnik za BZR, koordinator u fazi izrade projekta, koordinator u fazi izvođenja radova, referent zaštite od požara. Inspektorat za rad i MUP RS.",
+      "title": "Tri lične licence",
+      "text": "Savetnik za BZR, koordinator gradilišta u fazi izvođenja radova, referent zaštite od požara. Inspektorat za rad i MUP RS.",
       "chips": null
     },
     {
@@ -62,7 +62,7 @@
       "photo": "Fotografija: Boris na terenu",
       "name": "Boris Sabo",
       "role": "OSNIVAČ · SAVETNIK ZA BZR · KOORDINATOR",
-      "bio": "Master bezbednosti na radu (Nitra). Tri godine koordinator u Slovačkoj, sedam godina na remontima rafinerija po EU, četiri lične licence u Srbiji. Na njega ide linija 24/7."
+      "bio": "Master bezbednosti na radu (Nitra). Tri godine koordinator u Slovačkoj, sedam godina na remontima rafinerija po EU, tri lične licence u Srbiji. Na njega ide linija 24/7."
     },
     {
       "id": "foto-mira",
@@ -75,7 +75,7 @@
   "teren": [
     {
       "label": "OPREMA",
-      "text": "Alcovisor Mark X Plus za kontrolu alkohola sa protokolom, fotoaparat za geotagovani fotoreporting, projektor za obuke na terenu."
+      "text": "Alcovisor Mark X Plus za kontrolu alkohola sa protokolom, fotoaparat Olympus OM System TG-6 za geotagovani fotoreporting, projektor Epson EB-W05 za obuke na terenu."
     },
     {
       "label": "DOSTUPNOST",

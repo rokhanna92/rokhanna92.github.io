@@ -56,7 +56,7 @@
       "tabular": false
     },
     {
-      "label": "Kontrola gradilišta sa fotoreportingom, po satu",
+      "label": "Kontrola gradilišta/radilišta sa fotoreportingom, po izlasku na teren",
       "ref": "fotoreporting",
       "tabular": false
     },
@@ -66,5 +66,5 @@
       "tabular": false
     }
   ],
-  "itemsNote": "Cene su u dinarima, bez PDV-a."
+  "itemsNote": "Cene su u dinarima. Poreski obveznik nije u sistemu PDV-a na osnovu člana 33. Zakona o PDV-u."
 }

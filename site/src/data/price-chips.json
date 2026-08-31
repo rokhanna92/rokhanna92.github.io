@@ -6,7 +6,7 @@
   ],
   "koordinator": [
     { "label": "SAT KOORDINATORA", "ref": "sat-savetnika", "suffix": "" },
-    { "label": "KONTROLA SA FOTOREPORTINGOM", "ref": "fotoreporting", "suffix": "/ SATU" },
+    { "label": "KONTROLA SA FOTOREPORTINGOM", "ref": "fotoreporting", "suffix": "/ IZLASKU NA TEREN" },
     { "label": "ZASTUPANJE PRED INSPEKCIJOM", "ref": "zastupanje-inspekcija", "suffix": "" }
   ]
 }
