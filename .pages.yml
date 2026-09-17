@@ -1282,7 +1282,7 @@ content:
             hidden: true
           - name: slika
             label: "Fotografija"
-            description: "Kvadratni portret. Sajt ga prikazuje u odnosu 1:1, pa se šira ili viša slika seče po sredini."
+            description: "Fotografija u odnosu 4:3 (na primer 1000 x 750). Sajt je prikazuje u tom odnosu, pa se šira ili viša slika seče po sredini."
             type: image
             required: true
           - name: name
