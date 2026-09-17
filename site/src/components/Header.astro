@@ -33,7 +33,7 @@ const innerNav = [
 ];
 
 const nav = inner ? innerNav : homeNav;
-const bannerHref = inner ? '/#provera' : '#provera';
+const bannerHref = '/cenovnik';
 const logoHref = inner ? '/' : '#pp-root';
 const ctaHref = cta ?? (inner ? '/kontakt' : '#kontakt');
 const navStyle = inner
@@ -52,8 +52,8 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
 
 {showBanner && (
 <div class="hdr-banner" style={bannerStyle}>
-  <span style="font:600 11.5px 'IBM Plex Mono',monospace; letter-spacing:.14em; font-variant-numeric:tabular-nums">ČETIRI NOVA PRAVILNIKA SE PRIMENJUJU OD 01.01.2027. · JOŠ <span data-cd="days">{days}</span> DANA</span>
-  <a href={bannerHref} class="hdr-banner-a" style={bannerLinkStyle}>PROVERITE OBAVEZE →</a>
+  <span style="font:600 11.5px 'IBM Plex Mono',monospace; letter-spacing:.14em; font-variant-numeric:tabular-nums">FIRMA KREĆE SA RADOM 01.01.2027. · JOŠ <span data-cd="days">{days}</span> DANA</span>
+  <a href={bannerHref} class="hdr-banner-a" style={bannerLinkStyle}>POTPUNA TRANSPARENTNOST, OD CENA DO POSLOVANJA →</a>
 </div>
 )}
 
