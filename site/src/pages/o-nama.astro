@@ -250,9 +250,8 @@ const description =
           <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr)); gap:28px; max-width:980px">
             {tim.map((p, i) => (
               <div data-fd style={`background:#fff; border:1px solid rgba(7,7,7,.15)${i === 0 ? '' : '; transition-delay:.08s'}`}>
-                {/* Fotografija je 4:3 kao i okvir pre nje. Portretni original je
-                    prosiren pozadinom u stranu, pa se ovde nista ne sece. */}
-                <img src={p.slika} alt={p.name} width="1000" height="750" loading="lazy" decoding="async" style="display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; border-bottom:2px solid #070707" />
+                {/* Fotografija je 4:3 kao i okvir pre nje, pa se ovde nista ne sece. */}
+                <img src={p.slika} alt={p.name} width="1448" height="1086" loading="lazy" decoding="async" style="display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; border-bottom:2px solid #070707" />
                 <div style="padding:24px 26px 26px">
                   <p style="margin:0; font:700 22px 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.01em">{p.name}</p>
                   <p style="margin:6px 0 14px; font:600 11.5px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(7,7,7,.55)">{p.role}</p>

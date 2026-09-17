@@ -59,14 +59,14 @@
   "tim": [
     {
       "id": "foto-boris",
-      "slika": "/boris.jpg",
+      "slika": "/Boris.png",
       "name": "Boris Sabo",
       "role": "OSNIVAČ · SAVETNIK ZA BZR · KOORDINATOR",
       "bio": "Master bezbednosti na radu (Nitra). Tri godine koordinator u Slovačkoj, sedam godina na remontima rafinerija po EU. Na njega ide linija 24/7."
     },
     {
       "id": "foto-mira",
-      "slika": "/mira.jpg",
+      "slika": "/Mira.png",
       "name": "Mira Lainović",
       "role": "KANCELARIJA · ADMINISTRACIJA · SARADNIK ZA BZR I ZOP",
       "bio": "Grafički tehničar, sedam godina na projektima rafinerija sa SAM Industries a.s. Vodi dokumentaciju, evidencije i komunikaciju: kod nje ništa ne kasni."
