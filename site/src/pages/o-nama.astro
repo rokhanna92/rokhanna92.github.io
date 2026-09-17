@@ -55,7 +55,7 @@ for (let d = Math.ceil(latMin); d <= Math.floor(latMax); d++) mrezaLat.push(naCr
 
 const title = 'O nama · Preving Pro';
 const description =
-  'Preving Pro je agencija za preventivni inženjering i tehničko savetovanje iz Novog Sada. Deset godina na remontima rafinerija po EU i tri lične licence.';
+  'Preving Pro je društvo za preventivni inženjering iz Novog Sada. Deset godina na remontima rafinerija po EU, licenca za BZR i rešenje za zaštitu od požara na ime firme.';
 ---
 
 <!doctype html>
@@ -133,13 +133,6 @@ const description =
         .mapa-puls{animation:none}
       }
 
-      /* Mesto za fotografiju. Zamenite <img> tagom kad slika stigne. */
-      .img-slot{display:block;position:relative;font:13px/1.3 'IBM Plex Sans',system-ui,sans-serif;width:100%;height:100%;aspect-ratio:3/2}
-      .img-slot-frame{position:absolute;inset:0;overflow:hidden;background:rgba(127,127,127,.08)}
-      .img-slot-ring{position:absolute;inset:0;pointer-events:none;border:1.5px dashed currentColor;opacity:.35}
-      .img-slot-empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:12px;box-sizing:border-box}
-      .img-slot-empty svg{opacity:.45}
-      .img-slot-cap{max-width:90%;font-weight:500;letter-spacing:.01em;opacity:.75}
     </style>
   </head>
   <body>
@@ -154,7 +147,7 @@ const description =
           <p class="hero-crumb" style="grid-column:1 / -1; margin:0 0 20px; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45); letter-spacing:.2em"><a href="/" style="color:rgba(255,255,255,.45)">POČETNA</a> / <span style="color:#FECB0F">O NAMA</span></p>
           <div style="min-width:0">
             <h1 style="margin:0; font:700 clamp(38px,4.6vw,68px)/1 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.035em; color:#fff; max-width:16ch">Dva čoveka. Deset godina rafinerija.</h1>
-            <p style="margin:22px 0 0; font:400 17px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.68); max-width:58ch">Preving Pro je agencija za preventivni inženjering i tehničko savetovanje iz Novog Sada. Iza imena stoje dvoje ljudi i deset godina rada na projektima gde se bezbednost ne dokazuje pečatom, nego praksom.</p>
+            <p style="margin:22px 0 0; font:400 17px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.68); max-width:58ch">Preving Pro je društvo za preventivni inženjering iz Novog Sada. Iza imena stoje dvoje ljudi i deset godina rada na projektima gde se bezbednost ne dokazuje pečatom, nego praksom.</p>
             <div style="display:flex; flex-wrap:wrap; gap:0; margin-top:40px; border-top:1px solid rgba(255,255,255,.14); max-width:760px">
               {stats.map((s, i) => (
                 <div style={`display:flex; justify-content:space-between; gap:20px; width:100%;${i === stats.length - 1 ? '' : ' border-bottom:1px dotted rgba(255,255,255,.2);'} padding:11px 0; font:500 14px 'IBM Plex Mono',monospace`}><span style="color:rgba(255,255,255,.55)">{s.label}</span><span style="color:#FECB0F">{s.value}</span></div>
@@ -257,16 +250,8 @@ const description =
           <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr)); gap:28px; max-width:980px">
             {tim.map((p, i) => (
               <div data-fd style={`background:#fff; border:1px solid rgba(7,7,7,.15)${i === 0 ? '' : '; transition-delay:.08s'}`}>
-                <div style="width:100%; aspect-ratio:4/3; position:relative; border-bottom:2px solid #070707">
-                  <div class="img-slot" role="img" aria-label={p.photo}>
-                    <div class="img-slot-frame"></div>
-                    <div class="img-slot-ring"></div>
-                    <div class="img-slot-empty">
-                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="m21 15-5-5L5 21"></path></svg>
-                      <div class="img-slot-cap">{p.photo}</div>
-                    </div>
-                  </div>
-                </div>
+                {/* Portret je kvadrat: 4:3 bi od portretne fotografije ostavio samo lice. */}
+                <img src={p.slika} alt={p.name} width="900" height="900" loading="lazy" decoding="async" style="display:block; width:100%; aspect-ratio:1/1; object-fit:cover; border-bottom:2px solid #070707" />
                 <div style="padding:24px 26px 26px">
                   <p style="margin:0; font:700 22px 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.01em">{p.name}</p>
                   <p style="margin:6px 0 14px; font:600 11.5px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(7,7,7,.55)">{p.role}</p>

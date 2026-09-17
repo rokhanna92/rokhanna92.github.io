@@ -6,15 +6,15 @@
       "stavke": [
         {
           "id": "pausal-osnovni",
-          "n": "Osnovni paket",
-          "d": "imenovanje savetnika, mesečni obilazak, izveštaj, evidencije",
-          "iznos": "od 8.200",
+          "n": "Mikro paket",
+          "d": "imenovanje savetnika, obilazak po dogovoru, izveštaj, evidencije",
+          "iznos": "od 6.400",
           "jedinica": "/ mes"
         },
         {
           "id": "pausal-pro",
-          "n": "Pro paket · ključ u ruke",
-          "d": "sve iz Osnovnog + alko-testiranje, zastupanje, linija 24/7",
+          "n": "Makro paket · ključ u ruke",
+          "d": "sve iz Mikro paketa + alko-testiranje, zastupanje, linija 24/7",
           "iznos": "od 12.000",
           "jedinica": "/ mes"
         }
@@ -102,19 +102,6 @@
           "jedinica": "/ radniku"
         }
       ]
-    },
-    {
-      "naziv": "SERVIS",
-      "oznaka": "G-05",
-      "stavke": [
-        {
-          "id": "revizija-pp-aparata",
-          "n": "Revizija PP aparata",
-          "d": "na vašoj adresi, sa nalepnicom i zapisnikom",
-          "iznos": "od 250",
-          "jedinica": "/ aparatu"
-        }
-      ]
     }
   ],
   "note": "Sve cene su u dinarima. Poreski obveznik nije u sistemu PDV-a na osnovu člana 33. Zakona o PDV-u. Cenovnik važi za 2026/27. i menja se objavom na ovoj strani. Za mesečne pakete cena zavisi od broja zaposlenih i delatnosti.",
@@ -139,7 +126,7 @@
       "pravilnikLzo": 10000,
       "pravilaZop": 8000,
       "obukaPoRadniku": 2000,
-      "pausalOsnovni": 8200,
+      "pausalOsnovni": 6400,
       "pausalPro": 12000
     },
     "labels": {
@@ -157,11 +144,11 @@
         "id": "ne"
       },
       {
-        "t": "Osnovni",
+        "t": "Mikro",
         "id": "osnovni"
       },
       {
-        "t": "Pro",
+        "t": "Makro",
         "id": "pro"
       }
     ],

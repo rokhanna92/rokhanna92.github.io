@@ -19,20 +19,21 @@
       "redovi": [
         { "label": "Zakon 35/2023", "value": "NA SNAZI" },
         { "label": "4 nova pravilnika", "value": "01.01.2027." },
-        { "label": "Lične licence", "value": "3 / 3" }
+        { "label": "Licenca BZR · rešenje ZOP", "value": "PRAVNO LICE" }
       ]
     },
     "traka": [
       "AKT O PROCENI RIZIKA",
       "OBUKA ZAPOSLENIH",
       "PLAN EVAKUACIJE",
-      "REVIZIJA PP APARATA",
+      "KONTROLA GRADILIŠTA I FIRMI",
+      "VOĐENJE EVIDENCIJA",
       "ZASTUPANJE PRED INSPEKCIJOM",
       "GEOTAGOVANI FOTOREPORTING"
     ]
   },
   "brojke": [
-    { "broj": "03", "tekst": "lične licence Inspektorata za rad i MUP-a Republike Srbije" },
+    { "broj": "02", "tekst": "dokumenta na ime firme: licenca za poslove BZR i rešenje MUP-a za zaštitu od požara" },
     { "broj": "10", "tekst": "godina na investicionim projektima i remontima u EU" },
     { "broj": "05", "tekst": "rafinerija: Slovnaft, MOL, Unipetrol, OMV i INA" },
     { "broj": "24/7", "tekst": "telefonska linija i hitan izlazak na teren" }
@@ -124,7 +125,7 @@
     "oznaka": "02 / ROKOVI KOJI VAS SE TIČU",
     "datumRed1": "1. januar",
     "datumRed2": "2027.",
-    "tekst": "Od tog dana primenjuju se četiri nova pravilnika: o proceni rizika, o radu na visini, o pregledu opreme za rad i električnih i gromobranskih instalacija, i o vođenju evidencija. Primena je pomerena sa 1. jula 2026. godine. Dobili ste vreme, ne oproštaj.",
+    "tekst": "Od tog dana primenjuju se četiri nova pravilnika, među njima o proceni rizika, o radu na visini i o vođenju evidencija. Primena je pomerena sa 1. jula 2026. godine. Dobili ste vreme, ne oproštaj. Naš deo posla: obuke zaposlenih, kontrola gradilišta i firmi, vođenje evidencija i zastupanje pred inspekcijom.",
     "kazne": [
       { "oznaka": "KAZNA / PREDUZETNIK", "iznos": "400.000–500.000", "valuta": "RSD" },
       { "oznaka": "KAZNA / PRAVNO LICE", "iznos": "1,5–2 miliona", "valuta": "RSD" },
@@ -149,11 +150,10 @@
     "naslov": "Zašto Preving Pro",
     "oznaka": "05 / DOKAZI, NE PRIDEVI",
     "licence": [
-      { "oznaka": "LICENCA 01", "tekst": "Savetnik za bezbednost i zdravlje na radu" },
-      { "oznaka": "LICENCA 02", "tekst": "Koordinator gradilišta u fazi izvođenja radova" },
-      { "oznaka": "LICENCA 03", "tekst": "Referent zaštite od požara" }
+      { "oznaka": "LICENCA", "tekst": "Licenca za pravna lica za obavljanje poslova bezbednosti i zdravlja na radu" },
+      { "oznaka": "REŠENJE", "tekst": "Rešenje za obavljanje poslova organizovanja zaštite od požara u subjektima II i III kategorije ugroženosti od požara" }
     ],
-    "licenceNapomena": "Izdate od Inspektorata za rad i MUP-a Republike Srbije.",
+    "licenceNapomena": "Izdati na ime firme: Preving Pro DOO, Novi Sad.",
     "iskustvoOznaka": "DESET GODINA NA NAJZAHTEVNIJIM PROJEKTIMA U EU",
     "rafinerije": [
       { "ime": "Slovnaft", "mesto": "BRATISLAVA · SLOVAČKA" },
@@ -181,7 +181,7 @@
         { "jako": "Cela Vojvodina", "tekst": ": po dogovoru." }
       ]
     },
-    "napomena": "Poslove obavljamo na osnovu ličnih licenci izdatih od Inspektorata za rad i MUP-a Republike Srbije, uz akt poslodavca o imenovanju savetnika za BZR i ugovor koji ostaje u vašoj dokumentaciji."
+    "napomena": "Poslove obavljamo na osnovu licence za pravna lica za obavljanje poslova BZR i rešenja MUP-a za organizovanje zaštite od požara, uz akt poslodavca o imenovanju savetnika za BZR i ugovor koji ostaje u vašoj dokumentaciji."
   },
   "faq": {
     "oznaka": "06 / PITANJA",

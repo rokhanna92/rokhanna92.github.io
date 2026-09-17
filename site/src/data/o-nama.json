@@ -1,6 +1,6 @@
 {
   "stats": [
-    { "label": "Lične licence", "value": "3" },
+    { "label": "Licenca za BZR i rešenje za ZOP, na ime firme", "value": "2" },
     { "label": "Godine prakse na tržištu EU", "value": "10" },
     { "label": "Rafinerije: Slovnaft · MOL · Unipetrol · OMV · INA", "value": "5" },
     { "label": "Ljudi koje dobijate na telefon", "value": "2" }
@@ -44,29 +44,29 @@
       ]
     },
     {
-      "tag": "SRBIJA",
-      "title": "Tri lične licence",
-      "text": "Savetnik za BZR, koordinator gradilišta u fazi izvođenja radova, referent zaštite od požara. Inspektorat za rad i MUP RS.",
+      "tag": "2026 · NOVI SAD",
+      "title": "Osnovan Preving Pro",
+      "text": "Preving Pro DOO za preventivni inženjering, Novi Sad. Kancelarija na Temerinskom putu 51 na Klisi: na glavnom putu, nadomak rafinerije. Standard sa remonta, primenjen na male firme u Vojvodini.",
       "chips": null
     },
     {
-      "tag": "2026 · NOVI SAD",
-      "title": "Osnovan Preving Pro",
-      "text": "Boris Sabo PR, Novi Sad. Kancelarija na Temerinskom putu 51 na Klisi: na glavnom putu, nadomak rafinerije. Standard sa remonta, primenjen na male firme u Vojvodini.",
+      "tag": "SRBIJA · PRAVNO LICE",
+      "title": "Licenca i rešenje na ime firme",
+      "text": "Licenca za pravna lica za obavljanje poslova bezbednosti i zdravlja na radu i rešenje MUP-a za obavljanje poslova organizovanja zaštite od požara u subjektima II i III kategorije ugroženosti od požara.",
       "chips": null
     }
   ],
   "tim": [
     {
       "id": "foto-boris",
-      "photo": "Fotografija: Boris na terenu",
+      "slika": "/boris.jpg",
       "name": "Boris Sabo",
       "role": "OSNIVAČ · SAVETNIK ZA BZR · KOORDINATOR",
-      "bio": "Master bezbednosti na radu (Nitra). Tri godine koordinator u Slovačkoj, sedam godina na remontima rafinerija po EU, tri lične licence u Srbiji. Na njega ide linija 24/7."
+      "bio": "Master bezbednosti na radu (Nitra). Tri godine koordinator u Slovačkoj, sedam godina na remontima rafinerija po EU. Na njega ide linija 24/7."
     },
     {
       "id": "foto-mira",
-      "photo": "Fotografija: Mira u kancelariji",
+      "slika": "/mira.jpg",
       "name": "Mira Lainović",
       "role": "KANCELARIJA · ADMINISTRACIJA · SARADNIK ZA BZR I ZOP",
       "bio": "Grafički tehničar, sedam godina na projektima rafinerija sa SAM Industries a.s. Vodi dokumentaciju, evidencije i komunikaciju: kod nje ništa ne kasni."
@@ -87,7 +87,7 @@
     },
     {
       "label": "OSNOV RADA",
-      "text": "Lične licence, akt poslodavca o imenovanju savetnika za BZR i ugovor koji ostaje u vašoj dokumentaciji."
+      "text": "Licenca za pravna lica za obavljanje poslova BZR, rešenje MUP-a za organizovanje zaštite od požara, akt poslodavca o imenovanju savetnika za BZR i ugovor koji ostaje u vašoj dokumentaciji."
     }
   ]
 }

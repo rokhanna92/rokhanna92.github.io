@@ -5,7 +5,7 @@
       "Pravilnik o BZR i pravilnik o ličnoj zaštitnoj opremi",
       "Osposobljavanje zaposlenih za bezbedan i zdrav rad",
       "Vođenje svih propisanih evidencija, po novim obrascima",
-      "Organizacija pregleda opreme za rad i instalacija",
+      "Kontrola gradilišta i firme, sa geotagovanim fotoreportingom",
       "Zastupanje pred Inspekcijom rada i izlazak na teren kod povrede"
     ],
     "checklist": [
@@ -55,9 +55,6 @@
     ]
   },
   "koordinator": {
-    "licences": [
-      "LICENCA · FAZA IZVOĐENJA RADOVA"
-    ],
     "cards": [
       {
         "metric": "8 DANA",

@@ -136,7 +136,7 @@ const description =
           <div style="position:absolute; left:0; top:6px; bottom:6px; width:3px; background:repeating-linear-gradient(180deg,#070707 0 10px,transparent 10px 26px); animation:flowY 1.2s linear infinite" aria-hidden="true"></div>
           <p style="margin:0 0 12px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:rgba(7,7,7,.45)">USLUGA 1.2</p>
           <h2 data-wp style="margin:0 0 18px; font:700 clamp(30px,3.4vw,46px)/1.04 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.03em">Zaštita od požara</h2>
-          <p style="margin:0 0 36px; font:400 16px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.65); max-width:60ch">Referent zaštite od požara za vaš objekat: dokumentacija po kategoriji ugroženosti, obuka zaposlenih i redovna revizija aparata.</p>
+          <p style="margin:0 0 36px; font:400 16px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.65); max-width:60ch">Referent zaštite od požara za vaš objekat: dokumentacija po kategoriji ugroženosti i obuka zaposlenih.</p>
           <div style="display:flex; flex-wrap:wrap; gap:40px">
             <div style="flex:1 1 460px; min-width:0">
               <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr)); gap:14px">
@@ -159,10 +159,10 @@ const description =
               </div>
             </div>
             <div data-fd style="flex:0 1 340px; min-width:0; align-self:flex-start; background:#070707; color:#F2F1EC; padding:28px 28px 26px; transition-delay:.1s">
-              <p style="margin:0; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.2em; color:#FECB0F">NAJLAKŠI PRVI POSAO</p>
-              <p style="margin:12px 0 8px; font:700 34px 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.02em">{cena('revizija-pp-aparata').iznos} <span style="font:500 13px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.5)">RSD / APARATU</span></p>
-              <p style="margin:0 0 18px; font:400 14.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.7)">Revizija PP aparata na vašoj adresi, sa nalepnicom i zapisnikom. Pozovite, dolazimo: pa se upoznajemo na poslu, ne na sastanku.</p>
-              <a href="/kontakt" class="btn-y" style="display:inline-block; background:#FECB0F; color:#070707; font:700 13.5px 'IBM Plex Sans',system-ui,sans-serif; padding:12px 20px">Zakažite reviziju →</a>
+              <p style="margin:0; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.2em; color:#FECB0F">REŠENJE MUP-a</p>
+              <p style="margin:12px 0 8px; font:700 34px 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.02em">II i III <span style="font:500 13px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.5)">KATEGORIJA</span></p>
+              <p style="margin:0 0 18px; font:400 14.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.7)">Rešenje za obavljanje poslova organizovanja zaštite od požara u subjektima II i III kategorije ugroženosti od požara, na ime firme. Pozovite, dolazimo: pa se upoznajemo na poslu, ne na sastanku.</p>
+              <a href="/kontakt" class="btn-y" style="display:inline-block; background:#FECB0F; color:#070707; font:700 13.5px 'IBM Plex Sans',system-ui,sans-serif; padding:12px 20px">Zatražite ponudu →</a>
             </div>
           </div>
         </div>
@@ -173,12 +173,7 @@ const description =
           <div style="position:absolute; left:0; top:6px; bottom:6px; width:3px; background:repeating-linear-gradient(180deg,#FECB0F 0 10px,transparent 10px 26px); animation:flowY 1.2s linear infinite" aria-hidden="true"></div>
           <p style="margin:0 0 12px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:rgba(254,203,15,.7)">USLUGA 1.3</p>
           <h2 data-wp style="margin:0 0 18px; font:700 clamp(30px,3.4vw,46px)/1.04 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.03em; color:#fff">Koordinator za BZR na gradilištu</h2>
-          <p style="margin:0 0 14px; font:400 16px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.65); max-width:60ch">Lična licenca koordinatora za bezbednost i zdravlje na radu u fazi izvođenja radova. Tri godine ovog posla na gradilištima u Slovačkoj, sada za investitore u Vojvodini.</p>
-          <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:36px">
-            {koordinator.licences.map((l) => (
-              <span style="border:1px solid rgba(254,203,15,.4); color:#FECB0F; font:600 11.5px 'IBM Plex Mono',monospace; letter-spacing:.1em; padding:9px 13px">{l}</span>
-            ))}
-          </div>
+          <p style="margin:0 0 36px; font:400 16px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.65); max-width:60ch">Koordinator za bezbednost i zdravlje na radu u fazi izvođenja radova. Tri godine ovog posla na gradilištima u Slovačkoj, sada za investitore u Vojvodini.</p>
           <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr)); gap:16px">
             {koordinator.cards.map((c, i) => (
               <div data-fd style={`border:1px solid rgba(255,255,255,.14); padding:22px${delay(i, 7)}`}>

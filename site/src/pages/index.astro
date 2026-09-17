@@ -269,6 +269,7 @@ const description = tekst.meta.opis;
                   <span style="position:absolute; top:-14px; right:24px; background:#070707; color:#FECB0F; font:700 10.5px 'IBM Plex Mono',monospace; letter-spacing:.16em; padding:6px 12px">{p.badge}</span>
                 )}
                 <p style="margin:0; font:700 18px 'IBM Plex Sans',system-ui,sans-serif">{cena(p.ref).naziv}</p>
+                <p style={`margin:6px 0 0; font:400 13.5px/1.5 "IBM Plex Sans",system-ui,sans-serif; color:rgba(7,7,7,${p.featured ? '.7' : '.55'})`}>{p.tagline}</p>
                 <p style="margin:8px 0 20px; font:700 34px 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.02em">{`${cena(p.ref).iznos} ${p.suffix}`.trim()} <span style="font:500 13px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.5)">{p.unit}</span></p>
                 <div style={`display:grid; gap:12px; font:400 15px/1.5 "IBM Plex Sans",system-ui,sans-serif; color:rgba(7,7,7,${p.featured ? '.85' : '.8'})`}>
                   {p.features.map((f) => (

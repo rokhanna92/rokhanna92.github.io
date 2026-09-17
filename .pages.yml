@@ -783,7 +783,7 @@ content:
             fields:
               - name: oznaka
                 label: "Oznaka licence"
-                description: "Na primer LICENCA 01."
+                description: "Na primer LICENCA ili REŠENJE."
                 type: string
                 required: true
                 options:
@@ -793,7 +793,7 @@ content:
                 type: string
                 required: true
                 options:
-                  maxlength: 90
+                  maxlength: 130
           - name: licenceNapomena
             label: "Napomena ispod licenci"
             type: text
@@ -1280,13 +1280,11 @@ content:
             label: "Tehnička oznaka"
             type: string
             hidden: true
-          - name: photo
-            label: "Opis mesta za fotografiju"
-            description: "Tekst koji stoji u praznom okviru dok fotografija ne stigne. Služi i kao opis slike za čitače ekrana."
-            type: string
+          - name: slika
+            label: "Fotografija"
+            description: "Kvadratni portret. Sajt ga prikazuje u odnosu 1:1, pa se šira ili viša slika seče po sredini."
+            type: image
             required: true
-            options:
-              maxlength: 80
           - name: name
             label: "Ime i prezime"
             type: string

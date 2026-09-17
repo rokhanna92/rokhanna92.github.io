@@ -7,10 +7,10 @@
       "unit": "/ MESEČNO",
       "badge": null,
       "featured": false,
+      "tagline": "Idealan za preduzeća koja ne spadaju u član 48. Zakona o BZR (35/2023)",
       "features": [
         "Akt o imenovanju savetnika za BZR",
-        "Obilazak radilišta jednom mesečno",
-        "Izveštaj sa geotagovanim fotografijama u imejlu",
+        "Obilazak vaše firme po dogovoru, sa izveštajem i geotagovanim fotografijama u imejlu",
         "Evidencija zaposlenih, obuka i lekarskih pregleda",
         "Obaveštavanje o rokovima i izmenama propisa"
       ],
@@ -23,8 +23,9 @@
       "unit": "/ MESEČNO",
       "badge": "NAJTRAŽENIJI",
       "featured": true,
+      "tagline": "Idealan za preduzeća koja spadaju u član 48. Zakona o BZR (35/2023)",
       "features": [
-        "Sve iz Osnovnog paketa",
+        "Sve iz Mikro paketa",
         "Obilazak jednom ili više puta mesečno, po potrebi",
         "Kontrola radnika na alkohol uređajem Alcovisor Mark X Plus, uz protokol",
         "Zastupanje pred Inspekcijom rada i izlazak na teren u slučaju povrede",
@@ -58,11 +59,6 @@
     {
       "label": "Kontrola gradilišta/radilišta sa fotoreportingom, po izlasku na teren",
       "ref": "fotoreporting",
-      "tabular": false
-    },
-    {
-      "label": "Revizija PP aparata, po aparatu",
-      "ref": "revizija-pp-aparata",
       "tabular": false
     }
   ],
